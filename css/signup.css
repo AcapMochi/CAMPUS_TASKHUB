@@ -41,14 +41,14 @@ a :visited {
 }
 
 .left {
-    background-image: url('background2.png');
+    background-image: url('/CAMPUS_TASKHUB/images/background2.png');
     background-size: cover;
     height: 100vh;
     width: 100vh;
 }
 
 .right {
-    background-image: url('background1.png');
+    background-image: url('/CAMPUS_TASKHUB/images/background1.png');
     background-size: cover;
     height: 100vh;
     width: 100vh;
