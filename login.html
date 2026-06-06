@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-    <title>SIGN IN</title>
+    <title>LOG IN</title>
     <link rel="stylesheet" href="/CAMPUS_TASKHUB/css/login.css" />
-</head>
+    </head>
 
 <body>
     <nav class="top-menu">
@@ -15,16 +15,17 @@
         <section class="login-form">
             <h1 class="login">LOGIN</h1>
 
-            <label class="label">Username:</label>
-            <input class="input" type="text", placeholder="e.g: campustaskhub123">
+            <form action="/CAMPUS_TASKHUB/includes/login_handler.php" method="POST">
+                <label class="label">Username:</label>
+                <input class="input" name="username" type="text" placeholder="e.g: campustaskhub123" required>
 
-            <label class="label">Password:</label>
-            <input class="input" type="password", placeholder="e.g: taskhub@27">
+                <label class="label">Password:</label>
+                <input class="input" name="password" type="password" placeholder="e.g: taskhub@27" required>
 
-            <button class="button" type="submit">LOGIN</button>
+                <button class="button" type="submit">LOGIN</button>
+            </form>
             <h4 class="signup"><a href="/CAMPUS_TASKHUB/signup.html">No account yet? sign up here.</a></h4>
         </section>
     </main>
 </body>
-
 </html>
