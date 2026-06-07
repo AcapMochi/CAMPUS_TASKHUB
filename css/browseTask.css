@@ -1,7 +1,30 @@
 body{
+    margin:0;
     background:#120015;
     color:white;
     font-family:Arial, sans-serif;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+    background:#0b0710;
+}
+
+.logo{
+    font-weight:bold;
+}
+
+.logo-highlight{
+    color:#00ffb3;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
 }
 
 .page-title{
@@ -9,22 +32,28 @@ body{
 }
 
 .task-container{
+    padding:20px;
     display:flex;
     flex-direction:column;
     gap:20px;
-    padding:20px;
 }
 
 .task-card{
-    border:1px solid #333;
-    border-radius:10px;
+    background:#1d1025;
+    border-radius:12px;
     padding:20px;
-    background:#1b0f22;
+    border:1px solid #2c1b38;
+}
+
+.reward{
+    color:#00ffb3;
+    font-weight:bold;
 }
 
 button{
-    padding:10px 15px;
+    background:#00ffb3;
     border:none;
+    padding:10px 15px;
     border-radius:8px;
     cursor:pointer;
 }
