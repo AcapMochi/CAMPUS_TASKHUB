@@ -1,0 +1,30 @@
+body{
+    background:#120015;
+    color:white;
+    font-family:Arial, sans-serif;
+}
+
+.page-title{
+    margin:30px;
+}
+
+.task-container{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    padding:20px;
+}
+
+.task-card{
+    border:1px solid #333;
+    border-radius:10px;
+    padding:20px;
+    background:#1b0f22;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
