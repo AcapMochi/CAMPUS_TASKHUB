@@ -1,0 +1,62 @@
+body{
+    margin:0;
+    background:#120015;
+    color:white;
+    font-family:Arial,sans-serif;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+    background:#0b0710;
+}
+
+.logo-highlight{
+    color:#00ffb3;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
+}
+
+.page-title{
+    margin:30px;
+}
+
+.task-card{
+    margin:30px;
+    padding:25px;
+    border-radius:12px;
+    background:#1d1025;
+    border:1px solid #2c1b38;
+}
+
+.tags{
+    margin:20px 0;
+}
+
+.tags span{
+    background:#2b1735;
+    padding:6px 12px;
+    border-radius:20px;
+    margin-right:10px;
+}
+
+.reward{
+    color:#00ffb3;
+    font-size:20px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.accept-btn{
+    background:#00ffb3;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
