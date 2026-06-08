@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Campus TaskHub - Profile Settings</title>
+    <link rel="stylesheet" href="profile.css"> 
+</head>
+<body>
+
+   
+    <header class="app-header">
+        <div class="brand-group">
+            <span class="campus">CAMPUS</span><span class="taskhub">TASKHUB</span>
+            <nav class="main-nav">
+                <a href="#">Dashboard</a>
+                <a href="#">Browse Task</a>
+                <a href="#">Post Task</a>
+                <a href="#">My Tasks</a>
+                <a href="leaderboard.html">Leaderboard</a>
+            </nav>
+        </div>
+        <div class="user-actions">
+            <span class="chat-icon">📋</span>
+            <div class="profile-icon"></div>
+        </div>
+    </header>
+
+    
+    <main class="profile-container">
+        <a href="#" class="back-link">← Browse Tasks</a>
+        
+        <form action="update_profile.php" method="POST" enctype="multipart/form-data">
+            
+            
+            <div class="settings-card">
+                <span class="section-label">Profile Photo</span>
+                <div class="avatar-section">
+                    <div class="avatar-preview"></div>
+                    <div class="upload-controls">
+                        <input type="file" name="profile_avatar" id="avatar-input" style="display: none;" onchange="previewImage(this)">
+                        <button type="button" class="btn-change-photo" onclick="document.getElementById('avatar-input').click()">Change Photo</button>
+                        <div class="upload-meta">JPG or PNG, max 2MB</div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="profile-grid">
+                
+                
+                <div class="settings-card input-row-group">
+                    <span class="section-label">Personal Info</span>
+                    
+                    <div class="field-block">
+                        <label>Full name</label>
+                        <input type="text" name="fullname" class="form-input" placeholder="e.g. Cristiano Ronaldo bin Messi">
+                    </div>
+
+                    <div class="field-block">
+                        <label>Nickname</label>
+                        <input type="text" name="nickname" class="form-input" placeholder="EpicGamer25">
+                    </div>
+
+                    <div class="field-block">
+                        <label>Student ID</label>
+                        <input type="text" name="student_id" class="form-input" placeholder="D032412345">
+                    </div>
+
+                    <div class="field-block">
+                        <label>Faculty</label>
+                        <input type="text" name="faculty" class="form-input" placeholder="e.g. FTMK">
+                    </div>
+                </div>
+
+                
+                <div class="settings-card flex-between-column">
+                    <div class="input-row-group">
+                        <div class="input-split">
+                            <div class="field-block">
+                                <label>Phone</label>
+                                <input type="text" name="phone" class="form-input" placeholder="+60 11-1234 5678">
+                            </div>
+                            <div class="field-block">
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-input" placeholder="d032412345@student.utem.edu.my">
+                            </div>
+                        </div>
+
+                        <div class="field-block">
+                            <textarea name="bio" class="form-textarea" placeholder="e.g. Cristiano Ronaldo bin Messi"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="actions-panel">
+                        <button type="submit" class="btn-save-action">Save Changes</button>
+                    </div>
+                </div>
+
+            </div>
+
+            
+            <div class="settings-card">
+                <span class="section-label">Security</span>
+                
+                <div class="security-row">
+                    <span class="security-text">Change Password</span>
+                    <button type="button" class="btn-sec-outline">Update</button>
+                </div>
+
+                <div class="security-row">
+                    <span class="security-text">Two-Step Verification</span>
+                    <label class="switch-wrapper">
+                        <input type="checkbox" name="two_step">
+                        <span class="slider-trail"></span>
+                    </label>
+                </div>
+
+                <div class="security-row">
+                    <span class="security-text">Delete Account</span>
+                    <button type="button" class="btn-sec-danger">Delete</button>
+                </div>
+            </div>
+
+        </form>
+    </main>
+
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector('.avatar-preview').style.backgroundImage = "url('" + e.target.result + "')";
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>
