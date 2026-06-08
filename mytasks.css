@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(#120914, #1a0f1f);
+    color: white;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: #0c0710;
+}
+
+.logo span { color: #00ffa6; }
+
+nav a {
+    margin: 0 12px;
+    color: gray;
+    text-decoration: none;
+}
+
+nav a.active {
+    color: white;
+    font-weight: bold;
+}
+
+/* MAIN */
+.container {
+    padding: 50px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+/* GRID */
+.grid {
+    display: flex;
+    gap: 25px;
+}
+
+/* COLUMN CARD */
+.column {
+    flex: 1;
+    background: #241329;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* TASK CARD */
+.task {
+    background: #2b1633;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* TEXT */
+.task h4 {
+    margin: 0 0 5px 0;
+}
+
+.task small {
+    color: #aaa;
+}
+
+/* STATUS */
+.status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.open {
+    background: #7ee2a8;
+    color: black;
+}
+
+.accepted {
+    background: #66c7ff;
+    color: black;
+}
+
+.done {
+    background: #6cff9e;
+    color: black;
+}
+
+/* PRICE */
+.price {
+    color: #00ffa6;
+    font-weight: bold;
+}
+
+/* BUTTON */
+button {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    background: #333;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #00ffa6;
+    color: black;
+}
