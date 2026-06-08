@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">CAMPUS <span>TASKHUB</span></div>
+
+    <nav>
+        <a class="active" href="dashboard.html">Dashboard</a>
+        <a href="#">Browse Task</a>
+        <a href="posttask.html">Post Task</a>
+        <a href="mytasks.html">My Tasks</a>
+        <a href="#">Leaderboard</a>
+    </nav>
+
+    <div class="profile">
+        <a href="#" class="msg">💬</a>
+        <img src="https://i.pravatar.cc/40">
+    </div>
+</header>
+
+<section class="container">
+
+<h1>Good morning</h1>
+
+<!-- STATS -->
+<div class="stats">
+
+<div class="card">
+    <h2 id="dashboard-open">0</h2>
+    <p>Open Tasks</p>
+</div>
+
+<div class="card">
+    <h2 id="dashboard-posted">0</h2>
+    <p>Tasks Posted</p>
+</div>
+
+<div class="card highlight">
+    <h2 id="dashboard-earned">RM 0</h2>
+    <p>Your Total Earned</p>
+</div>
+
+<div class="card">
+    <h2 id="dashboard-done">0</h2>
+    <p>Completed</p>
+</div>
+
+</div>
+
+<!-- GRID -->
+<div class="grid">
+
+<!-- LEFT -->
+<div class="column">
+<h3>Tasks you may like</h3>
+<div id="taskList"></div>
+</div>
+
+<!-- RIGHT -->
+<div class="column">
+
+<h3>Your activity</h3>
+
+<p>Tasks completed</p>
+<div class="bar">
+    <div id="barCompleted" class="fill"></div>
+</div>
+
+<p>Tasks posted</p>
+<div class="bar">
+    <div id="barPosted" class="fill blue"></div>
+</div>
+
+<h3>Recent activity</h3>
+<div id="recent"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<script src="dashboard.js"></script>
+</body>
+</html>
+``
