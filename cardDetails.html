@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Card Payment</title>
+
+    <link rel="stylesheet" href="css/cardDetails.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+            <span class="campus">CAMPUS </span>
+            <span class="taskhub">TASKHUB</span>
+        </div>
+
+        <nav class="nav-menu">
+            
+<a href="dashboard.html">
+        Dashboard
+    </a>
+
+    <a href="browse-task.html">
+         </a>
+
+    <a href="post-task.html">
+        Post Task
+    </a>
+
+    <a href="mytasks.html">
+        My Tasks
+    </a>
+
+    <a href="leaderboard.html">
+        Leaderboard
+    </a>
+
+</nav>
+
+        <div class="header-icons">
+
+            <span>💬</span>
+
+            ><a href="myProfile.html">
+            <img src="images/pfp.png" alt="Profile" class="profile-pic">
+            </a>
+        </div>
+
+    </header>
+
+    <!-- PAGE -->
+
+    <div class="container">
+
+        <div class="top-section">
+
+            <a href="posttasks.html" class="back-btn">
+                ← Back to Post
+            </a>
+
+            <h1 class="page-title">
+                Enter Card Details
+            </h1>
+
+        </div>
+
+        <hr class="divider">
+
+        <!-- FORM -->
+
+        <form id="payment-form"
+        action="payment.html" method="get">
+
+            <div class="card-box">
+
+                <!-- CARD NUMBER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Card Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="card-number"
+                        placeholder="eg. XXXX XXXX XXXX XXXX"
+                        maxlength="19"
+                    >
+
+                    <div class="card-icons">
+
+                        <img src="images/visa.png" >
+
+                        <img src="images/americanExpress.jpg" >
+
+                        <img src="images/mastercard.png" >
+
+                        <img src="images/discover.png" >
+
+                        <img src="images/paypal.png" >
+
+                        <img src="images/jcb.png" >
+
+                    </div>
+
+                </div>
+
+                <div class="line"></div>
+
+                <!-- EXPIRY DATE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Expiry Date
+                    </label>
+
+                    <p class="small-text">
+                        For Example: 10/30
+                    </p>
+
+                    <div class="expiry-row">
+
+                        <div>
+
+                            <p class="mini-label">
+                                Month
+                            </p>
+
+                            <input
+                                type="text"
+                                id="month"
+                                maxlength="2"
+                            >
+
+                        </div>
+
+                        <span class="slash">/</span>
+
+                        <div>
+
+                            <p class="mini-label">
+                                Year
+                            </p>
+
+                            <input
+                                type="text"
+                                id="year"
+                                maxlength="2"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="line"></div>
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label>
+                        Name on card
+                    </label>
+
+                    <input
+                        type="text"
+                        id="card-name"
+                        placeholder="eg. Cristiano Ronaldo"
+                    >
+
+                </div>
+
+                <div class="line"></div>
+
+                <!-- CVV -->
+
+                <div class="form-group">
+
+                    <label>
+                        Card security code
+                    </label>
+
+                    <p class="small-text">
+                        Last 3 digits on the back of the card
+                    </p>
+
+                    <div class="cvv-row">
+
+                        <input
+                            type="password"
+                            id="cvv"
+                            placeholder="eg. XXX"
+                            maxlength="3"
+                        >
+
+                        <div class="cvv-icon">
+
+                             <img src="images/cvv.jpg" alt="CVV Example">
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <!-- BUTTON -->
+
+                <button type="submit" class="pay-btn">
+                    Pay
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // AUTO SPACE CARD NUMBER
+
+        const cardInput =
+            document.querySelector('#card-number');
+
+        cardInput.addEventListener('input', function (e) {
+
+            let value =
+                e.target.value.replace(/\s/g, '');
+
+            value =
+                value.replace(/[^0-9]/gi, '');
+
+            let formatted =
+                value.match(/.{1,4}/g);
+
+            if (formatted) {
+
+                e.target.value =
+                    formatted.join(' ');
+
+            }
+
+        });
+
+
+
+        // FORM VALIDATION
+
+        const form =
+            document.querySelector('#payment-form');
+
+        form.addEventListener('submit', function (e) {
+
+            const cardNumber =
+                document.querySelector('#card-number').value;
+
+            const month =
+                document.querySelector('#month').value;
+
+            const year =
+                document.querySelector('#year').value;
+
+            const cardName =
+                document.querySelector('#card-name').value;
+
+            const cvv =
+                document.querySelector('#cvv').value;
+
+            if (
+
+                cardNumber.length < 19 ||
+
+                month === '' ||
+
+                year === '' ||
+
+                cardName === '' ||
+
+                cvv.length < 3
+
+            ) {
+
+                e.preventDefault();
+
+                alert(
+                    'Please complete all card details.'
+                );
+
+            }
+
+           
+
+        });
+
+    </script>
+
+</body>
+
+</html>
