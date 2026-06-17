@@ -3,11 +3,11 @@ require 'dhb.inc.php';
 
 try {
     // We join the tasks and users tables so we can display the name of the person who posted it!
-    $sql = "SELECT t.TaskID, t.Title, t.Description, t.`Reward Amount`, t.Status, t.`Created Date`, u.Username 
+    $sql = "SELECT t.TaskID, t.Title, t.Description, t.`Reward_Amount`, t.Status, t.`Created_Date`, u.Username 
             FROM tasks t 
             JOIN users u ON t.PosterID = u.UserID 
             WHERE t.Status = 'Open' 
-            ORDER BY t.`Created Date` DESC";
+            ORDER BY t.`Created_Date` DESC";
             
     $stmt = $pdo->query($sql);
     $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);

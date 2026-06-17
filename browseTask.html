@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta charset="UTF-8">
 
 <head>
     <title>Campus TaskHub - Browse Tasks</title>
-    <link rel="stylesheet" href="/css/browse-task.css">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/browseTask.css">
 </head>
 
 <body>
 
     <header class="navbar">
         <div class="logo">
-            CAMPUS <span class="logo-highlight">TASKHUB</span>
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
         </div>
 
         <nav class="nav-links">
-            <a href="#">Dashboard</a>
-            <a href="#" class="active">Browse Task</a>
-            <a href="#">Post Task</a>
-            <a href="#">My Tasks</a>
-            <a href="#">Leaderboard</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
         </nav>
+
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.png" alt="Profile" class="profile-pic">
+            </a>
+        </div>
     </header>
 
     <main class="main-container">
@@ -59,7 +69,7 @@
                             <h3>${task.Title}</h3>
                             <p style="color: #bbb; font-size: 0.9em;">Posted by: ${task.Username}</p>
                             <p>${task.Description}</p>
-                            <p class="reward">Reward: RM${task['Reward Amount']}</p>
+                            <p class="reward">Reward: RM${task['Reward_Amount']}</p>
                             <button onclick="window.location.href='taskDetail.html?id=${task.TaskID}'">View Details</button>
                         `;
                             container.appendChild(card);

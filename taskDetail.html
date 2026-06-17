@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<head>
+    <title>Campus TaskHub - Task Details</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="/css/taskDetail.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
+
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.png" alt="Profile" class="profile-pic">
+            </a>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <h1 class="page-title">Task Details</h1>
+
+        <div class="task-card" id="task-detail-container">
+            <p style="color: #888;">Loading task details...</p>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // 1. Grab the ID from the web address bar
+            const urlParams = new URLSearchParams(window.location.search);
+            const taskId = urlParams.get('id');
+
+            if (taskId) {
+                // 2. Ask PHP for the task data
+                fetch(`includes/get_task_detail.php?id=${taskId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            const task = data.task;
+
+                            // 3. Inject the real data into the HTML
+                            document.getElementById('task-detail-container').innerHTML = `
+                            <h2>${task.Title}</h2>
+                            <p style="color: #bbb; margin-top: -10px; margin-bottom: 20px;">
+                                Posted by: <strong>${task.Username}</strong>
+                            </p>
+                            
+                            <p style="font-size: 1.1em; line-height: 1.5;">
+                                ${task.Description}
+                            </p>
+
+                            <div class="tags">
+                                <span>📍 ${task.Location}</span>
+                                ${task['Specific Location'] ? `<span>${task['Specific Location']}</span>` : ''}
+                            </div>
+
+                            <div class="reward">
+                                Reward: RM${task['Reward Amount']}
+                            </div>
+
+                            <button class="accept-btn" onclick="acceptTask(${task.TaskID})">
+                                Accept Task
+                            </button>
+                        `;
+                        } else {
+                            document.getElementById('task-detail-container').innerHTML = `<p style="color: #ff4d4d;">${data.message}</p>`;
+                        }
+                    })
+                    .catch(error => console.error("Error fetching details:", error));
+            } else {
+                document.getElementById('task-detail-container').innerHTML = "<p>No task selected. Please go back to Browse Tasks.</p>";
+            }
+        });
+
+        function acceptTask(taskId) {
+            // Add a quick confirmation so they don't click it by accident
+            if (!confirm("Are you sure you want to accept this task and commit to completing it?")) {
+                return;
+            }
+
+            // Send the Task ID to our new PHP handler
+            fetch('includes/accept_task_handler.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ task_id: taskId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert("Task accepted! Redirecting to your dashboard...");
+                        // Send them back to the dashboard or My Tasks page so they can track it
+                        window.location.href = "mytasks.html";
+                    } else {
+                        alert("Error: " + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Something went wrong. Please check your connection and try again.");
+                });
+        }
+    </script>
+
+</body>
+
+</html>

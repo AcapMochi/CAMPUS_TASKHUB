@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($category_text == "Delivery") $category_id = 2;
 
     try {
-        $sql = "INSERT INTO tasks (CategoryID, PosterID, Title, Description, Location, `Specific Location`, `Reward Amount`, Status) 
+        $sql = "INSERT INTO tasks (CategoryID, PosterID, Title, Description, Location, `Specific_Location`, `Reward_Amount`, Status) 
                 VALUES (:cat_id, :poster, :title, :desc, :loc, :specific_loc, :reward, 'Open')";
         
         $stmt = $pdo->prepare($sql);

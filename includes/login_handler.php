@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Verify using the exact column name from your DB
-        if ($user && password_verify($password, $user['Password Hash'])) {
+        if ($user && password_verify($password, $user['Password_Hash'])) {
             
             // Store their UserID in the session so they can post tasks
             $_SESSION['user_id'] = $user['UserID'];

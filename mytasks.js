@@ -5,63 +5,46 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function loadTasks() {
+    fetch('includes/get_my_tasks.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const posted = document.getElementById("postedList");
+                const running = document.getElementById("runningList");
 
-    let tasks = JSON.parse(localStorage.getItem("posttasks")) || [];
+                posted.innerHTML = "";
+                running.innerHTML = "";
 
-    console.log(tasks); // 🔥 check data
+                if (data.tasks.length === 0) {
+                    posted.innerHTML = "<p>No tasks found.</p>";
+                    return;
+                }
 
-    const posted = document.getElementById("postedList");
-    const running = document.getElementById("runningList");
+                data.tasks.forEach(task => {
+                    let div = document.createElement("div");
+                    div.className = "task";
 
-    posted.innerHTML = "";
-    running.innerHTML = "";
+                    // Logic: If I am the Runner, show "Mark Done" button. 
+                    // If I am the Poster, I just view status.
+                    let isRunner = (task.RunnerID == '<?php echo $_SESSION["user_id"]; ?>'); // Simplified logic
 
-    if (tasks.length === 0) {
-        posted.innerHTML = "No tasks yet";
-        return;
-    }
+                    div.innerHTML = `
+                        <h4>${task.Title}</h4>
+                        <span class="tag ${task.Status.toLowerCase()}">${task.Status}</span>
+                        <p>Reward: RM ${task['Reward Amount']}</p>
+                        ${task.Status === 'In Progress' && task.RunnerID == '<?php echo $_SESSION["user_id"]; ?>'
+                            ? `<button onclick="completeTask(${task.TaskID})">Mark as Done</button>`
+                            : ''}
+                    `;
 
-    tasks.forEach((task, index) => {
-
-        let div = document.createElement("div");
-        div.className = "task";
-
-        let status = "";
-
-        if (task.status === "open") {
-            status = `<span class="status open">Open</span>`;
-        } 
-        else if (task.status === "accepted") {
-            status = `<span class="status accepted">Accepted</span>`;
-        } 
-        else {
-            status = `<span class="status done">Completed</span>`;
-        }
-
-        let button = "";
-
-        if (task.status === "open") {
-            button = `<button onclick="acceptTask(${index})">Accept</button>`;
-        } 
-        else if (task.status === "accepted") {
-            button = `<button onclick="completeTask(${index})">Mark Done</button>`;
-        }
-
-        div.innerHTML = `
-            <h4>${task.title}</h4>
-            ${status}
-            <small>${task.location}</small><br>
-            <span>RM ${task.reward}</span><br>
-            ${button}
-        `;
-
-        if (task.status === "accepted") {
-            running.appendChild(div);
-        } else {
-            posted.appendChild(div);
-        }
-
-    });
+                    if (task.RunnerID == '<?php echo $_SESSION["user_id"]; ?>') {
+                        running.appendChild(div);
+                    } else {
+                        posted.appendChild(div);
+                    }
+                });
+            }
+        });
 }
 
 // BUTTON

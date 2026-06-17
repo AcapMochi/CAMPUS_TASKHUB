@@ -1,59 +1,45 @@
-body{
-    margin:0;
-    background:#120015;
-    color:white;
-    font-family:Arial, sans-serif;
+/* =========================================
+   BROWSE TASKS SPECIFIC STYLES
+   Note: Navbar, Body, and Fonts are handled by global.css
+========================================= */
+
+.page-title {
+    margin: 30px;
 }
 
-.navbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px;
-    background:#0b0710;
+.task-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.logo{
-    font-weight:bold;
+.task-card {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #2f2235;
 }
 
-.logo-highlight{
-    color:#00ffb3;
+.reward {
+    color: var(--accent);
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 15px 0;
 }
 
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    margin:0 10px;
+button {
+    background-color: var(--accent);
+    color: #000;
+    font-weight: bold;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.2s;
 }
 
-.page-title{
-    margin:30px;
-}
-
-.task-container{
-    padding:20px;
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-}
-
-.task-card{
-    background:#1d1025;
-    border-radius:12px;
-    padding:20px;
-    border:1px solid #2c1b38;
-}
-
-.reward{
-    color:#00ffb3;
-    font-weight:bold;
-}
-
-button{
-    background:#00ffb3;
-    border:none;
-    padding:10px 15px;
-    border-radius:8px;
-    cursor:pointer;
+button:hover {
+    transform: translateY(-2px);
+    background-color: #00e695; /* Slightly darker green on hover */
 }

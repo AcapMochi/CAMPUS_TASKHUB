@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // We use backticks (`) around column names that contain spaces
-        $sql = "INSERT INTO users (Username, `Password Hash`, Email, FullName, Phone, Faculty, StudentID, `Bio Text`, `Is Verified`) 
+        $sql = "INSERT INTO users (Username, `Password_Hash`, Email, FullName, Phone, Faculty, StudentID, `Bio_Text`, `Is_Verified`) 
                 VALUES (:username, :password, :email, :fullname, :phone, :faculty, :studentid, :bio, :is_verified)";
         
         $stmt = $pdo->prepare($sql);
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':is_verified' => 0
         ]);
 
-        echo "Signup successful! You can now <a href='../login.html'>Login</a>";
+        echo "Signup successful! You can now <a href='/CAMPUS_TASKHUB/login.html'>Login</a>";
 
     } catch (PDOException $e) {
         if ($e->getCode() == 23000) {
