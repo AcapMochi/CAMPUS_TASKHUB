@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang = en>
-    <meta charset ="UTF-8"/>
-    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
-    <title>Campus TaskHub - Task Done Poster</title>
-    <link href = "taskhubstyle.css" rel = "stylesheet">
+<html lang=en>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale = 1.0">
+<title>Campus TaskHub - Task Done Poster</title>
+<link href="taskhubstyle.css" rel="stylesheet">
 
-    <body>
-      
-      <script>
+<body>
+
+  <script>
     const stars = document.querySelectorAll('.star');
     let currentRating = 1;
- 
+
     stars.forEach(star => {
       star.addEventListener('click', () => {
         currentRating = parseInt(star.dataset.value);
@@ -19,69 +19,92 @@
       star.addEventListener('mouseenter', () => updateStars(parseInt(star.dataset.value)));
       star.addEventListener('mouseleave', () => updateStars(currentRating));
     });
- 
+
     function updateStars(val) {
       stars.forEach(s => {
         s.classList.toggle('active', parseInt(s.dataset.value) <= val);
       });
     }
- 
+
     updateStars(currentRating);
   </script>
 
   <main>
+
+    <header class="navbar">
+      <div class="logo">
+        <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="browseTask.html">Browse Tasks</a>
+        <a href="posttasks.html">Post Task</a>
+        <a href="mytasks.html">My Tasks</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </nav>
+
+      <div class="header-icons">
+        <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+        <a href="myProfile.html">
+          <img src="images/PFP.png" alt="Profile" class="profile-pic">
+        </a>
+      </div>
+    </header>
+
     <div class="done-main">
-    <div class="done-card">
- 
+      <div class="done-card">
+
         <div class="checkmark">✅</div>
- 
-      <div class="done-title">
-        <h1>Task Completed!</h1>
-        <p>Beam Patapim has delivered your order</p>
-      </div>
- 
-      <div class="receipt">
-        <div class="receipt-rows">
-          <div class="receipt-row">
-            <span class="receipt-label">Task</span>
-            <span class="receipt-value" id="taskName">Belikan Makanan</span>
+
+        <div class="done-title">
+          <h1>Task Completed!</h1>
+          <p>Beam Patapim has delivered your order</p>
+        </div>
+
+        <div class="receipt">
+          <div class="receipt-rows">
+            <div class="receipt-row">
+              <span class="receipt-label">Task</span>
+              <span class="receipt-value" id="taskName">Belikan Makanan</span>
+            </div>
+            <div class="receipt-row">
+              <span class="receipt-label">Runner</span>
+              <span class="receipt-value" id="taskRunner">Beam Patapim</span>
+            </div>
+            <div class="receipt-row">
+              <span class="receipt-label">Duration</span>
+              <span class="receipt-value" id="taskDuration">18 mins</span>
+            </div>
           </div>
-          <div class="receipt-row">
-            <span class="receipt-label">Runner</span>
-            <span class="receipt-value" id="taskRunner">Beam Patapim</span>
-          </div>
-          <div class="receipt-row">
-            <span class="receipt-label">Duration</span>
-            <span class="receipt-value" id="taskDuration">18 mins</span>
+          <hr class="receipt-divider" />
+          <div class="receipt-paid">
+            <span class="receipt-paid-label">Paid</span>
+            <span class="receipt-paid-amount" id="taskPrice">RM 10.00</span>
           </div>
         </div>
-        <hr class="receipt-divider"/>
-        <div class="receipt-paid">
-          <span class="receipt-paid-label">Paid</span>
-          <span class="receipt-paid-amount" id="taskPrice">RM 10.00</span>
+
+        <div class="rating-panel">
+          <p class="rating-label">Rate your runner</p>
+          <div class="stars" id="starRow">
+            <span class="star active" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+          </div>
+          <textarea class="feedback-box" id="feedback" placeholder="Leave a comment (optional)..."></textarea>
         </div>
-      </div>
- 
-      <div class="rating-panel">
-        <p class="rating-label">Rate your runner</p>
-        <div class="stars" id="starRow">
-          <span class="star active" data-value="1">&#9733;</span>
-          <span class="star" data-value="2">&#9733;</span>
-          <span class="star" data-value="3">&#9733;</span>
-          <span class="star" data-value="4">&#9733;</span>
-          <span class="star" data-value="5">&#9733;</span>
+
+        <div class="done-actions">
+          <button class="btn-submit" id="nextBtn">Submit Review &amp; Confirm Payment</button>
+          <button class="btn-skip" id="homeBtn">Skip</button>
         </div>
-        <textarea class="feedback-box" id="feedback" placeholder="Leave a comment (optional)..."></textarea>
+
       </div>
- 
-      <div class="done-actions">
-        <button class="btn-submit" id="nextBtn">Submit Review &amp; Confirm Payment</button>
-        <button class="btn-skip" id="homeBtn">Skip</button>
-      </div>
- 
-    </div>
     </div>
   </main>
- 
+
 </body>
+
 </html>

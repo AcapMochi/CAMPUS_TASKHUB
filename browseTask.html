@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Campus TaskHub - Browse Tasks</title>
     <link rel="stylesheet" href="/css/browse-task.css">
@@ -7,50 +8,74 @@
 
 <body>
 
-<header class="navbar">
-    <div class="logo">
-        CAMPUS <span class="logo-highlight">TASKHUB</span>
-    </div>
-
-    <nav class="nav-links">
-        <a href="#">Dashboard</a>
-        <a href="#" class="active">Browse Task</a>
-        <a href="#">Post Task</a>
-        <a href="#">My Tasks</a>
-        <a href="#">Leaderboard</a>
-    </nav>
-</header>
-
-<main class="main-container">
-
-    <h1 class="page-title">Browse Tasks</h1>
-
-    <div class="task-container">
-
-        <div class="task-card">
-            <h3>Belikan Makanan</h3>
-            <p>Need someone to buy food from Cafe Satria.</p>
-            <p class="reward">Reward: RM10</p>
-            <button>View Details</button>
+    <header class="navbar">
+        <div class="logo">
+            CAMPUS <span class="logo-highlight">TASKHUB</span>
         </div>
 
-        <div class="task-card">
-            <h3>Print Lecture Notes</h3>
-            <p>Need notes printed before class.</p>
-            <p class="reward">Reward: RM7</p>
-            <button>View Details</button>
+        <nav class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#" class="active">Browse Task</a>
+            <a href="#">Post Task</a>
+            <a href="#">My Tasks</a>
+            <a href="#">Leaderboard</a>
+        </nav>
+    </header>
+
+    <main class="main-container">
+
+        <h1 class="page-title">Browse Tasks</h1>
+
+        <div class="task-container" id="live-task-container">
+            <p style="text-align: center; color: #888;">Loading tasks...</p>
         </div>
 
-        <div class="task-card">
-            <h3>Library Book Return</h3>
-            <p>Return borrowed books to library.</p>
-            <p class="reward">Reward: RM5</p>
-            <button>View Details</button>
-        </div>
+    </main>
 
-    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchTasks();
+        });
 
-</main>
+        function fetchTasks() {
+            fetch('includes/get_tasks.php')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('live-task-container');
+                    container.innerHTML = ''; // Clear the "Loading..." text
+
+                    if (data.status === 'success') {
+                        if (data.tasks.length === 0) {
+                            container.innerHTML = '<p style="text-align: center; color: #888;">No open tasks available right now. Be the first to post one!</p>';
+                            return;
+                        }
+
+                        // Loop through each task from the database and create a card
+                        data.tasks.forEach(task => {
+                            const card = document.createElement('div');
+                            card.className = 'task-card';
+
+                            card.innerHTML = `
+                            <h3>${task.Title}</h3>
+                            <p style="color: #bbb; font-size: 0.9em;">Posted by: ${task.Username}</p>
+                            <p>${task.Description}</p>
+                            <p class="reward">Reward: RM${task['Reward Amount']}</p>
+                            <button onclick="window.location.href='taskDetail.html?id=${task.TaskID}'">View Details</button>
+                        `;
+                            container.appendChild(card);
+                        });
+                    } else {
+                        console.error("Error fetching tasks:", data.message);
+                        container.innerHTML = '<p style="color: #ff4d4d;">Failed to load tasks.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error("Fetch error:", error);
+                    document.getElementById('live-task-container').innerHTML = '<p style="color: #ff4d4d;">Failed to load tasks.</p>';
+                });
+        }
+    </script>
 
 </body>
+
 </html>

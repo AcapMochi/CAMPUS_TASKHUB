@@ -1,34 +1,40 @@
 <?php
-// 1. Include your database connection
+session_start();
 require 'dhb.inc.php';
 
-// 2. Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    // Grab the data from the form
     $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // 3. Hash the password for security
+    // Hash the password for security
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     try {
-        // 4. Prepare the SQL statement to prevent SQL injection
-        $stmt = $pdo->prepare("INSERT INTO users (username, password_hash) VALUES (:username, :password)");
+        // We use backticks (`) around column names that contain spaces
+        $sql = "INSERT INTO users (Username, `Password Hash`, Email, FullName, Phone, Faculty, StudentID, `Bio Text`, `Is Verified`) 
+                VALUES (:username, :password, :email, :fullname, :phone, :faculty, :studentid, :bio, :is_verified)";
         
-        // 5. Execute the statement with our variables
+        $stmt = $pdo->prepare($sql);
+        
+        // Passing empty strings for the required fields that aren't on the signup form
         $stmt->execute([
             ':username' => $username,
-            ':password' => $hashed_password
+            ':password' => $hashed_password,
+            ':email' => $email,
+            ':fullname' => '',
+            ':phone' => '',
+            ':faculty' => '',
+            ':studentid' => '',
+            ':bio' => '',
+            ':is_verified' => 0
         ]);
 
-        echo "Signup successful! You can now <a href='/CAMPUS_TASKHUB/login.html'>Login</a>";
-        // Alternatively, redirect them: header("Location: login.html"); exit();
+        echo "Signup successful! You can now <a href='../login.html'>Login</a>";
 
     } catch (PDOException $e) {
-        // If the username already exists, it will throw an error because of the UNIQUE constraint
         if ($e->getCode() == 23000) {
-            echo "Username already exists. Please choose another.";
+            echo "Username or Email already exists. Please choose another.";
         } else {
             echo "Error: " . $e->getMessage();
         }

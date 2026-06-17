@@ -16,47 +16,37 @@
 
     <!-- HEADER -->
 
-    <header class="header">
-
+    <header class="navbar">
         <div class="logo">
-            <span class="campus">CAMPUS </span>
-            <span class="taskhub">TASKHUB</span>
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
         </div>
 
-        <nav class="nav-menu">
-
-           <a href="dashboard.html">
-        Dashboard
-    </a>
-
-    <a href="browseTask.html">
-         Browse<br> Task </a>
-
-    <a href="posttasks.html">
-        Post Task
-    </a>
-
-    <a href="mytasks.html">
-        My Tasks
-    </a>
-
-    <a href="leaderboard.html">
-        Leaderboard
-    </a>
-
-</nav>
+        <nav class="nav-links">
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
 
         <div class="header-icons">
-
-            <a href="chatpage.html">
-            <span>💬</span>
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.png" alt="Profile" class="profile-pic">
             </a>
-
-            <img src="images/PFP.png"
-                 alt="Profile"
-                 class="profile-pic">
-
         </div>
+    </header>
+
+
+    <div class="header-icons">
+
+        <a href="chatpage.html">
+            <span>💬</span>
+        </a>
+
+        <img src="images/PFP.png" alt="Profile" class="profile-pic">
+
+    </div>
 
     </header>
 
@@ -70,11 +60,10 @@
                 My Profile
             </h1>
 
-            
-<button class="settings-btn"
-onclick="window.location.href='profile.html'">
-    Settings
-</button>
+
+            <button class="settings-btn" onclick="window.location.href='profile.html'">
+                Settings
+            </button>
 
 
         </div>
@@ -93,8 +82,7 @@ onclick="window.location.href='profile.html'">
 
                     <div class="user-top">
 
-                        <img src="images/pfp.png"
-                             class="user-image">
+                        <img src="images/pfp.png" class="user-image">
 
                         <div>
 
@@ -180,8 +168,7 @@ onclick="window.location.href='profile.html'">
 
                         <div class="review-top">
 
-                            <img src="images/pfp1.jpg"
-                                 class="review-pic">
+                            <img src="images/pfp1.jpg" class="review-pic">
 
                             <p class="review-name">
                                 Afiq Muzakkir ⭐⭐⭐⭐⭐
@@ -201,8 +188,7 @@ onclick="window.location.href='profile.html'">
 
                         <div class="review-top">
 
-                            <img src="images/pfp2.jpg"
-                                 class="review-pic">
+                            <img src="images/pfp2.jpg" class="review-pic">
 
                             <p class="review-name">
                                 Asyraf Raziq ⭐⭐⭐⭐⭐

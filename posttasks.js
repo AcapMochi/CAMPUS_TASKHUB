@@ -28,29 +28,38 @@ document.getElementById("fileInput").addEventListener("change", function () {
 
 });
 
-// submit (CONNECT TO MYTASKS)
 document.getElementById("posttaskForm").addEventListener("submit", function (e) {
-
     e.preventDefault();
 
-    const task = {
-        title: document.getElementById("title").value,
-        category: document.getElementById("category").value,
-        desc: document.getElementById("desc").value,
-        location: document.getElementById("location").value,
-        reward: document.getElementById("reward").value,
-        image: imageData,
-        status: "open"
-    };
+    // Create a FormData object to easily send form fields to PHP
+    let formData = new FormData();
+    formData.append("title", document.getElementById("title").value);
+    formData.append("category", document.getElementById("category").value);
+    formData.append("desc", document.getElementById("desc").value);
+    formData.append("location", document.getElementById("location").value);
+    formData.append("reward", document.getElementById("reward").value);
+    
+    // Note: If you want to handle the image (imageData), you can append it here too, 
+    // but you will need to add an 'image' column to your database later!
 
-    let tasks = JSON.parse(localStorage.getItem("posttasks")) || [];
-
-    tasks.push(task);
-
-    localStorage.setItem("posttasks", JSON.stringify(tasks));
-
-    alert("Task submitted!");
-
-    this.reset();
-    document.getElementById("preview").style.display = "none";
+    // Send the data to the PHP handler
+    fetch("includes/post_task_handler.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("Task submitted to the marketplace!");
+            document.getElementById("posttaskForm").reset();
+            document.getElementById("preview").style.display = "none";
+            document.getElementById("uploadText").style.display = "block";
+        } else {
+            alert("Error: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Error posting task:", error);
+        alert("Something went wrong. Please try again.");
+    });
 });

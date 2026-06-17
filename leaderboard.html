@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Campus TaskHub - System Leaderboard</title>
-        <link rel="stylesheet" href="/css/leaderboard.css">
-    </head>
-    <body>
 
-        <header class="navbar">
-            <div class="logo">CAMPUS <span class="logo-highlight">TASKHUB</span></div>
-            <nav class="nav-links">
-                <a href="#">Dashboard</a>
-                <a href="#">Browse Task</a>
-                <a href="#">Post Task</a>
-                <a href="#">My Tasks</a>
-                <a href="#" class="active">Leaderboard</a>
-            </nav>
-            <div class="nav-icons">
-                <div class="nav-profile"></div>
+<head>
+    <title>Campus TaskHub - System Leaderboard</title>
+    <link rel="stylesheet" href="/css/leaderboard.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
+
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.png" alt="Profile" class="profile-pic">
+            </a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <h1 class="page-title">Leaderboard</h1>
+        <div class="filter-button">
+            <button id="btn-posters" class="btn" onclick="switchTab('posters')">Top Posters</button>
+            <button id="btn-runners" class="btn active-btn" onclick="switchTab('runners')">Top Runners</button>
+        </div>
+
+        <div class="leaderboard-card">
+            <h2 class="card-title">TOP 100</h2>
+
+            <div class="scroll-box">
+                <ul id="leaderboard-list">
+
+                </ul>
             </div>
-        </header>
+        </div>
+    </main>
 
-        <main class="main-container">
-            <h1 class="page-title">Leaderboard</h1>
-            <div class="filter-button">
-                <button id="btn-posters" class="btn" onclick="switchTab('posters')">Top Posters</button>
-                <button id="btn-runners" class="btn active-btn" onclick="switchTab('runners')">Top Runners</button>
-            </div>
+    <script src="/leaderboard.js"></script>
 
-            <div class="leaderboard-card">
-                <h2 class="card-title">TOP 100</h2>
+</body>
 
-                <div class="scroll-box">
-                    <ul id="leaderboard-list">
-
-                    </ul>
-                </div>
-            </div>
-        </main>
-
-        <script src="/leaderboard.js"></script>
-
-    </body>
 </html>

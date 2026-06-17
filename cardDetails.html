@@ -16,46 +16,39 @@
 
     <!-- HEADER -->
 
-    <header class="header">
-
+    <header class="navbar">
         <div class="logo">
-            <span class="campus">CAMPUS </span>
-            <span class="taskhub">TASKHUB</span>
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
         </div>
 
-        <nav class="nav-menu">
-
-           <a href="dashboard.html">
-        Dashboard
-    </a>
-
-    <a href="browseTask.html">
-         Browse<br> Task </a>
-
-    <a href="posttasks.html">
-        Post Task
-    </a>
-
-    <a href="mytasks.html">
-        My Tasks
-    </a>
-
-    <a href="leaderboard.html">
-        Leaderboard
-    </a>
-
-</nav>
+        <nav class="nav-links">
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
 
         <div class="header-icons">
-            
-            <a href="chatpage.html">
-            <span>💬</span>
-            </a>
-            
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
             <a href="myProfile.html">
-            <img src="images/PFP.png" alt="Profile" class="profile-pic">
+                <img src="images/PFP.png" alt="Profile" class="profile-pic">
             </a>
         </div>
+    </header>
+
+    </nav>
+
+    <div class="header-icons">
+
+        <a href="chatpage.html">
+            <span>💬</span>
+        </a>
+
+        <a href="myProfile.html">
+            <img src="images/PFP.png" alt="Profile" class="profile-pic">
+        </a>
+    </div>
 
     </header>
 
@@ -79,8 +72,7 @@
 
         <!-- FORM -->
 
-        <form id="payment-form"
-        action="payment.html" method="get">
+        <form id="payment-form" action="payment.html" method="get">
 
             <div class="card-box">
 
@@ -92,26 +84,21 @@
                         Card Number
                     </label>
 
-                    <input
-                        type="text"
-                        id="card-number"
-                        placeholder="eg. XXXX XXXX XXXX XXXX"
-                        maxlength="19"
-                    >
+                    <input type="text" id="card-number" placeholder="eg. XXXX XXXX XXXX XXXX" maxlength="19">
 
                     <div class="card-icons">
 
-                        <img src="images/visa.png" >
+                        <img src="images/visa.png">
 
-                        <img src="images/americanExpress.jpg" >
+                        <img src="images/americanExpress.jpg">
 
-                        <img src="images/mastercard.png" >
+                        <img src="images/mastercard.png">
 
-                        <img src="images/discover.png" >
+                        <img src="images/discover.png">
 
-                        <img src="images/paypal.png" >
+                        <img src="images/paypal.png">
 
-                        <img src="images/jcb.png" >
+                        <img src="images/jcb.png">
 
                     </div>
 
@@ -139,11 +126,7 @@
                                 Month
                             </p>
 
-                            <input
-                                type="text"
-                                id="month"
-                                maxlength="2"
-                            >
+                            <input type="text" id="month" maxlength="2">
 
                         </div>
 
@@ -155,11 +138,7 @@
                                 Year
                             </p>
 
-                            <input
-                                type="text"
-                                id="year"
-                                maxlength="2"
-                            >
+                            <input type="text" id="year" maxlength="2">
 
                         </div>
 
@@ -177,11 +156,7 @@
                         Name on card
                     </label>
 
-                    <input
-                        type="text"
-                        id="card-name"
-                        placeholder="eg. Cristiano Ronaldo"
-                    >
+                    <input type="text" id="card-name" placeholder="eg. Cristiano Ronaldo">
 
                 </div>
 
@@ -201,16 +176,11 @@
 
                     <div class="cvv-row">
 
-                        <input
-                            type="password"
-                            id="cvv"
-                            placeholder="eg. XXX"
-                            maxlength="3"
-                        >
+                        <input type="password" id="cvv" placeholder="eg. XXX" maxlength="3">
 
                         <div class="cvv-icon">
 
-                             <img src="images/cvv.jpg" alt="CVV Example">
+                            <img src="images/cvv.jpg" alt="CVV Example">
 
                         </div>
 
@@ -306,7 +276,7 @@
 
             }
 
-           
+
 
         });
 
