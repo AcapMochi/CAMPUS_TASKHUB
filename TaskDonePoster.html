@@ -7,27 +7,7 @@
 
     <body>
       
-      <script>
-    const stars = document.querySelectorAll('.star');
-    let currentRating = 1;
- 
-    stars.forEach(star => {
-      star.addEventListener('click', () => {
-        currentRating = parseInt(star.dataset.value);
-        updateStars(currentRating);
-      });
-      star.addEventListener('mouseenter', () => updateStars(parseInt(star.dataset.value)));
-      star.addEventListener('mouseleave', () => updateStars(currentRating));
-    });
- 
-    function updateStars(val) {
-      stars.forEach(s => {
-        s.classList.toggle('active', parseInt(s.dataset.value) <= val);
-      });
-    }
- 
-    updateStars(currentRating);
-  </script>
+      <script src = "taskdoneposter.js"></script>
 
   <main>
     <div class="done-main">
