@@ -30,7 +30,6 @@ const stars = document.querySelectorAll('.star');
         console.log("Rating Given: ", currentRating);
         console.log("Feedback Comment:", userFeedback ? userFeedback : "No comment left.");
 
-        alert('Thank you for your feedback!');
         window.location.href = 'dashboard.html';
     });
 
@@ -38,3 +37,23 @@ const stars = document.querySelectorAll('.star');
     {
         window.location.href = 'dashboard.html';
     });
+
+    const mockDatabaseResponse = 
+    {
+        taskName: "Nasi Lemak",
+        topRunnerName: "Bangcip",
+        taskRunner: "Bangcip",
+        taskDuration: "30 minutes",
+        taskPrice: "RM15.00"
+    };
+
+    function loadReceiptData(taskDetails)
+    {
+        document.getElementById('topRunnerName').textContent = taskDetails.topRunnerName;
+        document.getElementById('taskName').textContent = taskDetails.taskName;
+        document.getElementById('taskRunner').textContent = taskDetails.taskRunner;
+        document.getElementById('taskDuration').textContent = taskDetails.taskDuration;
+        document.getElementById('taskPrice').textContent = taskDetails.taskPrice;
+    }
+
+        loadReceiptData(mockDatabaseResponse);
