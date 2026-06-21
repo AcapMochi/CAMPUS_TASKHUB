@@ -11,8 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     etaMinutes -= 1;
     etaEl.textContent = `~${etaMinutes} mins`;
-  }, 4000);
+  }, 6000);
 
+  
   document.getElementById('chatBtn').addEventListener('click', () => {
     window.location.href = 'chatpage.html';
   });
