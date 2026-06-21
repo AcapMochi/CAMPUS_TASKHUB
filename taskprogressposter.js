@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => 
     {
-      window.location.href = 'taskdonerunner.html';
+      window.location.href = 'taskdoneposter.html';
     }, 900);
   });
 
