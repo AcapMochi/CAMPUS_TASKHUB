@@ -1,33 +1,16 @@
 <!DOCTYPE html>
 <html lang = en>
+
+  <head>
+    
     <meta charset ="UTF-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
     <title>Campus TaskHub - Task Done Poster</title>
-    <link href = "taskhubstyle.css" rel = "stylesheet">
+    <link href = "taskdoneposter.css" rel = "stylesheet">
+    
+    </head>
 
     <body>
-      
-      <script>
-    const stars = document.querySelectorAll('.star');
-    let currentRating = 1;
- 
-    stars.forEach(star => {
-      star.addEventListener('click', () => {
-        currentRating = parseInt(star.dataset.value);
-        updateStars(currentRating);
-      });
-      star.addEventListener('mouseenter', () => updateStars(parseInt(star.dataset.value)));
-      star.addEventListener('mouseleave', () => updateStars(currentRating));
-    });
- 
-    function updateStars(val) {
-      stars.forEach(s => {
-        s.classList.toggle('active', parseInt(s.dataset.value) <= val);
-      });
-    }
- 
-    updateStars(currentRating);
-  </script>
 
   <main>
     <div class="done-main">
@@ -37,7 +20,7 @@
  
       <div class="done-title">
         <h1>Task Completed!</h1>
-        <p>Beam Patapim has delivered your order</p>
+        <p><span id = "topRunnerName">Runner Placeholder</span> has delivered your order</p>
       </div>
  
       <div class="receipt">
@@ -82,6 +65,8 @@
     </div>
     </div>
   </main>
- 
+
+ <script src = "taskdoneposter.js"></script>
+
 </body>
 </html>
