@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus TaskHub - Task In Progress</title>
+  <link href = "taskprogressposter.html" rel = "stylesheet">
+</head>
+<body>
+
+  <main>
+
+    <header>
+      <a href="mytasks.html">My Tasks</a>
+      <h1>Tasks In Progress</h1>
+    </header>
+    <hr/>
+
+    <section>
+      <p>
+        <span>Food Delivery</span> — 
+        <span>In Progress</span>
+      </p>
+      <h2>Belikan Makanan</h2>
+      <p>
+        Tolong Belikan makanan kat Kafe Satria, saya nak nasi tambah ayam goreng masak merah,
+        lepastu sekali dengan air teh ais ikat tepi, akan bayar lepas dapat confirmation
+      </p>
+      <hr/>
+      <p>Reward: <span>RM10</span></p>
+    </section>
+
+    <section>
+      <h2>Runner</h2>
+      
+      <p>
+        <strong>Name:</strong> Beam Patapim<br/>
+        <strong>Rating:</strong> <span id="runnerRating">4</span>
+      </p>
+      
+      <button id="chatBtn">Chat</button>
+
+      <dl>
+        <dt>Accepted at</dt>
+        <dd id="acceptedAt">[Time]</dd>
+        
+        <dt>ETA</dt>
+        <dd id="etaValue">~20 mins</dd>
+        
+        <dt>Status</dt>
+        <dd id="statusValue">On the way</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Progress</h2>
+
+      <ol id="timeline">
+        <li>
+          <strong>Task Accepted</strong>
+          <p>[Time] · Timeline</p>
+        </li>
+
+        <li>
+          <strong>Heading to Kafe Satria</strong>
+          <p>[Time] · Timeline</p>
+        </li>
+
+        <li>
+          <strong>Buying your order</strong>
+          <p>In progress</p>
+        </li>
+
+        <li>
+          <strong>Delivering to you</strong>
+          <p>Pending</p>
+        </li>
+      </ol>
+    </section>
+
+    <footer>
+      <button id="cancelBtn">Cancel Task</button>
+      <button id="completeBtn">Mark as Complete</button>
+    </footer>
+
+  </main>
+
+  <script src="taskprogressposter.js"></script>
+</body>
+</html>
