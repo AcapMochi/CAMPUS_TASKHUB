@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+
+    <meta charset ="UTF-8"/>
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+    <title>Campus TaskHub - Task Done Runner</title>
+    <link href = "taskdonerunner.css" rel = "stylesheet">
+
+</head>
+<body>
+
+    <main>
+    <div class="confetti">🎉</div>
+
+    <h1>Great Job!</h1>
+    <p>Task marked as done, Waiting for poster confirmation.</p>
+
+    <p>Amount to be received</p>
+    <span class = "receipt-value" id="taskPrice">RM 10.00</span>
+    <p>Released after poster confirms</p>
+
+        <span class="receipt-label">Task</span>
+        <span class="receipt-value" id="taskName">Belikan Makanan</span>
+
+        <span class = "receipt-label">Posted by</span>
+        <span class = "receipt-value" id = "taskRunner">Acap</span>
+
+        <span class = "receipt-label">Duration</span>
+        <span class = "receipt-value" id = "taskDuration">18 mins</span>
+
+        <span class = "receipt-label">Your rating</span>
+        <span class = "receipt-value" id = "taskRating">4.0</span>
+
+        <button class = "btn-submit" id = "nextBtn">Browse More Tasks</button>
+</main>
+
+<script src = "taskdonerunner.js"></script>
+
+</body>
+</html>
