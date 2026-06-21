@@ -21,5 +21,5 @@ LoadReceiptData(MockDatabaseResponse);
 
 document.getElementById('browseMoreBtn').addEventListener('click', () =>
 {
-    window.location.href = 'browseTasks.html';
+    window.location.href = 'browseTask.html';
 });
