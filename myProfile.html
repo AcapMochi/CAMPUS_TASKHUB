@@ -2,19 +2,16 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>My Profile</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/myProfile.css">
-
+    <script src="includes/js/auth.js"></script>
 </head>
 
 <body>
-
-    <!-- HEADER -->
 
     <header class="navbar">
         <div class="logo">
@@ -22,7 +19,7 @@
         </div>
 
         <nav class="nav-links">
-            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="dashboard.html">Dashboard</a>
             <a href="browseTask.html">Browse Tasks</a>
             <a href="posttasks.html">Post Task</a>
             <a href="mytasks.html">My Tasks</a>
@@ -31,209 +28,83 @@
 
         <div class="header-icons">
             <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
-            <a href="myProfile.html">
-                <img src="images/PFP.png" alt="Profile" class="profile-pic">
+            <a href="myProfile.html" class="active">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic">
             </a>
         </div>
     </header>
 
-
-    <div class="header-icons">
-
-        <a href="chatpage.html">
-            <span>💬</span>
-        </a>
-
-        <img src="images/PFP.png" alt="Profile" class="profile-pic">
-
-    </div>
-
-    </header>
-
-    <!-- PAGE -->
-
     <div class="container">
 
         <div class="title-row">
-
-            <h1 class="page-title">
-                My Profile
-            </h1>
-
-
-            <button class="settings-btn" onclick="window.location.href='profile.html'">
-                Settings
-            </button>
-
-
+            <h1 class="page-title">My Profile</h1>
+            <div class="header-action-buttons">
+                <button class="settings-btn" onclick="window.location.href='profile.html'">Settings</button>
+                <button class="logout-btn" onclick="window.location.href='includes/php/logout.php'">Logout</button>
+            </div>
         </div>
 
         <!-- GRID -->
-
         <div class="profile-grid">
 
             <!-- LEFT -->
-
             <div class="left-column">
 
                 <!-- PROFILE CARD -->
-
                 <div class="card">
-
                     <div class="user-top">
-
-                        <img src="images/pfp.png" class="user-image">
-
+                        <img src="images/PFP.jpg" class="user-image" id="profile-avatar" alt="Profile Image">
                         <div>
-
-                            <h2 class="user-name">
-                                Ahmad Mukhriz
-                            </h2>
-
-                            <p class="user-email">
-                                d03241000@student.edu.my
-                            </p>
-
-                            <span class="verified">
-                                Verified member
-                            </span>
-
+                            <h2 class="user-name">Loading...</h2>
+                            <p class="user-email">Loading...</p>
+                            <span class="verified" id="verified-badge">Checking status...</span>
                         </div>
-
                     </div>
-
                 </div>
 
                 <!-- CONTACT -->
-
                 <div class="card">
-
-                    <h3 class="section-title">
-                        Contact Info
-                    </h3>
-
+                    <h3 class="section-title">Contact Info</h3>
                     <div class="info-group">
-
-                        <p class="label">
-                            Full Name
-                        </p>
-
-                        <p class="info-text">
-                            Mohammad Ahmad Mukhriz
-                        </p>
-
+                        <p class="label">Full Name</p>
+                        <p class="info-text" id="info-fullname">Loading...</p>
                     </div>
-
                     <div class="info-group">
-
-                        <p class="label">
-                            Phone Number
-                        </p>
-
-                        <p class="info-text">
-                            +60 11-1234 5678
-                        </p>
-
+                        <p class="label">Phone Number</p>
+                        <p class="info-text" id="info-phone">Loading...</p>
                     </div>
-
                     <div class="info-group">
-
-                        <p class="label">
-                            Faculty
-                        </p>
-
-                        <p class="info-text">
-                            FTMK
-                        </p>
-
+                        <p class="label">Faculty</p>
+                        <p class="info-text" id="info-faculty">Loading...</p>
                     </div>
-
                 </div>
 
             </div>
 
             <!-- RIGHT -->
-
             <div class="right-column">
 
                 <!-- REVIEWS -->
-
-                <div class="card">
-
-                    <h3 class="section-title">
-                        Recent Reviews Received
-                    </h3>
-
-                    <div class="review">
-
-                        <div class="review-top">
-
-                            <img src="images/pfp1.jpg" class="review-pic">
-
-                            <p class="review-name">
-                                Afiq Muzakkir ⭐⭐⭐⭐⭐
-                            </p>
-
-                        </div>
-
-                        <p class="review-text">
-                            "Super fast and followed instructions exactly."
-                        </p>
-
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="review">
-
-                        <div class="review-top">
-
-                            <img src="images/pfp2.jpg" class="review-pic">
-
-                            <p class="review-name">
-                                Asyraf Raziq ⭐⭐⭐⭐⭐
-                            </p>
-
-                        </div>
-
-                        <p class="review-text">
-                            "Very reliable and delivered on time."
-                        </p>
-
-                    </div>
-
+                <div class="card" id="reviews-container">
+                    <h3 class="section-title">Recent Reviews Received</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9em;">Loading reviews...</p>
                 </div>
 
                 <!-- SECURITY -->
-
                 <div class="card">
-
-                    <h3 class="section-title">
-                        Account Security
-                    </h3>
+                    <h3 class="section-title">Account Security</h3>
 
                     <div class="security-row">
-
                         <p>Email Verified</p>
-
-                        <span class="active-status">
-                            Active
-                        </span>
-
+                        <span class="active-status" id="sec-email">Loading...</span>
                     </div>
 
                     <div class="line"></div>
 
                     <div class="security-row">
-
                         <p>Two-Step Verification</p>
-
-                        <span class="off-status">
-                            Off
-                        </span>
-
+                        <span class="off-status" id="sec-2fa">Loading...</span>
                     </div>
-
                 </div>
 
             </div>
@@ -241,6 +112,83 @@
         </div>
 
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('includes/php/get_profile.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const user = data.user;
+
+                        // 1. Inject User Info
+                        document.querySelector('.user-name').textContent = user.FullName || user.Username;
+                        document.querySelector('.user-email').textContent = user.Email;
+                        document.getElementById('profile-avatar').src = user['Profile_Pic_URL'] || 'images/PFP.jpg';
+
+                        // 2. Verified Badge logic
+                        const verifiedBadge = document.getElementById('verified-badge');
+                        const secEmail = document.getElementById('sec-email');
+
+                        if (user['Is_Verified'] == 1) {
+                            verifiedBadge.textContent = 'Verified member';
+                            verifiedBadge.style.color = 'var(--accent)';
+
+                            secEmail.textContent = 'Active';
+                            secEmail.className = 'active-status';
+                        } else {
+                            verifiedBadge.textContent = 'Unverified member';
+                            verifiedBadge.style.color = '#888';
+
+                            secEmail.textContent = 'Pending';
+                            secEmail.className = 'off-status';
+                        }
+
+                        // 3. 2FA Logic
+                        const sec2FA = document.getElementById('sec-2fa');
+                        if (user['Two_Factor_Enabled'] == 1) {
+                            sec2FA.textContent = 'On';
+                            sec2FA.className = 'active-status';
+                        } else {
+                            sec2FA.textContent = 'Off';
+                            sec2FA.className = 'off-status';
+                        }
+
+                        // 4. Inject Contact Info
+                        document.getElementById('info-fullname').textContent = user.FullName || "Not set";
+                        document.getElementById('info-phone').textContent = user.Phone || "Not set";
+                        document.getElementById('info-faculty').textContent = user.Faculty || "Not set";
+
+                        // 5. Inject Reviews
+                        const reviewsContainer = document.getElementById('reviews-container');
+                        reviewsContainer.innerHTML = '<h3 class="section-title">Recent Reviews Received</h3>';
+
+                        if (data.reviews.length > 0) {
+                            data.reviews.forEach(rev => {
+                                let stars = '⭐'.repeat(rev.Rating);
+                                reviewsContainer.innerHTML += `
+                                    <div class="review">
+                                        <div class="review-top">
+                                            <img src="${rev.ReviewerPic || 'images/PFP.jpg'}" class="review-pic">
+                                            <p class="review-name">${rev.ReviewerName} ${stars}</p>
+                                        </div>
+                                        <p class="review-text">"${rev.Comment}"</p>
+                                    </div>
+                                    <div class="line"></div>
+                                `;
+                            });
+                        } else {
+                            reviewsContainer.innerHTML += '<p style="color: var(--text-muted); font-size: 0.9em;">No reviews yet.</p>';
+                        }
+                    } else {
+                        console.error("Failed to fetch profile: ", data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Network error fetching profile:", error);
+                });
+        });
+    </script>
 
 </body>
 

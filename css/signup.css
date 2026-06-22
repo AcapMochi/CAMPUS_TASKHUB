@@ -1,108 +1,211 @@
-/* COPY UNTIL HERE, THE REST IS THE SPECIFIC PAGE CSS */
-
-.container {
-    background-color: rgb(255, 255, 255, 0.03);
+/* =========================================
+   NAVIGATION BAR (.top-menu)
+   ========================================= */
+.top-menu {
     display: flex;
-    flex-direction: row;
-    flex: 1;
+    padding: 20px 40px;
+    background-color: rgba(0, 0, 0, 0.85);
+    /* Slightly darker for a sleeker look */
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 10;
 }
 
+.campus {
+    color: #ffffff;
+    margin-right: 8px;
+    letter-spacing: 2px;
+}
+
+.taskhub {
+    color: rgb(0, 255, 136);
+    /* Synced with your neon theme */
+    letter-spacing: 2px;
+}
+
+
+/* =========================================
+   SPECIFIC PAGE CSS: SIGNUP
+   ========================================= */
+
+/* --- Layout Container --- */
+.container {
+    background-color: rgba(255, 255, 255, 0.03);
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* Adjusted to account for a top nav bar, change to 100vh if fullscreen */
+    min-height: calc(100vh - 70px);
+}
+
+/* --- Split Screen Panes --- */
 .left {
+    flex: 1;
+    /* Automatically takes up half the container */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Color for 'multiply' blend mode to act on */
     background-image: url('/CAMPUS_TASKHUB/images/background2.png');
     background-size: cover;
+    background-position: center;
     background-blend-mode: multiply;
-    height: 100vh;
-    width: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
 }
 
 .right {
+    flex: 1;
+    /* Takes up the other half */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Slightly darker for the form readability */
     background-image: url('/CAMPUS_TASKHUB/images/background1.png');
     background-size: cover;
+    background-position: center;
     background-blend-mode: multiply;
-    height: 100vh;
-    width: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
+/* --- Left Side Typography --- */
 .hustle {
     color: rgb(0, 255, 136);
-    font-size: 100px;
+    font-size: 80px;
+    /* Scaled slightly for better responsiveness */
     text-align: center;
     font-weight: bolder;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
 }
 
 .hustle2 {
     color: rgb(0, 255, 136);
-    font-size: 70px;
+    font-size: 50px;
     text-align: center;
     font-weight: lighter;
+    letter-spacing: 4px;
 }
 
 .loginnow {
     color: rgb(0, 255, 136);
-    font-size: 30px;
+    font-size: 24px;
     text-align: center;
     font-weight: normal;
-    padding-top: 20%;
+    margin-top: 50px;
+    /* Replaced percentage padding for consistency */
 }
 
+/* Assuming there's a link in .loginnow */
+.loginnow a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.loginnow a:hover {
+    color: rgb(0, 255, 136);
+    text-decoration: underline;
+}
+
+/* --- Right Side Typography --- */
 .welcome-container {
-    padding: 100px 0px 60px 0px;
+    padding: 20px 0 40px 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    /* Allows text to wrap neatly on smaller screens */
+    text-align: center;
 }
 
 .welcometo {
     font-weight: normal;
-    font-size: 50px;
+    font-size: 40px;
+    color: white;
 }
 
 .ctask {
     padding-left: 10px;
     color: rgb(0, 255, 136);
     font-weight: bolder;
-    font-size: 50px;
+    font-size: 40px;
+    letter-spacing: 2px;
 }
 
+/* --- Signup Form Layout --- */
 .form-container {
-    padding: 0px 100px;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 450px;
+    /* Constrains form width nicely */
+    margin: 0 auto;
+    /* Centers the form block in the right pane */
+    padding: 0 20px;
 }
 
 .label {
     text-align: left;
     font-weight: bold;
-    padding: 50px 0px 5px 0px;
-    margin: 0px 120px;
-    font-size: 18px;
+    padding: 20px 0px 5px 10px;
+    font-size: 16px;
+    color: #cccccc;
 }
 
 .input {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.4);
     border-radius: 25px;
-    border-color: rgb(187, 187, 187);
-    border-style: solid;
-    border-width: 2px;
+    border: 2px solid rgb(187, 187, 187);
     font-size: 15px;
     font-weight: lighter;
-    padding: 10px 10px;
-    margin: 0px 120px;
-}
-
-input {
+    padding: 15px 20px;
     color: white;
+    width: 100%;
+    /* Adapts to .form-container */
+    transition: all 0.3s ease;
 }
 
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input:focus {
+    outline: none;
+    border-color: rgb(0, 255, 136);
+    /* Highlights neon green on focus */
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Button Styling --- */
 button {
-    padding: 15px 5px;
-    margin: 50px 150px;
+    padding: 15px;
+    margin: 40px 0 20px 0;
     border-radius: 30px;
-    border-style: none;
-    font-weight: lighter;
-    font-size: 15px;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    background-color: rgb(0, 255, 136);
+    color: #000000;
+    /* Dark text looks much better against a neon background */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
-button :focus {
+/* Fixed the space in your 'button :focus' selector */
+button:hover,
+button:focus {
+    background-color: rgb(0, 200, 100);
+    /* Slightly darker neon on hover */
     color: white;
+    outline: none;
+}
+
+button:active {
+    transform: scale(0.98);
+    /* Satisfying click effect */
 }

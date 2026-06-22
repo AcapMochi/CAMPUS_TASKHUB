@@ -4,14 +4,110 @@
 ========================================= */
 
 .page-title {
-    margin: 30px;
+    margin: 30px 40px;
 }
 
-.task-container {
-    padding: 20px;
+/* New layout wrapper for Sidebar + Tasks */
+.browse-layout {
     display: flex;
-    flex-direction: column;
+    gap: 30px;
+    padding: 0 40px 40px 40px;
+    align-items: flex-start;
+}
+
+/* --- Filter Sidebar Styles --- */
+.filter-sidebar {
+    width: 280px;
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid #2f2235;
+    flex-shrink: 0;
+}
+
+.filter-sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.5em;
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section h3, 
+.filter-section label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 1em;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.tag-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--text-muted);
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tag.active, 
+.tag:hover {
+    color: var(--text-main);
+    border-color: var(--text-main);
+    transform: translateY(0); /* Override global button hover if necessary */
+    background-color: transparent; 
+}
+
+.reward-input {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-main);
+    padding: 12px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.reward-input::placeholder {
+    color: var(--text-muted);
+}
+
+.apply-filters-btn {
+    width: 100%;
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--text-main);
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.apply-filters-btn:hover {
+    background-color: #2f2235; /* Subtle dark hover effect */
+}
+
+/* --- Task Container Styles (Updated for Grid) --- */
+.task-container {
+    /* Changed from flex to grid to match the image */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    flex-grow: 1;
+    padding: 0; /* Padding is now handled by .browse-layout */
 }
 
 .task-card {
@@ -19,6 +115,8 @@
     border-radius: 12px;
     padding: 20px;
     border: 1px solid #2f2235;
+    display: flex;
+    flex-direction: column;
 }
 
 .reward {
@@ -26,9 +124,11 @@
     font-size: 1.1em;
     font-weight: bold;
     margin: 15px 0;
+    margin-top: auto; /* Pushes the reward and button to the bottom */
 }
 
-button {
+/* Keeps your existing button styles for the "View Details" button */
+.task-card button {
     background-color: var(--accent);
     color: #000;
     font-weight: bold;
@@ -39,7 +139,7 @@ button {
     transition: transform 0.1s ease, background-color 0.2s;
 }
 
-button:hover {
+.task-card button:hover {
     transform: translateY(-2px);
-    background-color: #00e695; /* Slightly darker green on hover */
+    background-color: #00e695;
 }

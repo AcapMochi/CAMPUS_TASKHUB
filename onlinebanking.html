@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus TaskHub - Enter Card Details</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/onlinebanking.css">
+    <script src="includes/js/auth.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo"><span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span></div>
+        <nav class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="browseTask.html">Browse Task</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html"><img src="images/PFP.jpg" alt="Profile" class="profile-pic"></a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="header-inline">
+            <a href="#" class="back-link">← Back to Post</a>
+            <h1 class="page-title">Enter Card Details</h1>
+        </div>
+
+        <div class="card-form-wrapper">
+            <div class="form-card">
+                
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="e.g. XXXX XXXX XXXX XXXX" class="dark-input">
+                    <div class="card-logos">
+                        <img src="images/visa.png" alt="Visa" width="40">
+                        <img src="images/amex.png" alt="Amex" width="40">
+                        <img src="images/mastercard.png" alt="Mastercard" width="40">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Expiry Date</label>
+                    <span class="sub-label">For Example, 10/20</span>
+                    <div class="expiry-inputs">
+                        <div class="input-col">
+                            <label>Month</label>
+                            <input type="text" class="dark-input short-input">
+                        </div>
+                        <span class="slash">/</span>
+                        <div class="input-col">
+                            <label>Year</label>
+                            <input type="text" class="dark-input short-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Name on card</label>
+                    <input type="text" placeholder="e.g. Cristiano Ronaldo bin Messi" class="dark-input">
+                </div>
+
+                <div class="form-group">
+                    <label>Card security code</label>
+                    <span class="sub-label">Last 3 digits on the back of the card</span>
+                    <div class="security-row">
+                        <input type="text" placeholder="e.g. XXX" class="dark-input half-input">
+                        <div class="cvv-icon-placeholder">💳</div> </div>
+                </div>
+
+                <div class="btn-right">
+                    <button class="pay-btn">Pay</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

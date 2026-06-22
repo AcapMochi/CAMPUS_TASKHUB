@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERIFY EMAIL</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/verify.css">
+</head>
+
+<body>
+    <nav class="top-menu">
+        <span class="campus">CAMPUS</span>
+        <span class="taskhub">TASKHUB</span>
+    </nav>
+
+    <main class="container">
+        <section class="verify-form">
+            <h1 class="verify-title">VERIFY</h1>
+            <p class="subtitle">We sent a 5-digit code to your email.</p>
+
+            <form action="includes/php/verify_handler.php" method="POST">
+                <div class="code-container">
+                    <input class="code-input" name="otp" type="text" maxlength="5" placeholder="00000" required autocomplete="off">
+                </div>
+
+                <button class="button" type="submit">CONFIRM CODE</button>
+            </form>
+            
+            <h4 class="resend-text">Didn't receive it? <a href="#">Resend code.</a></h4>
+        </section>
+    </main>
+</body>
+</html>

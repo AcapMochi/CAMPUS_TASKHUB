@@ -1,56 +1,52 @@
 <!DOCTYPE html>
-<html<head><html lang="en">
-<meta charset="UTF-8">
-<title>My Tasks</title>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks</title>
     <link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="mytasks.css">
+    <link rel="stylesheet" href="css/mytasks.css">
+    <script src="includes/js/auth.js"></script>
 </head>
 
 <body>
+    <header class="navbar">
+        <div class="logo">
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+        </div>
 
-<header class="navbar">
-    <div class="logo">
-        <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
-    </div>
+        <nav class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html" class="active">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
 
-    <nav class="nav-links">
-        <a href="dashboard.html" class="active">Dashboard</a>
-        <a href="browseTask.html">Browse Tasks</a>
-        <a href="posttasks.html">Post Task</a>
-        <a href="mytasks.html">My Tasks</a>
-        <a href="leaderboard.html">Leaderboard</a>
-    </nav>
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic">
+            </a>
+        </div>
+    </header>
 
-    <div class="header-icons">
-        <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
-        <a href="myProfile.html">
-            <img src="images/PFP.png" alt="Profile" class="profile-pic">
-        </a>
-    </div>
-</header>
+    <main class="main-container">
+        <h1 class="page-title">My Tasks</h1>
+        <div class="grid">
+            <div class="column">
+                <h3>Tasks I’m running</h3>
+                <div id="runningList"></div>
+            </div>
 
-<section class="container">
-
-<h1>My Tasks</h1>
-
-<div class="grid">
-
-<div class="column">
-<h3>Tasks I’m running</h3>
-<div id="runningList"></div>
-</div>
-
-<div class="column">
-<h3>Tasks I’ve posted</h3>
-<div id="postedList"></div>
-</div>
-
-</div>
-
-</section>
-
-
-<script src="mytasks.js"></script>
-
+            <div class="column">
+                <h3>Tasks I’ve posted</h3>
+                <div id="postedList"></div>
+            </div>
+        </div>
+    </main>
+    <script src="includes/js/mytasks.js"></script>
 </body>
+
 </html>

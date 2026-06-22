@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus TaskHub - Task In Progress (Runner)</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/taskprogressrunner.css" />
+  <script src="includes/js/auth.js"></script>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="logo">
+      <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="browseTask.html">Browse Tasks</a>
+      <a href="posttasks.html">Post Task</a>
+      <a href="mytasks.html">My Tasks</a>
+      <a href="leaderboard.html">Leaderboard</a>
+    </nav>
+
+    <div class="header-icons">
+      <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+      <a href="myProfile.html">
+        <img src="images/PFP.jpg" alt="Profile" class="profile-pic">
+      </a>
+    </div>
+  </header>
+
+  <main class="page-main">
+
+    <div class="page-header">
+      <a href="mytasks.html" class="back-link">← My Tasks</a>
+      <h1 class="page-title">Tasks In Progress</h1>
+    </div>
+    <hr class="page-divider" />
+
+    <div class="content">
+
+      <section class="card earning-box">
+        <div class="earning-col">
+          <p class="box-label">Earning</p>
+          <p class="earning-value" id="earningValue">RM 10.00</p>
+        </div>
+        <div class="time-col">
+          <p class="box-label">Time remaining</p>
+          <p class="time-value" id="timeValue">22:34:50</p>
+        </div>
+      </section>
+
+      <section class="card task-details-card">
+        <p class="section-label">Task Details</p>
+        <h2 class="task-title">Belikan Makanan</h2>
+        <p class="task-desc">[Task Description]</p>
+        <div class="badge-row">
+          <span class="badge badge-teal">Food Delivery</span>
+          <span class="badge badge-progress">Kafe Satria</span>
+        </div>
+      </section>
+
+      <section class="card poster-card">
+        <p class="section-label">Poster</p>
+        <div class="poster-row">
+          <div class="poster-info">
+            <div class="poster-avatar">
+            </div>
+            <div class="poster-meta">
+              <p class="poster-name">Acap</p>
+              <p class="poster-rating"><span id="posterRating">4</span></p>
+            </div>
+          </div>
+          <button class="btn-chat" id="chatBtn">Chat</button>
+        </div>
+      </section>
+
+      <section class="card status-card">
+        <p class="section-label">Update Status</p>
+        <div class="status-list" id="statusList">
+          <button class="status-option" data-status="heading">
+            <span class="status-emoji">🏃</span>
+            <span class="status-text">Heading to pickup location</span>
+          </button>
+          <button class="status-option active" data-status="buying">
+            <span class="status-emoji">🛍️</span>
+            <span class="status-text">Buying the order now<span class="current-tag"> (current)</span></span>
+          </button>
+          <button class="status-option" data-status="delivering">
+            <span class="status-emoji">🛵</span>
+            <span class="status-text">On my way to deliver</span>
+          </button>
+        </div>
+      </section>
+
+      <div class="action-buttons">
+        <button class="btn-complete" id="completeBtn">Mark as Done</button>
+        <button class="btn-cancel" id="cancelBtn">Cancel Task</button>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="includes/js/taskprogressrunner.js"></script>
+</body>
+
+</html>

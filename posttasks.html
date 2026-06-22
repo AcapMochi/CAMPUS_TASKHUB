@@ -1,114 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Post Tasks</title>
+    <meta charset="UTF-8">
+    <title>Post Tasks</title>
     <link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="posttasks.css">
+    <link rel="stylesheet" href="css/posttasks.css">
+    <script src="includes/js/auth.js"></script>
 </head>
 
 <body>
 
-<header class="navbar">
-    <div class="logo">
-        <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
-    </div>
+    <header class="navbar">
+        <div class="logo">
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+        </div>
 
-    <nav class="nav-links">
-        <a href="dashboard.html" class="active">Dashboard</a>
-        <a href="browseTask.html">Browse Tasks</a>
-        <a href="posttasks.html">Post Task</a>
-        <a href="mytasks.html">My Tasks</a>
-        <a href="leaderboard.html">Leaderboard</a>
-    </nav>
+        <nav class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html" class="active">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
 
-    <div class="header-icons">
-        <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
-        <a href="myProfile.html">
-            <img src="images/PFP.png" alt="Profile" class="profile-pic">
-        </a>
-    </div>
-</header>
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic">
+            </a>
+        </div>
+    </header>
 
-<section class="container">
+    <main class="main-container">
 
-<h1>Post Tasks</h1>
+        <h1 class="page-title">Post Task</h1>
 
-<div class="card">
+        <div class="card">
 
-<form id="posttaskForm">
+            <form id="posttaskForm">
 
-<!-- ROW 1 -->
-<div class="row">
-    <div class="group">
-        <label>Task Title</label>
-        <input id="title" placeholder="e.g Buy food from Kafe Satria">
-    </div>
+                <!-- ROW 1 -->
+                <div class="row">
+                    <div class="group">
+                        <label>Task Title</label>
+                        <input id="title" placeholder="e.g Buy food from Kafe Satria">
+                    </div>
 
-    <div class="group">
-        <label>Category</label>
-        <select id="category">
-            <option>Select Category</option>
-            <option>Food</option>
-            <option>Delivery</option>
-        </select>
-    </div>
-</div>
+                    <div class="group">
+                        <label>Category</label>
+                        <select id="category">
+                            <option>Select Category</option>
+                            <option>Food</option>
+                            <option>Delivery</option>
+                        </select>
+                    </div>
+                </div>
 
-<!-- DESCRIPTION -->
-<div class="group">
-    <label>Description</label>
-    <textarea id="desc" placeholder="Describe what needs to be done in detail..."></textarea>
-</div>
+                <!-- DESCRIPTION -->
+                <div class="group">
+                    <label>Description</label>
+                    <textarea id="desc" placeholder="Describe what needs to be done in detail..."></textarea>
+                </div>
 
-<!-- ROW 2 -->
-<div class="row">
-    <div class="group">
-        <label>Location</label>
-        <input id="location" placeholder="Select Location">
-    </div>
+                <!-- ROW 2 -->
+                <div class="row">
+                    <div class="group">
+                        <label>Location</label>
+                        <input id="location" placeholder="Select Location">
+                    </div>
 
-    <div class="group">
-        <label>Specific location (optional)</label>
-        <input placeholder="e.g Blok C">
-    </div>
-</div>
+                    <div class="group">
+                        <label>Specific location (optional)</label>
+                        <input id="specific_location" placeholder="e.g Blok C">
+                    </div>
+                </div>
 
-<!-- ROW 3 -->
-<div class="row">
-    <div class="group">
-        <label>Reward amount (RM)</label>
-        <input id="reward" placeholder="RM 0.00">
-    </div>
+                <!-- ROW 3 -->
+                <div class="row">
+                    <div class="group">
+                        <label>Reward amount (RM)</label>
+                        <input id="reward" placeholder="RM 0.00">
+                    </div>
 
-    <!-- UPLOAD -->
-    <div class="upload-box" onclick="uploadFile()">
-        <span id="uploadText">＋</span>
-        <p>Drag and drop or click to add attachment</p>
-        <img id="preview">
-    </div>
-</div>
+                    <!-- UPLOAD -->
+                    <div class="upload-box" onclick="uploadFile()">
+                        <span id="uploadText">＋</span>
+                        <p>Drag and drop or click to add attachment</p>
+                        <img id="preview">
+                    </div>
+                </div>
 
-<input type="file" id="fileInput" hidden>
+                <input type="file" id="fileInput" hidden>
 
-<!-- GUIDELINE -->
-<div class="guideline">
-    <strong>Community guidelines</strong><br>
-    Only post tasks that are safe, legal, and campus-appropriate.
-</div>
+                <!-- GUIDELINE -->
+                <div class="guideline">
+                    <strong>Community guidelines</strong><br>
+                    Only post tasks that are safe, legal, and campus-appropriate.
+                </div>
 
-<!-- BUTTON -->
-<div class="buttons">
-    <button type="button" class="draft">Save as draft</button>
-    <button type="submit" class="continue">Continue</button>
-</div>
+                <!-- BUTTON -->
+                <div class="buttons">
+                    <button type="button" class="draft">Save as draft</button>
+                    <button type="submit" class="continue">Continue</button>
+                </div>
 
-</form>
+            </form>
 
-</div>
-</section>
+        </div>
+        </section>
 
-<script src="posttasks.js"></script>
+        <script src="includes/js/posttasks.js"></script>
 </body>
+
 </html>
 ``

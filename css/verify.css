@@ -1,0 +1,167 @@
+/* =========================================
+   VERIFY PAGE CSS
+   ========================================= */
+   
+.top-menu {
+    display: flex;
+    padding: 20px 40px;
+    background-color: rgba(0, 0, 0, 0.85);
+    /* Slightly darker for a sleeker look */
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 10;
+}
+
+.campus {
+    color: #ffffff;
+    margin-right: 8px;
+    letter-spacing: 2px;
+}
+
+.taskhub {
+    color: rgb(0, 255, 136);
+    /* Synced with your neon theme */
+    letter-spacing: 2px;
+}
+
+
+/* --- Main Background Container (Matches Login) --- */
+.container {
+    background-color: rgba(0, 0, 0, 0.5); 
+    
+    /* NOTE: If your background is black on live server, change this path to: url('../images/background3.png') */
+    background-image: url('/CAMPUS_TASKHUB/images/background3.png'); 
+    
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply; 
+    min-height: calc(100vh - 70px); 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+}
+
+/* --- The Glass Form Box --- */
+.verify-form {
+    background-color: rgba(0, 0, 0, 0.75); 
+    width: 100%;
+    max-width: 450px; 
+    padding: 50px 40px; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the text and inputs */
+    backdrop-filter: blur(8px); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* --- Typography --- */
+.verify-title {
+    font-weight: 300;
+    font-size: 45px;
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+    color: rgb(0, 255, 136); /* Neon Green */
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #cccccc;
+    margin-bottom: 40px;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+/* --- Form Elements --- */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.code-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+/* Big, spaced-out input for the 5-digit code */
+.code-input {
+    width: 80%; 
+    text-align: center;
+    font-size: 40px; 
+    letter-spacing: 15px; /* Creates wide gaps between numbers */
+    font-weight: bold;
+    padding: 15px 15px 15px 30px; /* Extra left padding to balance the letter-spacing */
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: rgb(0, 255, 136); 
+    transition: all 0.3s ease;
+}
+
+.code-input::placeholder {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+.code-input:focus {
+    outline: none;
+    border-color: rgb(0, 255, 136);
+    background-color: rgba(0, 255, 136, 0.05);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+/* --- Button --- */
+.button {
+    padding: 16px;
+    border-radius: 12px; 
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 2px;
+    background-color: rgb(0, 255, 136);
+    color: #000000; 
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.button:hover, .button:focus {
+    background-color: rgb(0, 220, 115);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4); 
+    outline: none;
+}
+
+.button:active {
+    transform: scale(0.97); 
+}
+
+/* --- Resend Link --- */
+.resend-text {
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    color: #aaaaaa; 
+    margin-top: 25px;
+}
+
+.resend-text a {
+    color: rgb(0, 255, 136);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.resend-text a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.8); 
+}
