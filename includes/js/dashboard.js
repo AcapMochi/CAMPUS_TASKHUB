@@ -8,7 +8,6 @@ function fetchDashboardData() {
         .then(data => {
             if (data.status === 'success') {
                 
-                // 1. Update Welcome Message based on time of day
                 const hour = new Date().getHours();
                 let greeting = "Good evening";
                 if (hour < 12) greeting = "Good morning";
@@ -16,13 +15,11 @@ function fetchDashboardData() {
                 
                 document.getElementById('welcome-msg').innerText = `${greeting}, ${data.username}!`;
 
-                // 2. Update Stats
                 document.getElementById('dashboard-open').innerText = data.stats.open_tasks;
                 document.getElementById('dashboard-posted').innerText = data.stats.posted_tasks;
                 document.getElementById('dashboard-done').innerText = data.stats.completed_tasks;
                 document.getElementById('dashboard-earned').innerText = `RM ${data.stats.total_earned}`;
 
-                // 3. Update Progress Bars (Assuming a goal of 10 for the visual bar)
                 const goal = 10;
                 const completedPercent = Math.min((data.stats.completed_tasks / goal) * 100, 100);
                 const postedPercent = Math.min((data.stats.posted_tasks / goal) * 100, 100);
@@ -30,7 +27,6 @@ function fetchDashboardData() {
                 document.getElementById('barCompleted').style.width = `${completedPercent}%`;
                 document.getElementById('barPosted').style.width = `${postedPercent}%`;
 
-                // 4. Render "Tasks You May Like"
                 renderRecommendedTasks(data.recommended_tasks);
             } else {
                 console.error("Error loading dashboard:", data.message);
@@ -49,7 +45,6 @@ function renderRecommendedTasks(tasks) {
     }
 
     tasks.forEach(task => {
-        // Create a mini-card similar to browse tasks
         const div = document.createElement("div");
         div.style.background = "rgba(0, 0, 0, 0.4)";
         div.style.padding = "15px";

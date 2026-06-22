@@ -1,19 +1,70 @@
 <!DOCTYPE html>
 <html lang=en>
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale = 1.0">
-<title>Campus TaskHub - Task Done Poster</title>
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/taskdoneposter.css">
-<script src="includes/js/auth.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+  <title>Campus TaskHub - Task Done Poster</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/taskdoneposter.css">
+  <script src="includes/js/auth.js"></script>
 </head>
 
 <body>
 
+  <div class="done-main">
+    <div class="done-card">
+      <div class="checkmark">✅</div>
+      <div class="done-title">
+        <h1>Task Completed!</h1>
+        <p id="runner-msg">Your runner has delivered your order</p>
+      </div>
+
+      <div class="receipt">
+        <div class="receipt-rows">
+          <div class="receipt-row">
+            <span class="receipt-label">Task</span>
+            <span class="receipt-value" id="taskName">Loading...</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">Runner</span>
+            <span class="receipt-value" id="taskRunner">Loading...</span>
+          </div>
+        </div>
+        <hr class="receipt-divider" />
+        <div class="receipt-paid">
+          <span class="receipt-paid-label">Paid</span>
+          <span class="receipt-paid-amount" id="taskPrice">RM 0.00</span>
+        </div>
+      </div>
+
+      <div class="rating-panel">
+        <p class="rating-label">Rate your runner</p>
+        <div class="stars" id="starRow">
+          <span class="star" data-value="1">&#9733;</span>
+          <span class="star" data-value="2">&#9733;</span>
+          <span class="star" data-value="3">&#9733;</span>
+          <span class="star" data-value="4">&#9733;</span>
+          <span class="star" data-value="5">&#9733;</span>
+        </div>
+        <textarea class="feedback-box" id="feedback" placeholder="Leave a comment (optional)..."></textarea>
+      </div>
+
+      <div class="done-actions">
+        <button class="btn-submit" id="submitBtn">Submit Review</button>
+        <button class="btn-skip" id="homeBtn" onclick="window.location.href='dashboard.html'">Skip</button>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Star Rating Logic
     const stars = document.querySelectorAll('.star');
-    let currentRating = 1;
+    let currentRating = 0;
+
+    function updateStars(val) {
+      stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.value) <= val));
+    }
 
     stars.forEach(star => {
       star.addEventListener('click', () => {
@@ -24,90 +75,46 @@
       star.addEventListener('mouseleave', () => updateStars(currentRating));
     });
 
-    function updateStars(val) {
-      stars.forEach(s => {
-        s.classList.toggle('active', parseInt(s.dataset.value) <= val);
+    // Submission Logic
+    document.addEventListener("DOMContentLoaded", function () {
+      const submitBtn = document.getElementById('submitBtn');
+
+      submitBtn.addEventListener('click', function () {
+        console.log("Submit button clicked!"); // Check console for this
+
+        const feedback = document.getElementById('feedback').value;
+        const urlParams = new URLSearchParams(window.location.search);
+        const taskId = urlParams.get('id');
+
+        if (currentRating === 0) {
+          alert("Please select a rating!");
+          return;
+        }
+
+        console.log("Sending data to PHP...");
+
+        fetch('includes/php/submit_review.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            task_id: taskId,
+            rating: currentRating,
+            feedback: feedback
+          })
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log("Server Response:", data); // See what PHP says
+            if (data.status === 'success') {
+              window.location.href = 'dashboard.html';
+            } else {
+              alert("Error from server: " + data.message);
+            }
+          })
+          .catch(err => console.error("Fetch Error:", err));
       });
-    }
-
-    updateStars(currentRating);
+    });
   </script>
-
-  <main>
-
-    <header class="navbar">
-      <div class="logo">
-        <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
-      </div>
-
-      <nav class="nav-links">
-        <a href="dashboard.html" class="active">Dashboard</a>
-        <a href="browseTask.html">Browse Tasks</a>
-        <a href="posttasks.html">Post Task</a>
-        <a href="mytasks.html">My Tasks</a>
-        <a href="leaderboard.html">Leaderboard</a>
-      </nav>
-
-      <div class="header-icons">
-        <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
-        <a href="myProfile.html">
-          <img src="images/PFP.jpg" alt="Profile" class="profile-pic">
-        </a>
-      </div>
-    </header>
-
-    <div class="done-main">
-      <div class="done-card">
-
-        <div class="checkmark">✅</div>
-
-        <div class="done-title">
-          <h1>Task Completed!</h1>
-          <p>Beam Patapim has delivered your order</p>
-        </div>
-
-        <div class="receipt">
-          <div class="receipt-rows">
-            <div class="receipt-row">
-              <span class="receipt-label">Task</span>
-              <span class="receipt-value" id="taskName">Belikan Makanan</span>
-            </div>
-            <div class="receipt-row">
-              <span class="receipt-label">Runner</span>
-              <span class="receipt-value" id="taskRunner">Beam Patapim</span>
-            </div>
-            <div class="receipt-row">
-              <span class="receipt-label">Duration</span>
-              <span class="receipt-value" id="taskDuration">18 mins</span>
-            </div>
-          </div>
-          <hr class="receipt-divider" />
-          <div class="receipt-paid">
-            <span class="receipt-paid-label">Paid</span>
-            <span class="receipt-paid-amount" id="taskPrice">RM 10.00</span>
-          </div>
-        </div>
-
-        <div class="rating-panel">
-          <p class="rating-label">Rate your runner</p>
-          <div class="stars" id="starRow">
-            <span class="star active" data-value="1">&#9733;</span>
-            <span class="star" data-value="2">&#9733;</span>
-            <span class="star" data-value="3">&#9733;</span>
-            <span class="star" data-value="4">&#9733;</span>
-            <span class="star" data-value="5">&#9733;</span>
-          </div>
-          <textarea class="feedback-box" id="feedback" placeholder="Leave a comment (optional)..."></textarea>
-        </div>
-
-        <div class="done-actions">
-          <button class="btn-submit" id="nextBtn">Submit Review &amp; Confirm Payment</button>
-          <button class="btn-skip" id="homeBtn">Skip</button>
-        </div>
-
-      </div>
-    </div>
-  </main>
 
 </body>
 

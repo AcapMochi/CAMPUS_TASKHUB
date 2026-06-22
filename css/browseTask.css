@@ -1,145 +1,235 @@
-/* =========================================
-   BROWSE TASKS SPECIFIC STYLES
-   Note: Navbar, Body, and Fonts are handled by global.css
-========================================= */
+.main-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
 
 .page-title {
-    margin: 30px 40px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #ffffff;
 }
 
-/* New layout wrapper for Sidebar + Tasks */
+/* LAYOUT: SIDEBAR + GRID */
 .browse-layout {
-    display: flex;
+    display: grid;
+    grid-template-columns: 280px 1fr;
     gap: 30px;
-    padding: 0 40px 40px 40px;
-    align-items: flex-start;
+    align-items: start;
 }
 
-/* --- Filter Sidebar Styles --- */
+/* --- SIDEBAR FILTERS --- */
 .filter-sidebar {
-    width: 280px;
-    background-color: var(--bg-card);
+    background-color: #0d0910;
     border-radius: 12px;
     padding: 25px;
-    border: 1px solid #2f2235;
-    flex-shrink: 0;
+    border: 1px solid #1f1524;
 }
 
 .filter-sidebar h2 {
+    color: #ffffff;
     margin-top: 0;
     margin-bottom: 25px;
-    font-size: 1.5em;
+    font-size: 1.2rem;
 }
 
 .filter-section {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
-.filter-section h3, 
-.filter-section label {
+.filter-section h3, .filter-section label {
     display: block;
-    color: var(--text-muted);
-    font-size: 1em;
+    color: #948b9c;
+    font-size: 0.9rem;
     margin-bottom: 12px;
-    font-weight: 500;
 }
 
+/* Sidebar Tags */
 .tag-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
 }
 
-.tag {
+.side-tag {
     background: transparent;
-    color: var(--text-muted);
-    border: 1px solid var(--text-muted);
+    border: 1px solid #42355c;
+    color: #948b9c;
     border-radius: 20px;
-    padding: 5px 15px;
-    font-size: 0.85em;
+    padding: 5px 14px;
+    font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.tag.active, 
-.tag:hover {
-    color: var(--text-main);
-    border-color: var(--text-main);
-    transform: translateY(0); /* Override global button hover if necessary */
-    background-color: transparent; 
+.side-tag:hover {
+    border-color: #ffffff;
+    color: #ffffff;
 }
 
+.side-tag.active {
+    border-color: #ffffff;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Sidebar Inputs & Button */
 .reward-input {
     width: 100%;
     background-color: transparent;
-    border: 1px solid var(--text-muted);
-    color: var(--text-main);
-    padding: 12px;
+    border: 1px solid #42355c;
+    color: #ffffff;
+    padding: 10px 15px;
     border-radius: 8px;
     box-sizing: border-box;
-    font-size: 1em;
+    outline: none;
 }
 
-.reward-input::placeholder {
-    color: var(--text-muted);
+.reward-input:focus {
+    border-color: var(--accent, #00ffa6);
 }
 
 .apply-filters-btn {
     width: 100%;
     background-color: transparent;
-    color: var(--text-main);
-    border: 1px solid var(--text-main);
+    border: 1px solid #ffffff;
+    color: #ffffff;
     padding: 12px;
     border-radius: 8px;
-    font-weight: bold;
     cursor: pointer;
-    margin-top: 15px;
+    font-weight: bold;
+    transition: all 0.2s;
 }
 
 .apply-filters-btn:hover {
-    background-color: #2f2235; /* Subtle dark hover effect */
+    background-color: #ffffff;
+    color: #000000;
 }
 
-/* --- Task Container Styles (Updated for Grid) --- */
+
+/* --- TASK GRID & CARDS --- */
 .task-container {
-    /* Changed from flex to grid to match the image */
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 cards side-by-side */
     gap: 20px;
-    flex-grow: 1;
-    padding: 0; /* Padding is now handled by .browse-layout */
 }
 
 .task-card {
-    background-color: var(--bg-card);
+    background-color: #0d0910;
     border-radius: 12px;
-    padding: 20px;
-    border: 1px solid #2f2235;
+    padding: 25px;
+    border: 1px solid #1f1524;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
+    transition: transform 0.2s, border-color 0.2s;
 }
 
-.reward {
-    color: var(--accent);
-    font-size: 1.1em;
-    font-weight: bold;
-    margin: 15px 0;
-    margin-top: auto; /* Pushes the reward and button to the bottom */
-}
-
-/* Keeps your existing button styles for the "View Details" button */
-.task-card button {
-    background-color: var(--accent);
-    color: #000;
-    font-weight: bold;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.1s ease, background-color 0.2s;
-}
-
-.task-card button:hover {
+.task-card:hover {
     transform: translateY(-2px);
-    background-color: #00e695;
+    border-color: #42355c;
+}
+
+/* Card Header (User Info) */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.card-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card-username {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.card-rating {
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+/* Card Body */
+.card-title {
+    color: #ffffff;
+    font-size: 1.25rem;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.card-desc {
+    color: #b0a7b8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+    
+    /* Truncates text to 3 lines with an ellipsis (...) */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Card Tags */
+.card-tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.card-tag {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.tag-open { background-color: #7ee2a8; }
+.tag-category { background-color: #a1ebd6; }
+.tag-location { background-color: #f7dfa1; }
+
+/* Card Footer */
+.card-footer {
+    margin-top: auto; /* Pushes footer to the bottom */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-reward {
+    color: #b0a7b8;
+    font-size: 0.9rem;
+}
+
+.card-reward strong {
+    color: #ffffff;
+    font-size: 1rem;
+    margin-left: 4px;
+}
+
+.card-time {
+    color: var(--accent, #00ffa6);
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 900px) {
+    .browse-layout {
+        grid-template-columns: 1fr;
+    }
+    .task-container {
+        grid-template-columns: 1fr;
+    }
 }

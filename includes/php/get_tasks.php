@@ -5,7 +5,16 @@ require 'dhb.inc.php';
 header('Content-Type: application/json');
 
 try {
-    $sql = "SELECT * FROM tasks WHERE 1=1";
+    // BASE QUERY: Join tasks, categories, and users
+    $sql = "SELECT 
+                tasks.*, 
+                categories.Name AS CategoryName,
+                users.Username 
+            FROM tasks 
+            LEFT JOIN categories ON tasks.CategoryID = categories.CategoryID 
+            LEFT JOIN users ON tasks.PosterID = users.UserID 
+            WHERE 1=1";
+            
     $params = [];
 
     // 1. Filter by MULTIPLE Locations
@@ -19,19 +28,11 @@ try {
             $params[$paramName] = $loc;
         }
 
-        // Adds: AND Location IN (:loc0, :loc1, ...)
-        $sql .= " AND Location IN (" . implode(',', $locPlaceholders) . ")";
+        // Specify tasks.Location to avoid ambiguity if users also has a Location column
+        $sql .= " AND tasks.Location IN (" . implode(',', $locPlaceholders) . ")";
     }
 
-    $sql = "SELECT tasks.*, categories.Name AS CategoryName 
-            FROM tasks 
-            LEFT JOIN categories ON tasks.CategoryID = categories.CategoryID 
-            WHERE 1=1";
-    $params = [];
-
-    // ... (Keep your Location filter code here) ...
-
-    // 2. Filter by MULTIPLE Categories using the JOINed table
+    // 2. Filter by MULTIPLE Categories
     if (isset($_GET['categories']) && !empty($_GET['categories'])) {
         $catArray = explode(',', $_GET['categories']);
         $catPlaceholders = [];
@@ -42,23 +43,23 @@ try {
             $params[$paramName] = $cat;
         }
 
-        // Change 'Category' to 'categories.Name' so it searches the correct table column
         $sql .= " AND categories.Name IN (" . implode(',', $catPlaceholders) . ")";
     }
 
     // 3. Filter by Min Reward
     if (isset($_GET['min']) && is_numeric($_GET['min'])) {
-        $sql .= " AND Reward_Amount >= :min";
+        $sql .= " AND tasks.Reward_Amount >= :min";
         $params[':min'] = $_GET['min'];
     }
 
     // 4. Filter by Max Reward
     if (isset($_GET['max']) && is_numeric($_GET['max'])) {
-        $sql .= " AND Reward_Amount <= :max";
+        $sql .= " AND tasks.Reward_Amount <= :max";
         $params[':max'] = $_GET['max'];
     }
 
-    $sql .= " ORDER BY 'Created_At' DESC";
+    // Fixed the quotes around Created_At so it sorts properly
+    $sql .= " ORDER BY tasks.Created_Date DESC";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);

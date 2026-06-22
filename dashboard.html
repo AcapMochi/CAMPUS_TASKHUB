@@ -1,99 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Dashboard</title>
+    <meta charset="UTF-8">
+    <title>Dashboard | Campus TaskHub</title>
     <link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/dashboard.css">
-<script src="includes/js/auth.js"></script>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="includes/js/auth.js"></script>
 </head>
 
 <body>
 
-<header class="navbar">
-    <div class="logo">
-        <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
-    </div>
+    <header class="navbar">
+        <div class="logo">
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+        </div>
 
-    <nav class="nav-links">
-        <a href="dashboard.html" class="active">Dashboard</a>
-        <a href="browseTask.html">Browse Tasks</a>
-        <a href="posttasks.html">Post Task</a>
-        <a href="mytasks.html">My Tasks</a>
-        <a href="leaderboard.html">Leaderboard</a>
-    </nav>
+        <nav class="nav-links">
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
 
-    <div class="header-icons">
-        <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
-        <a href="myProfile.html">
-            <img src="images/PFP.jpg" alt="Profile" class="profile-pic">
-        </a>
-    </div>
-</header>
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic" onerror="this.src='images/pfp1.jpg'">
+            </a>
+        </div>
+    </header>
 
-<section class="container">
+    <main class="main-container">
+        <h1 class="page-title" id="welcome-msg">Good morning, acap</h1>
 
-<h1 id="welcome-msg">Good morning</h1>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h2 id="dashboard-open">38</h2>
+                <p>Open Tasks today</p>
+            </div>
 
-<!-- STATS -->
-<div class="stats">
+            <div class="stat-card">
+                <h2 id="dashboard-users">142</h2>
+                <p>Active Users</p>
+            </div>
 
-<div class="card">
-    <h2 id="dashboard-open">0</h2>
-    <p>Open Tasks</p>
-</div>
+            <div class="stat-card stat-earned">
+                <h2 id="dashboard-earned">RM142</h2>
+                <p>Your Total Earned</p>
+            </div>
 
-<div class="card">
-    <h2 id="dashboard-posted">0</h2>
-    <p>Tasks Posted</p>
-</div>
+            <div class="stat-card">
+                <h2 id="dashboard-rating">4.8</h2>
+                <p>Your Rating ⭐</p>
+            </div>
+        </div>
 
-<div class="card highlight">
-    <h2 id="dashboard-earned">RM 0</h2>
-    <p>Your Total Earned</p>
-</div>
+        <div class="dashboard-grid">
 
-<div class="card">
-    <h2 id="dashboard-done">0</h2>
-    <p>Completed</p>
-</div>
+            <div class="dash-panel left-panel">
+                <h3 class="panel-title">Tasks you may like</h3>
 
-</div>
+                <div id="taskList">
+                    <div class="dash-task-item">
+                        <div class="task-info">
+                            <h4>Belikan Makanan</h4>
+                            <div class="task-tags">
+                                <span class="tag tag-open">Open</span>
+                                <span class="tag tag-delivery">Food Delivery</span>
+                            </div>
+                        </div>
+                        <div class="task-user">
+                            <img src="https://i.pravatar.cc/150?img=11" alt="User">
+                            <span>4.6 ⭐</span>
+                        </div>
+                        <div class="task-meta">
+                            <div class="reward">Reward: <strong>RM10</strong></div>
+                            <div class="time">22:34:50</div>
+                        </div>
+                    </div>
 
-<!-- GRID -->
-<div class="grid">
+                    <div class="dash-task-item">
+                        <div class="task-info">
+                            <h4>Tolong Ambil Gambar Event Kolej</h4>
+                            <div class="task-tags">
+                                <span class="tag tag-open">Open</span>
+                                <span class="tag tag-delivery">Food Delivery</span>
+                            </div>
+                        </div>
+                        <div class="task-user">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="User">
+                            <span>4.7 ⭐</span>
+                        </div>
+                        <div class="task-meta">
+                            <div class="reward">Reward: <strong>RM20</strong></div>
+                            <div class="time">14:20:45</div>
+                        </div>
+                    </div>
 
-<!-- LEFT -->
-<div class="column">
-<h3>Tasks you may like</h3>
-<div id="taskList"></div>
-</div>
+                    <div class="dash-task-item">
+                        <div class="task-info">
+                            <h4>Pam Tayar Motor Kat Parking</h4>
+                            <div class="task-tags">
+                                <span class="tag tag-open">Open</span>
+                                <span class="tag tag-delivery">Food Delivery</span>
+                            </div>
+                        </div>
+                        <div class="task-user">
+                            <img src="https://i.pravatar.cc/150?img=68" alt="User">
+                            <span>4.6 ⭐</span>
+                        </div>
+                        <div class="task-meta">
+                            <div class="reward">Reward: <strong>RM8</strong></div>
+                            <div class="time">08:15:20</div>
+                        </div>
+                    </div>
 
-<!-- RIGHT -->
-<div class="column">
+                    <div class="dash-task-item">
+                        <div class="task-info">
+                            <h4>Ambil Baju Dari Dobi</h4>
+                            <div class="task-tags">
+                                <span class="tag tag-open">Open</span>
+                                <span class="tag tag-delivery">Food Delivery</span>
+                            </div>
+                        </div>
+                        <div class="task-user">
+                            <img src="https://i.pravatar.cc/150?img=32" alt="User">
+                            <span>5.0 ⭐</span>
+                        </div>
+                        <div class="task-meta">
+                            <div class="reward">Reward: <strong>RM5</strong></div>
+                            <div class="time">03:45:00</div>
+                        </div>
+                    </div>
+                </div>
 
-<h3>Your activity</h3>
+                <button class="btn-outline-small">See all tasks</button>
+            </div>
 
-<p>Tasks completed</p>
-<div class="bar">
-    <div id="barCompleted" class="fill"></div>
-</div>
+            <div class="dash-panel right-panel">
+                <h3 class="panel-title">Your activity</h3>
 
-<p>Tasks posted</p>
-<div class="bar">
-    <div id="barPosted" class="fill blue"></div>
-</div>
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span>Tasks completed</span>
+                        <span class="progress-value">17/20</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-green" style="width: 85%;"></div>
+                    </div>
+                </div>
 
-<h3>Recent activity</h3>
-<div id="recent"></div>
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span>Tasks Posted</span>
+                        <span class="progress-value">8</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-cyan" style="width: 40%;"></div>
+                    </div>
+                </div>
 
-</div>
+                <hr class="panel-divider">
 
-</div>
+                <h3 class="panel-title">Recent activity</h3>
+                <div id="recentList">
 
-</section>
+                    <div class="recent-item">
+                        <div class="recent-left">
+                            <span class="status-dot dot-green"></span>
+                            <span>Printed docs for Hafiz Rahman</span>
+                        </div>
+                        <span class="recent-badge badge-green">Completed</span>
+                    </div>
 
-<script src="includes/js/dashboard.js"></script>
+                    <div class="recent-item">
+                        <div class="recent-left">
+                            <span class="status-dot dot-yellow"></span>
+                            <span>Food Delivery to Satria Jebat</span>
+                        </div>
+                        <span class="recent-badge badge-yellow">In Progress</span>
+                    </div>
+
+                    <div class="recent-item">
+                        <div class="recent-left">
+                            <span class="status-dot dot-green"></span>
+                            <span>Library return for Siti Nur</span>
+                        </div>
+                        <span class="recent-badge badge-green">Completed</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="includes/js/dashboard.js"></script>
+
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+                </div>
+                <p class="footer-tagline">Empowering students to hustle, help out, and get things done on campus.</p>
+            </div>
+
+            <div class="footer-links-group">
+                <div class="footer-column">
+                    <h4>Platform</h4>
+                    <a href="browseTask.html">Browse Tasks</a>
+                    <a href="posttasks.html">Post a Task</a>
+                    <a href="leaderboard.html">Leaderboard</a>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <a href="#">FAQ / Help Center</a>
+                    <a href="#">Safety Guidelines</a>
+                    <a href="#">Contact Us</a>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Campus TaskHub. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#">📱 TikTok</a>
+                <a href="#">📸 Instagram</a>
+                <a href="#">✖️ X (Twitter)</a>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
-``

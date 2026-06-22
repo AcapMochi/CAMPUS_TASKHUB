@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tasks</title>
+    <title>My Tasks | Campus TaskHub</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/mytasks.css">
     <script src="includes/js/auth.js"></script>
@@ -27,26 +26,128 @@
         <div class="header-icons">
             <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
             <a href="myProfile.html">
-                <img src="images/PFP.jpg" alt="Profile" class="profile-pic">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic" onerror="this.src='images/pfp1.jpg'">
             </a>
         </div>
     </header>
 
     <main class="main-container">
         <h1 class="page-title">My Tasks</h1>
+        
         <div class="grid">
             <div class="column">
                 <h3>Tasks I’m running</h3>
-                <div id="runningList"></div>
+                <div id="runningList">
+                    <p style="color: #6c637e;">Loading...</p>
+                </div>
             </div>
 
             <div class="column">
                 <h3>Tasks I’ve posted</h3>
-                <div id="postedList"></div>
+                <div id="postedList">
+                    <p style="color: #6c637e;">Loading...</p>
+                </div>
             </div>
         </div>
     </main>
-    <script src="includes/js/mytasks.js"></script>
-</body>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const postedContainer = document.getElementById('postedList');
+            const runningContainer = document.getElementById('runningList');
+
+            fetch('includes/php/get_my_tasks.php')
+                .then(res => res.json())
+                .then(data => {
+                    const posted = data.posted_tasks || [];
+                    const runner = data.runner_tasks || [];
+
+                    // --- GENERATE HTML FOR TASKS YOU ARE RUNNING ---
+                    const generateRunnerHTML = (task) => {
+                        // Fallbacks for missing database columns
+                        const status = task.Status || "In Progress"; 
+                        const cssClass = status.toLowerCase().replace(' ', '-');
+                        const posterName = task.PosterName || task.Username || "Unknown Poster";
+                        const reward = parseFloat(task.Reward_Amount).toFixed(0);
+
+                        return `
+                            <div class="task-list-item">
+                                <div class="item-top">
+                                    <h4>${task.Title}</h4>
+                                    <span class="price">RM ${reward}</span>
+                                </div>
+                                <div class="item-bottom">
+                                    <div class="item-meta">
+                                        <span class="status-badge ${cssClass}">${status}</span>
+                                        <span class="subtext">For ${posterName}</span>
+                                    </div>
+                                    <button class="btn-outline-action">Mark Done</button>
+                                </div>
+                            </div>
+                        `;
+                    };
+
+                    // --- GENERATE HTML FOR TASKS YOU POSTED ---
+                    const generatePostedHTML = (task) => {
+                        const status = task.Status || "Open";
+                        const cssClass = status.toLowerCase().replace(' ', '-');
+                        const runnerName = task.RunnerName || "Someone";
+                        const reward = parseFloat(task.Reward_Amount).toFixed(0);
+
+                        // Dynamic logic for buttons and subtext based on status
+                        let subtext = "";
+                        let actionHtml = "";
+
+                        if (status.toLowerCase() === 'open' || status.toLowerCase() === 'pending') {
+                            subtext = "No runner yet";
+                            // No button needed for open tasks
+                        } else if (status.toLowerCase() === 'accepted' || status.toLowerCase() === 'in progress') {
+                            subtext = `Runner: ${runnerName}`;
+                            actionHtml = `<button class="btn-outline-action">Confirm</button>`;
+                        } else if (status.toLowerCase() === 'completed' || status.toLowerCase() === 'done') {
+                            subtext = `Rate ${runnerName}`;
+                            actionHtml = `<button class="btn-outline-action">Confirm & Rate</button>`;
+                        } else {
+                            subtext = `Runner: ${runnerName}`;
+                        }
+
+                        return `
+                            <div class="task-list-item">
+                                <div class="item-top">
+                                    <h4>${task.Title}</h4>
+                                    <span class="price">RM ${reward}</span>
+                                </div>
+                                <div class="item-bottom">
+                                    <div class="item-meta">
+                                        <span class="status-badge ${cssClass}">${status}</span>
+                                        <span class="subtext">${subtext}</span>
+                                    </div>
+                                    ${actionHtml}
+                                </div>
+                            </div>
+                        `;
+                    };
+
+                    // Execute Runner Generation
+                    if (runner.length > 0) {
+                        runningContainer.innerHTML = runner.map(generateRunnerHTML).join('');
+                    } else {
+                        runningContainer.innerHTML = "<p class='empty-state'>You are not running any tasks right now.</p>";
+                    }
+
+                    // Execute Posted Generation
+                    if (posted.length > 0) {
+                        postedContainer.innerHTML = posted.map(generatePostedHTML).join('');
+                    } else {
+                        postedContainer.innerHTML = "<p class='empty-state'>You haven't posted any tasks yet.</p>";
+                    }
+                })
+                .catch(err => {
+                    console.error("Fetch Error:", err);
+                    postedContainer.innerHTML = "<p class='empty-state'>Error loading tasks.</p>";
+                    runningContainer.innerHTML = "<p class='empty-state'>Error loading tasks.</p>";
+                });
+        });
+    </script>
+</body>
 </html>

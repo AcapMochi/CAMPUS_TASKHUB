@@ -49,4 +49,59 @@ document.addEventListener("DOMContentLoaded", function () {
                 window.location.replace('login.html');
             }
         });
+
+    // Ensure every page has the unified site footer (if not present)
+    const footerExists = document.querySelector('.site-footer');
+    if (!footerExists) {
+        const footerHTML = `
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+                </div>
+                <p class="footer-tagline">Empowering students to hustle, help out, and get things done on campus.</p>
+            </div>
+
+            <div class="footer-links-group">
+                <div class="footer-column">
+                    <h4>Platform</h4>
+                    <a href="browseTask.html">Browse Tasks</a>
+                    <a href="posttasks.html">Post a Task</a>
+                    <a href="leaderboard.html">Leaderboard</a>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <a href="#">FAQ / Help Center</a>
+                    <a href="#">Safety Guidelines</a>
+                    <a href="#">Contact Us</a>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Campus TaskHub. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#">📱 TikTok</a>
+                <a href="#">📸 Instagram</a>
+                <a href="#">✖️ X (Twitter)</a>
+            </div>
+        </div>
+    </footer>`;
+
+        try {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = footerHTML;
+            document.body.appendChild(wrapper.firstElementChild);
+        } catch (e) {
+            console.error('Failed to append site footer:', e);
+        }
+    }
 });

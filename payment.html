@@ -11,12 +11,9 @@
 </head>
 
 <body>
-    
-    <header class="navbar">
-        <div class="logo">
-            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
-        </div>
 
+    <header class="navbar">
+        <div class="logo"><span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span></div>
         <nav class="nav-links">
             <a href="dashboard.html">Dashboard</a>
             <a href="browseTask.html">Browse Tasks</a>
@@ -24,86 +21,87 @@
             <a href="mytasks.html">My Tasks</a>
             <a href="leaderboard.html">Leaderboard</a>
         </nav>
-
         <div class="header-icons">
             <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
-            <a href="myProfile.html">
-                <img src="images/PFP.jpg" alt="Profile" class="profile-pic">
-            </a>
+            <a href="myProfile.html"><img src="images/PFP.jpg" alt="Profile" class="profile-pic" onerror="this.src='images/pfp1.jpg'"></a>
         </div>
     </header>
 
     <div class="container">
-
         <h1 class="page-title">Payment</h1>
-
         <hr class="divider">
-
         <a href="posttasks.html" class="back-btn">← Back to Post</a>
 
-        <form action="TaskDonePoster.html" method="get">
-
-            <div class="payment-card">
-
-                <div class="summary-box">
-
-                    <p class="summary-title">TASK SUMMARY</p>
-
-                    <div class="row">
-                        <span>Belikan Makanan</span>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="row">
-                        <span class="label">Task reward</span>
-                        <span class="price">RM 10.00</span>
-                    </div>
-
-                    <div class="row">
-                        <span class="label">Platform fee</span>
-                        <span class="fee">RM 0.50</span>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="row total">
-                        <span>Total</span>
-                        <span class="price">RM 10.50</span>
-                    </div>
-
+        <div class="payment-card">
+            <div class="summary-box">
+                <p class="summary-title">TASK SUMMARY</p>
+                <div class="row"><span id="task-title">Loading task...</span></div>
+                <div class="line"></div>
+                <div class="row">
+                    <span class="label">Task reward</span>
+                    <span class="price" id="task-reward">RM 0.00</span>
                 </div>
-
-                <div class="method-box">
-
-                    <p class="method-title">PAYMENT METHOD</p>
-
-                    <label class="method">
-                        <input type="radio" name="payment" checked>
-                        Online Banking
-                    </label>
-
-                    <label class="method">
-                        <input type="radio" name="payment">
-                        Touch 'n Go eWallet
-                    </label>
-
+                <div class="row">
+                    <span class="label">Platform fee</span>
+                    <span class="fee">RM 0.50</span>
                 </div>
-
-                <button type="submit" class="pay-btn">
-                    Confirm & Pay RM 10.50
-                </button>
-
-                <p class="note">
-                    Payment is released to runner only after you confirm task completion.
-                </p>
-
+                <div class="line"></div>
+                <div class="row total">
+                    <span>Total</span>
+                    <span class="price" id="task-total">RM 0.50</span>
+                </div>
             </div>
 
-        </form>
+            <button id="verify-payment-btn" class="pay-btn">Confirm & Pay</button>
 
+            <p class="note">Payment is held securely in Stripe and released only after confirmation.</p>
+        </div>
     </div>
 
+    <script>
+        // 1. Fetch Task details when page loads
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const taskId = urlParams.get('id');
+            // 1. Fetch Task details
+            if (taskId) {
+                // Note: No leading slash. This looks relative to payment.html
+                fetch('includes/php/get_task_details.php?id=' + taskId)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            const reward = parseFloat(data.task.Reward_Amount);
+                            const total = reward + 0.50;
+                            document.getElementById('task-title').innerText = data.task.Title;
+                            document.getElementById('task-reward').innerText = 'RM ' + reward.toFixed(2);
+                            document.getElementById('task-total').innerText = 'RM ' + total.toFixed(2);
+                            document.getElementById('verify-payment-btn').innerText = 'Confirm & Pay RM ' + total.toFixed(2);
+                        } else {
+                            console.error("Server error:", data.message);
+                        }
+                    })
+                    .catch(err => console.error("Fetch failed:", err));
+            }
+
+            // 2. Stripe Payment Logic
+            const payBtn = document.getElementById('verify-payment-btn');
+            payBtn.addEventListener('click', function () {
+                payBtn.disabled = true;
+                payBtn.innerText = "Connecting to Secure Checkout...";
+
+                fetch('includes/php/create_checkout.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ task_id: taskId })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'success') window.location.href = data.url;
+                        else { alert("Error: " + data.message); payBtn.disabled = false; }
+                    });
+            });
+        });
+    </script>
 </body>
 
 </html>

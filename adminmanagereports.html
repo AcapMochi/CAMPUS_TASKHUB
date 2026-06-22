@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus TaskHub - Manage Reports</title>
+  <link rel="stylesheet" href="adminmanagereports.css"/>
+</head>
+<body>
+
+  <main class="page-main">
+    <h1 class="page-title">Manage Reports</h1>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <p class="stat-number" id="statTotal">6</p>
+        <p class="stat-label">Total Reports</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-number stat-red" id="statOpen">0</p>
+        <p class="stat-label">Open</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-number stat-amber" id="statReviewing">1</p>
+        <p class="stat-label">Reviewing</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-number stat-green" id="statResolved">0</p>
+        <p class="stat-label">Resolved</p>
+      </div>
+    </div>
+
+    <div class="controls-bar">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search reports..."/>
+      <div class="filter-pills" id="filterPills">
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="open">Open</button>
+        <button class="filter-pill" data-filter="reviewing">Reviewing</button>
+        <button class="filter-pill" data-filter="resolved">Resolved</button>
+        <button class="filter-pill" data-filter="dismissed">Dismissed</button>
+      </div>
+    </div>
+
+    <section class="card reports-card">
+      <div class="reports-card-header">
+        <p class="section-label">Reports</p>
+        <p class="results-count" id="resultsCount"></p>
+      </div>
+
+      <div class="reports-list" id="reportsList">
+
+        <div class="report-row"
+             data-status="open"
+             data-title="saya ditipu dan tidak menerima duit"
+             data-report-id="#0067"
+             data-task="Belikan Makanan"
+             data-reported-user="Faris Iskandar"
+             data-reporters="2 users"
+             data-date="20 Jun 2026"
+             data-desc="Reporter says they paid the runner but never received their order or a refund.">
+          <div class="report-info">
+            <p class="report-title">Saya ditipu dan tidak menerima duit</p>
+            <p class="report-sub">Reported by 2 users · Task #0067</p>
+          </div>
+          <span class="status-pill status-open">Open</span>
+          <div class="report-actions">
+            <button class="btn-outline btn-amber" data-action="review">Review</button>
+            <button class="btn-outline btn-red-fill" data-action="suspend">Suspend</button>
+          </div>
+        </div>
+
+        <div class="report-row"
+             data-status="open"
+             data-title="runner tidak memberikan respon"
+             data-report-id="#0144"
+             data-task="Reach Diamond Rank"
+             data-reported-user="Siti Aminah"
+             data-reporters="1 user"
+             data-date="21 Jun 2026"
+             data-desc="Poster says the runner accepted the task but has not responded in over 24 hours.">
+          <div class="report-info">
+            <p class="report-title">Runner tidak memberikan respon</p>
+            <p class="report-sub">Poster complaint · Task #0144</p>
+          </div>
+          <span class="status-pill status-open">Open</span>
+          <div class="report-actions">
+            <button class="btn-outline btn-amber" data-action="review">Review</button>
+            <button class="btn-outline btn-red-fill" data-action="suspend">Suspend</button>
+          </div>
+        </div>
+
+        <div class="report-row"
+             data-status="reviewing"
+             data-title="spam messages during chat"
+             data-report-id="#0099"
+             data-task="Printing Notes for FTKE"
+             data-reported-user="Nur Aisyah"
+             data-reporters="1 user"
+             data-date="19 Jun 2026"
+             data-desc="Reporter says the runner sent repeated unrelated promotional links during task chat.">
+          <div class="report-info">
+            <p class="report-title">Spam messages during chat</p>
+            <p class="report-sub">Reported by 1 user · Task #0099</p>
+          </div>
+          <span class="status-pill status-reviewing">Reviewing</span>
+          <div class="report-actions">
+            <button class="btn-outline btn-green" data-action="resolve">Resolve</button>
+            <button class="btn-outline" data-action="dismiss">Dismiss</button>
+            <button class="btn-outline btn-red-fill" data-action="suspend">Suspend</button>
+          </div>
+        </div>
+
+        <div class="report-row"
+             data-status="open"
+             data-title="fake profile, unverified email"
+             data-report-id="#0231"
+             data-task="—"
+             data-reported-user="Unknown User"
+             data-reporters="System flagged"
+             data-date="21 Jun 2026"
+             data-desc="Account was auto-flagged by the system for an unverified email domain and no profile activity.">
+          <div class="report-info">
+            <p class="report-title">Fake profile, unverified email</p>
+            <p class="report-sub">System flagged · Account #0231</p>
+          </div>
+          <span class="status-pill status-open">Open</span>
+          <div class="report-actions">
+            <button class="btn-outline btn-amber" data-action="review">Review</button>
+            <button class="btn-outline btn-red-fill" data-action="suspend">Suspend</button>
+          </div>
+        </div>
+
+        <div class="report-row"
+             data-status="dismissed"
+             data-title="duplicate task posting"
+             data-report-id="#0150"
+             data-task="Buy Gardenia White Bread"
+             data-reported-user="Khairol Karim"
+             data-reporters="3 users"
+             data-date="17 Jun 2026"
+             data-desc="Reported as a duplicate listing. Reviewed and found to be two separate genuine orders.">
+          <div class="report-info">
+            <p class="report-title">Duplicate task posting</p>
+            <p class="report-sub">Reported by 3 users · Task #0150</p>
+          </div>
+          <span class="status-pill status-dismissed">Dismissed</span>
+          <div class="report-actions">
+            <button class="btn-outline" data-action="reopen">Reopen</button>
+          </div>
+        </div>
+
+        <div class="report-row"
+             data-status="resolved"
+             data-title="task yang janggal dan tidak masuk akal"
+             data-report-id="#0102"
+             data-task="Reach Diamond Rank"
+             data-reported-user="—"
+             data-reporters="1 user"
+             data-date="15 Jun 2026"
+             data-desc="Task content flagged as nonsensical. Task was edited by the poster and report closed.">
+          <div class="report-info">
+            <p class="report-title">Task yang janggal dan tidak masuk akal</p>
+            <p class="report-sub">Task complaint · Task #0102</p>
+          </div>
+          <span class="status-pill status-resolved">Resolved</span>
+          <div class="report-actions">
+            <button class="btn-outline" data-action="reopen">Reopen</button>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="empty-state" id="emptyState" hidden>No reports match your search or filter.</p>
+    </section>
+  </main>
+
+  <script src="adminmanagereports.js"></script>
+</body>
+</html>

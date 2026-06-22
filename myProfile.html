@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>My Profile</title>
+    <title>My Profile | Campus TaskHub</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/myProfile.css">
     <script src="includes/js/auth.js"></script>
@@ -29,50 +28,49 @@
         <div class="header-icons">
             <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
             <a href="myProfile.html" class="active">
-                <img src="images/PFP.jpg" alt="Profile" class="profile-pic">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic" onerror="this.src='images/pfp1.jpg'">
             </a>
         </div>
     </header>
 
-    <div class="container">
+    <main class="main-container">
 
         <div class="title-row">
             <h1 class="page-title">My Profile</h1>
             <div class="header-action-buttons">
-                <button class="settings-btn" onclick="window.location.href='profile.html'">Settings</button>
-                <button class="logout-btn" onclick="window.location.href='includes/php/logout.php'">Logout</button>
+                <button class="btn-outline" onclick="window.location.href='profile.html'">Settings</button>
             </div>
         </div>
 
-        <!-- GRID -->
         <div class="profile-grid">
 
-            <!-- LEFT -->
             <div class="left-column">
 
-                <!-- PROFILE CARD -->
-                <div class="card">
-                    <div class="user-top">
+                <div class="card profile-header-card">
+                    <div class="avatar-wrapper">
                         <img src="images/PFP.jpg" class="user-image" id="profile-avatar" alt="Profile Image">
-                        <div>
-                            <h2 class="user-name">Loading...</h2>
-                            <p class="user-email">Loading...</p>
-                            <span class="verified" id="verified-badge">Checking status...</span>
-                        </div>
+                        <span class="online-dot"></span>
+                    </div>
+                    <div class="user-basic-info">
+                        <h2 class="user-name">Loading...</h2>
+                        <p class="user-email">Loading...</p>
+                        <span id="verified-badge" class="badge-loading">Checking status...</span>
                     </div>
                 </div>
 
-                <!-- CONTACT -->
                 <div class="card">
                     <h3 class="section-title">Contact Info</h3>
+                    
                     <div class="info-group">
                         <p class="label">Full Name</p>
                         <p class="info-text" id="info-fullname">Loading...</p>
                     </div>
+                    
                     <div class="info-group">
                         <p class="label">Phone Number</p>
                         <p class="info-text" id="info-phone">Loading...</p>
                     </div>
+                    
                     <div class="info-group">
                         <p class="label">Faculty</p>
                         <p class="info-text" id="info-faculty">Loading...</p>
@@ -81,29 +79,26 @@
 
             </div>
 
-            <!-- RIGHT -->
             <div class="right-column">
 
-                <!-- REVIEWS -->
                 <div class="card" id="reviews-container">
                     <h3 class="section-title">Recent Reviews Received</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9em;">Loading reviews...</p>
+                    <p class="empty-state">Loading reviews...</p>
                 </div>
 
-                <!-- SECURITY -->
                 <div class="card">
                     <h3 class="section-title">Account Security</h3>
 
                     <div class="security-row">
-                        <p>Email Verified</p>
-                        <span class="active-status" id="sec-email">Loading...</span>
+                        <p class="security-label">Email Verified</p>
+                        <span id="sec-email" class="badge-loading">...</span>
                     </div>
 
                     <div class="line"></div>
 
                     <div class="security-row">
-                        <p>Two-Step Verification</p>
-                        <span class="off-status" id="sec-2fa">Loading...</span>
+                        <p class="security-label">Two-Step Verification</p>
+                        <span id="sec-2fa" class="badge-loading">...</span>
                     </div>
                 </div>
 
@@ -111,7 +106,7 @@
 
         </div>
 
-    </div>
+    </main>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -132,26 +127,26 @@
 
                         if (user['Is_Verified'] == 1) {
                             verifiedBadge.textContent = 'Verified member';
-                            verifiedBadge.style.color = 'var(--accent)';
+                            verifiedBadge.className = 'badge badge-verified';
 
                             secEmail.textContent = 'Active';
-                            secEmail.className = 'active-status';
+                            secEmail.className = 'badge badge-active';
                         } else {
                             verifiedBadge.textContent = 'Unverified member';
-                            verifiedBadge.style.color = '#888';
+                            verifiedBadge.className = 'badge badge-unverified';
 
                             secEmail.textContent = 'Pending';
-                            secEmail.className = 'off-status';
+                            secEmail.className = 'badge badge-off';
                         }
 
                         // 3. 2FA Logic
                         const sec2FA = document.getElementById('sec-2fa');
                         if (user['Two_Factor_Enabled'] == 1) {
                             sec2FA.textContent = 'On';
-                            sec2FA.className = 'active-status';
+                            sec2FA.className = 'badge badge-active';
                         } else {
                             sec2FA.textContent = 'Off';
-                            sec2FA.className = 'off-status';
+                            sec2FA.className = 'badge badge-off';
                         }
 
                         // 4. Inject Contact Info
@@ -163,22 +158,26 @@
                         const reviewsContainer = document.getElementById('reviews-container');
                         reviewsContainer.innerHTML = '<h3 class="section-title">Recent Reviews Received</h3>';
 
-                        if (data.reviews.length > 0) {
-                            data.reviews.forEach(rev => {
+                        if (data.reviews && data.reviews.length > 0) {
+                            data.reviews.forEach((rev, index) => {
                                 let stars = '⭐'.repeat(rev.Rating);
+                                
+                                // Don't add a line after the last review
+                                let divider = index !== data.reviews.length - 1 ? '<div class="line"></div>' : '';
+
                                 reviewsContainer.innerHTML += `
-                                    <div class="review">
+                                    <div class="review-item">
                                         <div class="review-top">
                                             <img src="${rev.ReviewerPic || 'images/PFP.jpg'}" class="review-pic">
-                                            <p class="review-name">${rev.ReviewerName} ${stars}</p>
+                                            <span class="review-name">${rev.ReviewerName} <span class="stars">${stars}</span></span>
                                         </div>
                                         <p class="review-text">"${rev.Comment}"</p>
                                     </div>
-                                    <div class="line"></div>
+                                    ${divider}
                                 `;
                             });
                         } else {
-                            reviewsContainer.innerHTML += '<p style="color: var(--text-muted); font-size: 0.9em;">No reviews yet.</p>';
+                            reviewsContainer.innerHTML += '<p class="empty-state">No reviews yet.</p>';
                         }
                     } else {
                         console.error("Failed to fetch profile: ", data.message);
@@ -191,5 +190,4 @@
     </script>
 
 </body>
-
 </html>

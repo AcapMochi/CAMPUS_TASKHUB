@@ -4,16 +4,17 @@
 ========================================= */
 
 .main-container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 40px auto;
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .page-title {
-    font-size: 2.5rem;
-    font-weight: 600;
+    font-size: 2.2rem;
+    font-weight: 700;
     margin-bottom: 30px;
-    text-align: left;
+    color: #ffffff;
 }
 
 .card {
@@ -39,7 +40,7 @@
 label {
     display: block;
     margin-bottom: 8px;
-    color: #bbb;
+    color: #ffffff;
     font-size: 0.9em;
 }
 

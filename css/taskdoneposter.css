@@ -232,3 +232,22 @@
       background: rgb(255, 71, 71); 
       border-color: black;
     }
+
+    /* Star Rating Styles */
+.stars {
+    display: flex;
+    gap: 5px;
+    font-size: 30px;
+    cursor: pointer;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.star {
+    color: #ccc; /* Default grey */
+    transition: color 0.2s;
+}
+
+.star.active {
+    color: #ffc107; /* Gold color for selected/hovered stars */
+}
