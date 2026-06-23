@@ -1,0 +1,280 @@
+/* =========================================
+   1. LAYOUT & CONTAINERS
+========================================= */
+.main-container {
+    max-width: 2000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr; /* Left side slightly smaller than right */
+    gap: 25px;
+    align-items: start;
+}
+
+.left-column, .right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* =========================================
+   2. HEADER & BUTTONS
+========================================= */
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.header-action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #42355c;
+    color: #b0a7b8;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+/* Specialized Logout Button */
+.btn-logout {
+    border-color: #ff4d4d;
+    color: #ff4d4d;
+}
+
+.btn-logout:hover {
+    background-color: rgba(255, 77, 77, 0.1);
+    border-color: #ff4d4d;
+    color: #ff4d4d;
+}
+
+/* =========================================
+   3. REUSABLE CARDS
+========================================= */
+.card {
+    background-color: #0d0910;
+    border-radius: 12px;
+    padding: 30px; /* Consistent padding for all cards */
+    border: 1px solid #1f1524;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin: 0 0 25px 0;
+    font-weight: 600;
+}
+
+.line {
+    height: 1px;
+    background-color: #1f1524;
+    margin: 15px 0;
+}
+
+/* =========================================
+   4. PROFILE HEADER CARD (Top Left)
+========================================= */
+.profile-header-card {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Slightly more gap to balance the 30px card padding */
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0; /* Prevents avatar from squishing */
+}
+
+.user-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4a3e63;
+}
+
+.online-dot {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 18px;
+    height: 18px;
+    background-color: #00ffa6;
+    border: 3px solid #0d0910;
+    border-radius: 50%;
+}
+
+.user-basic-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.user-name {
+    margin: 0 0 4px 0;
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.user-email {
+    margin: 0 0 12px 0;
+    color: #948b9c;
+    font-size: 0.85rem;
+}
+
+/* =========================================
+   5. CONTACT INFO (Bottom Left)
+========================================= */
+.info-group {
+    margin-bottom: 20px;
+}
+
+.info-group:last-child {
+    margin-bottom: 0;
+}
+
+.label {
+    margin: 0 0 8px 0;
+    color: #6c637e;
+    font-size: 0.85rem;
+}
+
+.info-text {
+    margin: 0;
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   6. REVIEWS CARD (Top Right)
+========================================= */
+.review-item {
+    margin-bottom: 10px;
+}
+
+.review-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.review-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.review-name {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stars {
+    font-size: 0.8rem;
+}
+
+.review-text {
+    color: #948b9c;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.empty-state {
+    color: #6c637e;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* =========================================
+   7. SECURITY CARD (Bottom Right)
+========================================= */
+.security-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.security-label {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* =========================================
+   8. PILL BADGES
+========================================= */
+.badge {
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+/* Green Verified Profile Pill */
+.badge-verified {
+    background-color: #a1ebd6;
+    color: #004d33;
+}
+
+/* Gray Unverified Pill */
+.badge-unverified {
+    background-color: #2f2235;
+    color: #b0a7b8;
+}
+
+/* Green Active Setting Pill */
+.badge-active {
+    background-color: #7ee2a8;
+    color: #000000;
+}
+
+/* Red Off Setting Pill */
+.badge-off {
+    background-color: #ffb3b3;
+    color: #660000;
+}
+
+/* =========================================
+   9. RESPONSIVE DESIGN
+========================================= */
+@media (max-width: 850px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}

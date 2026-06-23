@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Post Tasks</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/posttasks.css">
+    <script src="includes/js/auth.js"></script>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+            </a>
+        </div>
+
+        <nav class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html" class="active">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
+
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic" onerror="this.src='images/PFP.jpg'">
+            </a>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <h1 class="page-title">Post Task</h1>
+
+        <div class="card">
+
+            <form id="posttaskForm">
+
+                <div class="row">
+                    <div class="group">
+                        <label>Task Title</label>
+                        <input id="title" placeholder="e.g Buy food from Kafe Satria" required>
+                    </div>
+
+                    <div class="group">
+                        <label>Category</label>
+                        <select id="category" required>
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Food">Food</option>
+                            <option value="Printing">Printing</option>
+                            <option value="Library">Library</option>
+                            <option value="Assignment">Assignment</option>
+                            <option value="Supplies">Supplies</option>
+                            <option value="Tech">Tech</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Grocery">Grocery</option>
+                            <option value="Car">Car</option>
+                            <option value="Room">Room</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <label>Description</label>
+                    <textarea id="desc" placeholder="Describe what needs to be done in detail..." required></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="group">
+                        <label>Location</label>
+                        <select id="location" required>
+                            <option value="" disabled selected>Select Location</option>
+                            <option value="FTMK">FTMK</option>
+                            <option value="FAIX">FAIX</option>
+                            <option value="FTKM">FTKM</option>
+                            <option value="FKE">FKE</option>
+                            <option value="FTKEK">FTKEK</option>
+                            <option value="FPTT">FPTT</option>
+                            <option value="Satria">Satria</option>
+                            <option value="Jebat">Jebat</option>
+                            <option value="Lekir">Lekir</option>
+                            <option value="Kasturi">Kasturi</option>
+                            <option value="Kafe Satria">Kafe Satria</option>
+                        </select>
+                    </div>
+
+                    <div class="group">
+                        <label>Specific location (optional)</label>
+                        <input id="specific_location" placeholder="e.g Blok C">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="group">
+                        <label>Reward amount (RM)</label>
+                        <input type="number" id="reward" placeholder="RM 0.00" min="0" step="0.01" required>
+                        <small class="reward-reminder">
+                            *Ensure this amount covers both the task supply cost and the service reward amount.
+                        </small>
+                    </div>
+
+                    <div class="upload-box" onclick="uploadFile()">
+                        <span id="uploadText">＋</span>
+                        <p>Drag and drop or click to add attachment</p>
+                        <img id="preview">
+                    </div>
+                </div>
+
+                <input type="file" id="fileInput" hidden>
+
+                <div class="guideline">
+                    <strong>Community guidelines</strong><br>
+                    Only post tasks that are safe, legal, and campus-appropriate.
+                </div>
+
+                <div class="buttons">
+                    <button type="submit" class="continue">Continue</button>
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+
+    <script src="includes/js/posttasks.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks | Campus TaskHub</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/mytasks.css">
+    <script src="includes/js/auth.js"></script>
+</head>
+
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo" style="text-decoration: none;">
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html" class="active">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
+
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic" onerror="this.src='images/PFP.jpg'">
+            </a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">My Tasks</h1>
+            <p class="page-subtitle">Track the progress of tasks you are running and tasks you have posted.</p>
+        </div>
+        
+        <div class="tasks-split-view">
+            <section class="task-section">
+                <h2 class="section-heading">🏃 Tasks I'm Running</h2>
+                <div class="list-container" id="runningList">
+                    <p class="loading-text">Loading...</p>
+                </div>
+            </section>
+
+            <section class="task-section">
+                <h2 class="section-heading">📢 Tasks I've Posted</h2>
+                <div class="list-container" id="postedList">
+                    <p class="loading-text">Loading...</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="task-section" style="margin-top: 60px;">
+            <h2 class="section-heading">🕒 My Tasks History</h2>
+            <div class="list-container" id="historyList">
+                <p class="loading-text">Loading...</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const postedContainer = document.getElementById('postedList');
+            const runningContainer = document.getElementById('runningList');
+            const historyContainer = document.getElementById('historyList');
+
+            fetch('includes/php/get_my_tasks.php')
+                .then(res => res.json())
+                .then(data => {
+                    const allPosted = data.posted_tasks || [];
+                    const allRunner = data.runner_tasks || [];
+
+                    // Helper to determine if a task is in the past
+                    const isHistory = (task) => {
+                        const s = (task.Status || "").toLowerCase();
+                        return s === 'completed' || s === 'done' || s === 'cancelled';
+                    };
+
+                    // Filter into Active and History
+                    const activePosted = allPosted.filter(task => !isHistory(task));
+                    const activeRunner = allRunner.filter(task => !isHistory(task));
+                    
+                    // Tag history items so we know if the user was the poster or runner
+                    const historyPosted = allPosted.filter(isHistory).map(t => ({...t, _role: 'Poster'}));
+                    const historyRunner = allRunner.filter(isHistory).map(t => ({...t, _role: 'Runner'}));
+                    
+                    // Combine history and sort newest first (assuming Created_Date exists)
+                    const combinedHistory = [...historyPosted, ...historyRunner].sort((a, b) => {
+                        return new Date(b.Created_Date) - new Date(a.Created_Date);
+                    });
+
+                    // --- GENERATE HTML FOR TASKS YOU ARE RUNNING ---
+                    const generateRunnerHTML = (task) => {
+                        const status = task.Status || "Open"; 
+                        const posterName = task.PosterName || task.Username || "Unknown Poster";
+                        const reward = parseFloat(task.Reward_Amount).toFixed(0);
+                        const taskId = task.TaskID;
+
+                        let isPending = (status.toLowerCase() === 'open' || status.toLowerCase() === 'pending');
+                        
+                        let displayStatus = isPending ? "Pending Approval" : status;
+                        let badgeClass = isPending ? "pending" : status.toLowerCase().replace(' ', '-');
+                        
+                        let actionBtn = isPending 
+                            ? `<button class="btn-progress" style="opacity: 0.5; cursor: not-allowed; border-color: #6c637e; color: #6c637e;" disabled>Awaiting Selection</button>`
+                            : `<button class="btn-progress" onclick="window.location.href='taskProgressRunner.html?id=${taskId}'">View Progress →</button>`;
+
+                        return `
+                            <div class="task-row">
+                                <div class="task-main-info">
+                                    <div class="title-row">
+                                        <span class="status-badge ${badgeClass}" style="${isPending ? 'background-color: #2f2235; color: #b0a7b8;' : ''}">${displayStatus}</span>
+                                        <h3 class="task-title">${task.Title}</h3>
+                                    </div>
+                                    <p class="task-context">Posted by: <strong>${posterName}</strong></p>
+                                </div>
+                                <div class="task-actions">
+                                    <div class="task-reward">RM ${reward}</div>
+                                    ${actionBtn}
+                                </div>
+                            </div>
+                        `;
+                    };
+
+                    // --- GENERATE HTML FOR TASKS YOU POSTED ---
+                    const generatePostedHTML = (task) => {
+                        const status = task.Status || "Open";
+                        const cssClass = status.toLowerCase().replace(' ', '-');
+                        const runnerName = task.RunnerName || "";
+                        const reward = parseFloat(task.Reward_Amount).toFixed(0);
+                        const taskId = task.TaskID;
+                        
+                        const applicantCount = task.ApplicantCount || 0; 
+
+                        let subtext = "";
+                        let btnText = "Manage Task →";
+                        let btnStyle = ""; 
+
+                        if (status.toLowerCase() === 'open' || status.toLowerCase() === 'pending') {
+                            if (applicantCount > 0) {
+                                subtext = `🔔 <strong>${applicantCount} runner(s)</strong> applied!`;
+                                btnText = "Review Applicants →";
+                                btnStyle = "border-color: var(--accent, #00ffa6); color: var(--accent, #00ffa6);"; 
+                            } else {
+                                subtext = "Waiting for runners...";
+                            }
+                        } else if (status.toLowerCase() === 'accepted' || status.toLowerCase() === 'in progress') {
+                            subtext = `Runner: <strong>${runnerName}</strong>`;
+                            btnText = "Track Progress →";
+                        }
+
+                        return `
+                            <div class="task-row">
+                                <div class="task-main-info">
+                                    <div class="title-row">
+                                        <span class="status-badge ${cssClass}">${status}</span>
+                                        <h3 class="task-title">${task.Title}</h3>
+                                    </div>
+                                    <p class="task-context">${subtext}</p>
+                                </div>
+                                <div class="task-actions">
+                                    <div class="task-reward">RM ${reward}</div>
+                                    <button class="btn-progress" style="${btnStyle}" onclick="window.location.href='taskProgressPoster.html?id=${taskId}'">
+                                        ${btnText}
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    };
+
+                    // --- GENERATE HTML FOR HISTORY ---
+                    const generateHistoryHTML = (task) => {
+                        const status = task.Status || "Unknown";
+                        const cssClass = status.toLowerCase().replace(' ', '-');
+                        const reward = parseFloat(task.Reward_Amount).toFixed(0);
+                        
+                        // Determine context text based on if they posted or ran it
+                        let contextText = "";
+                        if (task._role === 'Poster') {
+                            contextText = `You posted this • Runner: ${task.RunnerName || "N/A"}`;
+                        } else {
+                            contextText = `You ran this • Posted by: ${task.PosterName || task.Username || "Unknown"}`;
+                        }
+
+                        return `
+                            <div class="task-row history-row">
+                                <div class="task-main-info">
+                                    <div class="title-row">
+                                        <span class="status-badge ${cssClass}">${status}</span>
+                                        <h3 class="task-title">${task.Title}</h3>
+                                    </div>
+                                    <p class="task-context">${contextText}</p>
+                                </div>
+                                <div class="task-actions">
+                                    <div class="task-reward" style="color: #6c637e;">RM ${reward}</div>
+                                </div>
+                            </div>
+                        `;
+                    };
+
+                    // Render Active Runner
+                    if (activeRunner.length > 0) {
+                        runningContainer.innerHTML = activeRunner.map(generateRunnerHTML).join('');
+                    } else {
+                        runningContainer.innerHTML = `
+                            <div class="empty-state">
+                                <p>You aren't running any active tasks right now.</p>
+                                <a href="browseTask.html" class="empty-link">Find tasks to earn money</a>
+                            </div>`;
+                    }
+
+                    // Render Active Posted
+                    if (activePosted.length > 0) {
+                        postedContainer.innerHTML = activePosted.map(generatePostedHTML).join('');
+                    } else {
+                        postedContainer.innerHTML = `
+                            <div class="empty-state">
+                                <p>You haven't posted any active tasks.</p>
+                                <a href="posttasks.html" class="empty-link">Post a new task</a>
+                            </div>`;
+                    }
+
+                    // Render History
+                    if (combinedHistory.length > 0) {
+                        historyContainer.innerHTML = combinedHistory.map(generateHistoryHTML).join('');
+                    } else {
+                        historyContainer.innerHTML = `
+                            <div class="empty-state">
+                                <p>No completed or cancelled tasks yet.</p>
+                            </div>`;
+                    }
+                })
+                .catch(err => {
+                    console.error("Fetch Error:", err);
+                    postedContainer.innerHTML = "<p class='loading-text' style='color: #ff4d4d;'>Error loading tasks.</p>";
+                    runningContainer.innerHTML = "<p class='loading-text' style='color: #ff4d4d;'>Error loading tasks.</p>";
+                    historyContainer.innerHTML = "<p class='loading-text' style='color: #ff4d4d;'>Error loading tasks.</p>";
+                });
+        });
+    </script>
+</body>
+</html>

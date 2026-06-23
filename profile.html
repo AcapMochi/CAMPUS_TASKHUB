@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus TaskHub - Profile Settings</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <script src="includes/js/auth.js"></script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
+
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic" onerror="this.src='images/PFP.jpg'">
+            </a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <a href="browseTask.html" class="back-link">← Browse Tasks</a>
+
+        <form action="includes/php/update_profile.php" method="POST" enctype="multipart/form-data">
+
+            <div class="settings-card card-highlight">
+                <span class="section-label">Profile Photo</span>
+                <div class="avatar-section">
+                    <div class="avatar-wrapper">
+                        <div class="avatar-preview" id="avatar-preview-div"></div>
+                        <span class="online-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#00ffa6">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                            </svg>
+                        </span>
+                    </div>
+
+                    <div class="upload-controls">
+                        <input type="file" name="profile_avatar" id="avatar-input" style="display: none;"
+                            onchange="previewImage(this)">
+                        <button type="button" class="btn-outline"
+                            onclick="document.getElementById('avatar-input').click()">Change Photo</button>
+                        <div class="upload-meta">JPG or PNG, max 2MB</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-grid">
+                <div class="settings-card">
+                    <span class="section-label">Personal Info</span>
+
+                    <div class="input-grid">
+                        <div class="field-block">
+                            <label>Full name</label>
+                            <input type="text" name="fullname" class="form-input"
+                                placeholder="e.g. Cristiano Ronaldo bin Messi">
+                        </div>
+
+                        <div class="field-block">
+                            <label>Nickname</label>
+                            <input type="text" name="nickname" class="form-input" placeholder="EpicGamer25">
+                        </div>
+
+                        <div class="field-block">
+                            <label>Student ID</label>
+                            <input type="text" name="student_id" class="form-input" placeholder="D032412345" , readonly>
+                        </div>
+
+                        <div class="field-block">
+                            <label>Faculty</label>
+                            <input type="text" name="faculty" class="form-input" placeholder="e.g. FTMK">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-card flex-between-column">
+                    <div class="input-row-group">
+                        <div class="input-split">
+                            <div class="field-block">
+                                <label>Phone</label>
+                                <input type="text" name="phone" class="form-input" placeholder="+60 11-1234 5678">
+                            </div>
+                            <div class="field-block">
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-input"
+                                    placeholder="d032412345@student.utem.edu.my">
+                            </div>
+                        </div>
+
+                        <div class="field-block bio-block">
+                            <textarea name="bio" class="form-textarea"
+                                placeholder="e.g. Cristiano Ronaldo bin Messi"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="actions-panel">
+                        <button type="submit" class="btn-outline">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <span class="section-label">Security</span>
+
+                <div class="security-row">
+                    <span class="security-text">Change Password</span>
+                    <button type="button" class="btn-outline-small" onclick="changePassword()">Update</button>
+                </div>
+
+                <div class="security-row">
+                    <span class="security-text">Delete Account</span>
+                    <button type="button" class="btn-outline-small" onclick="deleteAccount()"
+                        style="color: #ff4d4d; border-color: #ff4d4d;">Delete</button>
+                </div>
+            </div>
+
+        </form>
+    </main>
+
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('avatar-preview-div').style.backgroundImage = "url('" + e.target.result + "')";
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('includes/php/get_profile.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const user = data.user;
+
+                        document.querySelector('input[name="fullname"]').value = user.FullName || '';
+                        document.querySelector('input[name="nickname"]').value = user.Username || '';
+                        document.querySelector('input[name="student_id"]').value = user.StudentID || '';
+                        document.querySelector('input[name="faculty"]').value = user.Faculty || '';
+                        document.querySelector('input[name="phone"]').value = user.Phone || '';
+                        document.querySelector('input[name="email"]').value = user.Email || '';
+                        document.querySelector('textarea[name="bio"]').value = user['Bio_Text'] || user['Bio Text'] || '';
+
+                        const preview = document.getElementById('avatar-preview-div');
+                        const picUrl = user['Profile_Pic_URL'] ? user['Profile_Pic_URL'] : 'images/PFP.jpg';
+                        preview.style.backgroundImage = `url('${picUrl}')`;
+
+                        if (user['Two_Factor_Enabled'] == 1) {
+                            document.getElementById('two-step-toggle').checked = true;
+                        } else {
+                            document.getElementById('two-step-toggle').checked = false;
+                        }
+                    } else {
+                        console.error("Failed to load profile data:", data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching profile:", error);
+                });
+        });
+
+        // --- SECURITY FUNCTIONS ---
+        function changePassword() {
+            const oldPass = prompt("Please enter your CURRENT password:");
+            if (!oldPass) return; // User cancelled
+
+            const newPass = prompt("Enter your NEW password:");
+            if (!newPass) return; // User cancelled
+
+            fetch('includes/php/change_password.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `old_password=${encodeURIComponent(oldPass)}&new_password=${encodeURIComponent(newPass)}`
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert("Password updated successfully!");
+                    } else {
+                        alert("Error: " + data.message);
+                    }
+                })
+                .catch(err => alert("A network error occurred."));
+        }
+
+        function deleteAccount() {
+            if (confirm("WARNING: Are you sure you want to permanently delete your account? This action CANNOT be undone.")) {
+                if (confirm("Final confirmation. Click OK to permanently delete your account and all associated data.")) {
+                    fetch('includes/php/delete_account.php', {
+                        method: 'POST'
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                alert("Your account has been deleted.");
+                                window.location.href = 'login.html'; // Kick them back to login
+                            } else {
+                                alert("Error: " + data.message);
+                            }
+                        })
+                        .catch(err => alert("A network error occurred."));
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

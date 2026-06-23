@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat | Campus TaskHub</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/chatpage.css">
+    <script src="includes/js/auth.js"></script>
+    <script src="includes/js/chat.js"></script>
+</head>
+
+<body class="chat-body">
+
+    <header class="navbar">
+        <a href="index.html" class="logo" style="text-decoration: none;">
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="browseTask.html">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
+
+        <div class="header-icons">
+            <a href="chatpage.html" class="active" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic" onerror="this.src='images/PFP.jpg'">
+            </a>
+        </div>
+    </header>
+
+    <div class="chat-container">
+        <aside class="chat-sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="back-arrow">←</a>
+                <input type="text" placeholder="Search conversations..." class="search-input">
+            </div>
+
+            <div class="contact-list" id="contact-list-container">
+                <p style="text-align: center; color: #888; padding: 20px;">Loading contacts...</p>
+            </div>
+        </aside>
+
+        <main class="chat-main">
+            <div class="chat-header">
+                <div class="chat-user-info">
+                    <img src="images/PFP.jpg" alt="Profile" class="contact-avatar" style="display: none;">
+                    <div>
+                        <h2>Select a conversation</h2>
+                        <span class="status online" style="display: none;">● Online</span>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="btn-outline" id="view-task-btn" style="display: none;">View Task</button>
+                    <button class="btn-icon">⋮</button>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chat-messages-container">
+                <div class="empty-chat-state">
+                    <p>Select a contact from the sidebar to start messaging.</p>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <button class="add-btn">+</button>
+                <input type="text" id="message-input" placeholder="Type a message..." class="message-input" disabled>
+                <button id="send-btn" class="send-btn" onclick="sendMessage()" disabled>Send</button>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

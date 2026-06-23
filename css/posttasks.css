@@ -1,0 +1,171 @@
+/* =========================================
+   POST TASKS SPECIFIC STYLES
+   Note: Navbar, Body, and Fonts are handled by global.css
+========================================= */
+
+.main-container {
+    max-width: 2000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.card {
+    max-width: 1200px;
+    margin: auto;
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #2f2235;
+}
+
+/* FORM LAYOUT */
+.row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.group {
+    flex: 1;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-size: 0.9em;
+}
+
+/* INPUT STYLES */
+input, select, textarea {
+    width: 100%; 
+    box-sizing: border-box; /* Ensures padding doesn't break the layout */
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #2f2235;
+    background-color: #14111d; 
+    color: var(--text-main);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* UPLOAD BOX */
+.upload-box {
+    flex: 1;
+    border: 1px solid #2f2235;
+    border-radius: 12px;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    background-color: #14111d;
+}
+
+.upload-box:hover {
+    border-color: var(--accent);
+}
+
+.upload-box span {
+    font-size: 30px;
+    color: #888;
+}
+
+.upload-box p {
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 10px;
+}
+
+.upload-box img {
+    width: 100%;
+    display: none;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* GUIDELINE BOX */
+.guideline {
+    background-color: rgba(0, 255, 166, 0.1); /* Transparent green */
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.guideline strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* BUTTONS */
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+    gap: 15px;
+}
+
+.draft {
+    background: transparent;
+    border: 1px solid #4a3e63;
+    color: #bbb;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+.draft:hover {
+    border-color: white;
+    color: white;
+}
+
+.continue {
+    background-color: var(--accent);
+    color: #000;
+    font-weight: bold;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.2s;
+}
+
+.continue:hover {
+    transform: translateY(-2px);
+    background-color: #00e695;
+}
+
+.reward-reminder {
+    display: block;
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+input#reward:focus + .reward-reminder {
+    color: var(--accent);
+}

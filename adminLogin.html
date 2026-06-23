@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Campus TaskHub</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body class="auth-body">
+
+    <main class="auth-container">
+        
+        <div class="auth-header">
+            <div class="logo" style="cursor: default;">
+                <span class="campus">CAMPUS </span><span class="taskhub" style="color: #ff4d4d;">ADMIN</span>
+            </div>
+            <p class="auth-subtitle" style="color: #ff4d4d; font-size: 0.85rem; margin-top: 8px; font-weight: 600; letter-spacing: 0.5px;">
+                ⚠️ Restricted Access. Authorized Personnel Only.
+            </p>
+        </div>
+
+        <div class="auth-card" style="border-top: 3px solid #ff4d4d;">
+            <form action="includes/php/admin_login_process.php" method="POST">
+                
+                <div class="field-block">
+                    <label>Admin ID or Email</label>
+                    <input type="text" name="admin_identifier" class="form-input" placeholder="e.g. admin_01" required>
+                </div>
+
+                <div class="field-block">
+                    <label>Master Password</label>
+                    <input type="password" name="admin_password" class="form-input" placeholder="Enter master password" required>
+                </div>
+
+                <div class="auth-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember" style="accent-color: #ff4d4d;">
+                        <span>Secure Session</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary-full" style="background-color: #ff4d4d; color: #ffffff;">
+                    Access Admin Portal
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Lost your admin credentials? <br>Contact the Systems Director.</p>
+            </div>
+        </div>
+
+        <div class="admin-access">
+            <a href="login.html" style="color: var(--accent, #00ffa6);">← Return to Student Portal</a>
+        </div>
+
+    </main>
+
+</body>
+</html>

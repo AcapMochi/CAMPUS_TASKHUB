@@ -1,0 +1,120 @@
+/* onlineBanking.css */
+.header-inline {
+    display: flex;
+    align-items: center;
+    margin: 30px 40px;
+    gap: 20px;
+    border-bottom: 1px solid #2f2235;
+    padding-bottom: 20px;
+}
+
+.back-link {
+    font-size: 1.2em;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 2em;
+}
+
+.card-form-wrapper {
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.form-card {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid #2f2235;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #2f2235;
+    padding-bottom: 25px;
+}
+
+.form-group:last-of-type {
+    border-bottom: none;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.sub-label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+.dark-input {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-main);
+    padding: 12px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.dark-input::placeholder {
+    color: #555;
+}
+
+.card-logos {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.expiry-inputs {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.short-input {
+    width: 60px;
+}
+
+.slash {
+    font-size: 1.5em;
+    color: var(--text-muted);
+    padding-bottom: 5px;
+}
+
+.security-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.half-input {
+    width: 200px;
+}
+
+.btn-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pay-btn {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--text-main);
+    padding: 10px 40px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.pay-btn:hover {
+    background-color: #2f2235;
+}

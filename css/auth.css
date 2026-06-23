@@ -1,0 +1,171 @@
+/* Ensure the body is perfectly centered for authentication pages */
+.auth-body {
+    background-color: #0B050C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 420px; /* Keeps the login card narrow and focused */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header .logo {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.auth-subtitle {
+    color: #948b9c;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* --- THE LOGIN CARD --- */
+.auth-card {
+    background-color: #0d0910;
+    border: 1px solid #1f1524;
+    border-radius: 12px;
+    padding: 40px 30px;
+    width: 100%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+}
+
+/* Inputs */
+.field-block {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.field-block label {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #42355c;
+    background-color: rgba(20, 10, 19, 0.5); /* Very dark transparent bg */
+    color: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus {
+    border-color: var(--accent, #00ffa6);
+}
+
+.form-input::placeholder {
+    color: #494158;
+}
+
+/* Remember Me & Forgot Password */
+.auth-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #b0a7b8;
+    cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+    accent-color: var(--accent, #00ffa6);
+    cursor: pointer;
+}
+
+.forgot-link {
+    color: var(--accent, #00ffa6);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.forgot-link:hover {
+    opacity: 0.8;
+}
+
+/* Buttons */
+.btn-primary-full {
+    width: 100%;
+    background-color: var(--accent, #00ffa6);
+    color: #000000;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary-full:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 166, 0.2);
+}
+
+/* Footer & Links */
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #1f1524;
+    font-size: 0.9rem;
+    color: #948b9c;
+}
+
+.register-link {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.register-link:hover {
+    color: var(--accent, #00ffa6);
+}
+
+/* --- THE SUBTLE ADMIN LINK --- */
+.admin-access {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.admin-access a {
+    color: #494158; /* Very muted gray */
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.5px;
+}
+
+.admin-access a:hover {
+    color: #ff4d4d; /* Changes to a warning red (or green) so admins know it's a special zone */
+}

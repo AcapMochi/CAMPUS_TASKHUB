@@ -1,0 +1,135 @@
+.main-container {
+    max-width: 2000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+/* TOGGLE BUTTONS */
+.filter-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 20px; /* Pill shape */
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn.active-btn {
+    background-color: var(--accent, #00ffa6); 
+    color: #000000;
+}
+
+/* MAIN CARD */
+.leaderboard-card {
+    background-color: #0B050C; /* Very dark, blends with main background */
+    border-radius: 12px;
+    padding: 20px 0;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    margin: 0 0 25px 0;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* SCROLL BOX */
+.scroll-box {
+    max-height: 550px; 
+    overflow-y: auto;
+}
+
+.scroll-box::-webkit-scrollbar {
+    width: 6px;
+}
+.scroll-box::-webkit-scrollbar-track {
+    background: #191324;
+}
+.scroll-box::-webkit-scrollbar-thumb {
+    background: #42355c;
+    border-radius: 4px;
+}
+
+/* LIST ITEMS */
+#leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#leaderboard-list li {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+/* Alternating Row Colors from Prototype */
+#leaderboard-list li:nth-child(odd) {
+    background-color: #493657; /* Lighter plum purple */
+}
+
+#leaderboard-list li:nth-child(even) {
+    background-color: #3f2d4b; /* Darker plum purple */
+}
+
+/* ROW ELEMENTS */
+.rank {
+    width: 50px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: left;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    background-color: #211a2e;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.rating {
+    font-size: 0.8rem;
+    color: #ffc107; /* Star yellow */
+    font-weight: bold;
+}
+
+.task-count {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    text-align: right;
+    font-weight: 400;
+}
