@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | Campus TaskHub</title>
+    <link rel="stylesheet" href="css/global.css">
+    <script src="includes/js/auth.js"></script>
+    <style>
+        .payment-container {
+            max-width: 500px;
+            margin: 80px auto;
+            background-color: #0d0910;
+            border: 1px solid #1f1524;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+        .btn-pay {
+            background-color: var(--accent, #00ffa6);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 30px;
+            transition: all 0.2s ease;
+        }
+        .btn-pay:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 166, 0.2);
+        }
+        .loading-overlay {
+            display: none;
+            color: #00ffa6;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo" style="text-decoration: none;">
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+        </a>
+    </header>
+
+    <main>
+        <div class="payment-container">
+            <h1 style="color: #fff; margin-bottom: 10px;">Secure Checkout</h1>
+            <p style="color: #948b9c;">Review your payment details before proceeding to Stripe.</p>
+            
+            <div style="background: #140a15; border: 1px solid #2f2235; padding: 20px; border-radius: 8px; margin-top: 30px; text-align: left;">
+                <p style="color: #fff; display: flex; justify-content: space-between;">Task Reward: <span id="task-reward">Loading...</span></p>
+                <p style="color: #fff; display: flex; justify-content: space-between;">Service Fee: <span>RM 0.50</span></p>
+                <hr style="border-top: 1px solid #2f2235; margin: 15px 0;">
+                <h3 style="color: #00ffa6; display: flex; justify-content: space-between; margin: 0;">Total to Pay: <span id="total-pay">Loading...</span></h3>
+            </div>
+
+            <button class="btn-pay" id="payBtn" onclick="processPayment()">Proceed to Stripe Payment</button>
+            <div class="loading-overlay" id="loadingText">Redirecting to secure gateway...</div>
+        </div>
+    </main>
+
+    <script>
+        // 1. Grab the IDs from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const taskId = urlParams.get('task_id');
+        const runnerId = urlParams.get('runner_id');
+
+        // 2. Fetch the task data on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            if (!taskId || !runnerId) {
+                alert("Missing task or runner information!");
+                return;
+            }
+
+            fetch(`includes/php/get_task_details.php?id=${taskId}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const reward = parseFloat(data.task.Reward_Amount);
+                        const serviceFee = 0.50; // New Extra 0.50 Fee
+                        const total = reward + serviceFee;
+
+                        // Inject the dynamically calculated numbers into the HTML
+                        document.getElementById('task-reward').innerText = `RM ${reward.toFixed(2)}`;
+                        document.getElementById('total-pay').innerText = `RM ${total.toFixed(2)}`;
+                    } else {
+                        alert("Failed to load task details.");
+                    }
+                })
+                .catch(err => {
+                    console.error("Fetch error:", err);
+                    alert("A network error occurred.");
+                });
+        });
+
+        // 3. Handle the button click
+        function processPayment() {
+            // Show loading state
+            document.getElementById('payBtn').style.display = 'none';
+            document.getElementById('loadingText').style.display = 'block';
+
+            // Brief visual delay, then redirect them directly to your Stripe checkout builder
+            setTimeout(() => {
+                window.location.href = `includes/php/create_checkout.php?task_id=${taskId}&runner_id=${runnerId}`;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
