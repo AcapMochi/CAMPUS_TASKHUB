@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus TaskHub - Task In Progress (Runner)</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/taskprogressrunner.css" />
+  <script src="includes/js/auth.js"></script>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo" style="text-decoration: none;">
+      <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="browseTask.html">Browse Tasks</a>
+      <a href="posttasks.html">Post Task</a>
+      <a href="mytasks.html" class="active">My Tasks</a>
+      <a href="leaderboard.html">Leaderboard</a>
+    </nav>
+
+    <div class="header-icons">
+      <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+      <a href="myProfile.html">
+        <img src="images/PFP.jpg" alt="Profile" class="profile-pic" onerror="this.src='images/PFP.jpg'">
+      </a>
+    </div>
+  </header>
+
+  <main class="page-main">
+
+    <div class="page-header">
+      <a href="mytasks.html" class="back-link">← My Tasks</a>
+      <h1 class="page-title">Tasks In Progress</h1>
+    </div>
+    <hr class="page-divider" />
+
+    <div class="content" id="taskContent" style="display: none;">
+
+      <section class="card earning-box">
+        <div class="earning-col">
+          <p class="box-label">Earning</p>
+          <p class="earning-value" id="earningValue">RM --</p>
+        </div>
+      </section>
+
+      <section class="card task-details-card">
+        <p class="section-label">Task Details</p>
+        <h2 class="task-title" id="taskTitle">Loading...</h2>
+        <p class="task-desc" id="taskDesc">Loading description...</p>
+        <div class="badge-row">
+          <span class="badge badge-teal" id="categoryBadge">Category</span>
+          <span class="badge badge-progress" id="locationBadge">Location</span>
+        </div>
+      </section>
+
+      <section class="card poster-card">
+        <p class="section-label">Poster</p>
+        <div class="poster-row">
+          <div class="poster-info">
+            <img src="images/PFP.jpg" id="posterAvatar" class="poster-avatar" onerror="this.src='images/PFP.jpg'"
+              style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover;">
+            <div class="poster-meta">
+              <p class="poster-name" id="posterName">Loading...</p>
+              <p class="poster-rating"><span id="posterRating">-</span> ⭐</p>
+            </div>
+          </div>
+          <button class="btn-chat" id="chatBtn" onclick="window.location.href='chatpage.html'">Chat</button>
+        </div>
+      </section>
+
+      <section class="card status-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <p class="section-label" style="margin: 0;">Update Status</p>
+          <span id="notifyToast"
+            style="color: var(--accent, #00ffa6); font-size: 0.85rem; font-weight: bold; display: none; transition: opacity 0.3s;">
+            ✓ Message sent to Poster!
+          </span>
+        </div>
+
+        <div class="status-list" id="statusList">
+          <button class="status-option" data-dbstatus="Heading to pickup" onclick="updateTaskStatus(this)"
+            style="display: flex; align-items: center; width: 100%;">
+            <span class="status-emoji">🏃</span>
+            <span class="status-text" style="flex-grow: 1; text-align: left;">Heading to pickup location<span
+                class="current-tag"></span></span>
+            <span title="Sends chat to poster" style="font-size: 1.2rem; opacity: 0.7;">✉️</span>
+          </button>
+
+          <button class="status-option" data-dbstatus="Buying order" onclick="updateTaskStatus(this)"
+            style="display: flex; align-items: center; width: 100%;">
+            <span class="status-emoji">🛍️</span>
+            <span class="status-text" style="flex-grow: 1; text-align: left;">Buying the order now<span
+                class="current-tag"></span></span>
+            <span title="Sends chat to poster" style="font-size: 1.2rem; opacity: 0.7;">✉️</span>
+          </button>
+
+          <button class="status-option" data-dbstatus="Delivering" onclick="updateTaskStatus(this)"
+            style="display: flex; align-items: center; width: 100%;">
+            <span class="status-emoji">🛵</span>
+            <span class="status-text" style="flex-grow: 1; text-align: left;">On my way to deliver<span
+                class="current-tag"></span></span>
+            <span title="Sends chat to poster" style="font-size: 1.2rem; opacity: 0.7;">✉️</span>
+          </button>
+        </div>
+      </section>
+
+      <div class="action-buttons">
+        <button class="btn-complete" id="completeBtn">Mark as Done</button>
+        <button class="btn-cancel" id="cancelBtn">Cancel Task</button>
+      </div>
+
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" style="text-align: center; color: #948b9c; margin-top: 50px;">
+      Loading Task Details...
+    </div>
+
+    <div class="modal-overlay" id="reportModal"
+      style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); align-items: center; justify-content: center; z-index: 1000;">
+      <div
+        style="background: #0d0910; border: 1px solid #2f2235; border-radius: 12px; width: 100%; max-width: 500px; padding: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h2 style="color: #ffffff; margin: 0;">Report Task Issue</h2>
+          <button onclick="closeReportModal()"
+            style="background: transparent; border: none; color: #948b9c; font-size: 1.5rem; cursor: pointer;">×</button>
+        </div>
+
+        <p style="color: #948b9c; margin-bottom: 20px; font-size: 0.9rem;">What went wrong with this task? Our admins
+          will review this transaction and chat logs.</p>
+
+        <textarea id="report-reason" rows="5" placeholder="Provide full details of the issue..."
+          style="width: 100%; background: #140a15; border: 1px solid #42355c; color: white; padding: 12px; border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; resize: vertical;"></textarea>
+
+        <div style="display: flex; justify-content: flex-end; gap: 15px;">
+          <button onclick="closeReportModal()"
+            style="background: transparent; border: 1px solid #42355c; color: #ffffff; padding: 10px 20px; border-radius: 8px; cursor: pointer;">Cancel</button>
+          <button id="btn-submit-report" onclick="submitTaskReport()"
+            style="background: #ff4d4d; border: none; color: #ffffff; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">Submit
+            Report</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let currentTaskId = null;
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      currentTaskId = urlParams.get('id');
+
+      if (!currentTaskId) {
+        document.getElementById('loadingState').innerHTML = "<span style='color: #ff4d4d;'>Error: No Task ID provided.</span>";
+        return;
+      }
+
+      // Fetch the task data using the script we built
+      fetch(`includes/php/get_runner_task_details.php?id=${currentTaskId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === 'success') {
+            const task = data.task;
+
+            // Hide loading, show content
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('taskContent').style.display = 'flex'; // Uses your flex column layout
+
+            // Populate Data
+            document.getElementById('earningValue').textContent = `RM ${parseFloat(task.Reward_Amount).toFixed(0)}`;
+            document.getElementById('taskTitle').textContent = task.Title;
+            document.getElementById('taskDesc').textContent = task.Description || 'No description provided.';
+            document.getElementById('categoryBadge').textContent = task.CategoryName || 'General';
+            document.getElementById('locationBadge').textContent = task.Location || 'Campus';
+
+            document.getElementById('posterName').textContent = task.PosterName || 'Unknown';
+            document.getElementById('posterRating').textContent = task.PosterRating || '4.8';
+            if (task.PosterPic) document.getElementById('posterAvatar').src = task.PosterPic;
+
+            // Sync the UI buttons with the current status from the database
+            syncStatusUI(task.Status);
+          } else {
+            document.getElementById('loadingState').innerHTML = `<span style='color: #ff4d4d;'>Error: ${data.message}</span>`;
+          }
+        })
+        .catch(err => {
+          console.error("Fetch Error:", err);
+          document.getElementById('loadingState').innerHTML = "<span style='color: #ff4d4d;'>Failed to load task details.</span>";
+        });
+
+      let runnerPollingInterval;
+
+      // --- ADD THIS TO YOUR DOMContentLoaded BLOCK ---
+      document.addEventListener("DOMContentLoaded", function () {
+        // ... existing code ...
+
+        runnerPollingInterval = setInterval(() => {
+          checkLiveRunnerStatus(currentTaskId);
+        }, 3000);
+      });
+
+      // --- NEW FUNCTION TO CHECK LIVE STATUS ---
+      function checkLiveRunnerStatus(taskId) {
+        fetch(`includes/php/get_runner_task_details.php?id=${taskId}`) // Or whatever your runner fetch endpoint is
+          .then(res => res.json())
+          .then(data => {
+            if (data.status === 'success') {
+              const task = data.task;
+
+              if (task.Status === 'Completed') {
+                clearInterval(runnerPollingInterval);
+                window.location.href = `taskdonerunner.html?id=${taskId}`;
+              }
+
+              if (task.Runner_Confirmed == 1 && task.Poster_Confirmed == 0) {
+                const btn = document.getElementById('completeBtn');
+                if (btn) {
+                  btn.disabled = true;
+                  btn.innerText = "⏳ Waiting for Poster to release pay...";
+                  btn.style.backgroundColor = "#2f2235";
+                  btn.style.color = "#b0a7b8";
+                  btn.style.cursor = "not-allowed";
+                }
+              }
+            }
+          });
+      }
+
+      // --- UPDATED BUTTON CLICK FUNCTION ---
+      // Look for where you handle the 'completeBtn' click event and update it:
+      document.getElementById('completeBtn').addEventListener('click', function () {
+        if (confirm("Are you sure you have completed this task? Payment will release once the poster confirms.")) {
+
+          const btn = document.getElementById('completeBtn');
+          btn.innerText = "Processing...";
+          btn.disabled = true;
+
+          fetch('includes/php/confirm_task_dual.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `task_id=${currentTaskId}`
+          })
+            .then(res => res.json())
+            .then(data => {
+              if (data.status === 'success') {
+                if (data.fully_completed) {
+                  window.location.href = `taskdonerunner.html?id=${currentTaskId}`;
+                } else {
+                  btn.innerText = "⏳ Waiting for Poster to release pay...";
+                  btn.style.backgroundColor = "#2f2235";
+                  btn.style.color = "#b0a7b8";
+                  btn.style.cursor = "not-allowed";
+                }
+              } else {
+                alert("Error: " + data.message);
+                btn.disabled = false;
+                btn.innerText = "Mark as Done";
+              }
+            });
+        }
+      });
+
+      // Handle "Cancel Task" Button
+      document.getElementById('cancelBtn').addEventListener('click', function () {
+        if (confirm("Cancel this task? This will negatively affect your runner rating!")) {
+          window.location.href = 'mytasks.html';
+        }
+      });
+    });
+
+    // Handle clicking the individual status buttons
+    function updateTaskStatus(clickedElement) {
+      const newStatus = clickedElement.getAttribute('data-dbstatus');
+
+      // Update UI immediately for a snappy feel
+      document.querySelectorAll('.status-option').forEach(btn => {
+        btn.classList.remove('active');
+        btn.querySelector('.current-tag').textContent = "";
+      });
+
+      clickedElement.classList.add('active');
+      clickedElement.querySelector('.current-tag').textContent = " (current)";
+
+      // 1. Send status update to the database
+      updateDatabaseStatus(newStatus);
+
+      // 2. NEW: Send automatic chat notification to the poster
+      sendChatNotification(newStatus);
+    }
+
+    // --- NEW FUNCTION: Send chat to poster ---
+    // --- NEW FUNCTION: Send chat to poster ---
+    function sendChatNotification(statusMessage) {
+      if (!currentTaskId) {
+          alert("Error: Cannot find Task ID.");
+          return;
+      }
+
+      // The exact message the poster will see in their chat
+      const message = `🔔 Task Update: I am now [ ${statusMessage} ]`;
+
+      // FIXED: Pointing to Messages.php instead of send_chat_message.php
+      fetch('includes/php/Messages.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `task_id=${currentTaskId}&message=${encodeURIComponent(message)}`
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === 'success') {
+            // Show the "Message sent to Poster!" toast
+            const toast = document.getElementById('notifyToast');
+            if (toast) {
+              toast.style.display = 'block';
+              toast.style.opacity = '1';
+
+              // Hide it again after 3 seconds
+              setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.style.display = 'none', 300);
+              }, 3000);
+            }
+          } else {
+             // If the PHP runs but fails (e.g. database error), show it!
+             alert("Failed to send chat: " + data.message);
+          }
+        })
+        .catch(err => {
+            console.error("Error notifying poster:", err);
+            alert("Network Error: Could not reach Messages.php");
+        });
+    }
+
+    // Function to sync UI on page load
+    function syncStatusUI(dbStatus) {
+      document.querySelectorAll('.status-option').forEach(btn => {
+        if (btn.getAttribute('data-dbstatus') === dbStatus) {
+          btn.classList.add('active');
+          btn.querySelector('.current-tag').textContent = " (current)";
+        } else {
+          btn.classList.remove('active');
+          btn.querySelector('.current-tag').textContent = "";
+        }
+      });
+    }
+
+    // Helper function to hit the PHP script
+    function updateDatabaseStatus(status, callback = null) {
+      fetch('includes/php/update_task_status.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `task_id=${currentTaskId}&status=${encodeURIComponent(status)}`
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status !== 'success') {
+            console.error("Failed to update status:", data.message);
+          } else if (callback) {
+            callback(); // Execute redirect if callback is provided
+          }
+        })
+        .catch(err => console.error("Error updating status:", err));
+    }
+
+    // --- REPORT ISSUE FUNCTIONS ---
+    let reportTaskId = null;
+
+    function reportIssue(taskId) {
+      reportTaskId = taskId; // Store the ID for submission
+      document.getElementById('reportModal').style.display = 'flex';
+    }
+
+    function closeReportModal() {
+      document.getElementById('reportModal').style.display = 'none';
+      document.getElementById('report-reason').value = ''; // Clear text
+    }
+
+    function submitTaskReport() {
+      const reasonText = document.getElementById('report-reason').value.trim();
+
+      if (!reasonText) {
+        alert("Please provide details about the issue.");
+        return;
+      }
+
+      const btn = document.getElementById('btn-submit-report');
+      btn.textContent = "Submitting...";
+      btn.disabled = true;
+
+      fetch('includes/php/submit_report.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          task_id: reportTaskId,
+          reason: reasonText
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === 'success') {
+            alert("Report submitted successfully. An admin will review this task.");
+            closeReportModal();
+          } else {
+            alert("Error: " + data.message);
+          }
+          btn.textContent = "Submit Report";
+          btn.disabled = false;
+        })
+        .catch(err => {
+          console.error("Fetch Error:", err);
+          alert("Network error. Please try again.");
+          btn.textContent = "Submit Report";
+          btn.disabled = false;
+        });
+    }
+  </script>
+</body>
+
+</html>

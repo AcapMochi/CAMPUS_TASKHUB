@@ -1,55 +1,52 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-    <title>SIGN IN</title>
-    <link rel="stylesheet" href="/CAMPUS_TASKHUB/css/signup.css" />
-    <script>
-        function Submit() {
-
-        }
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Campus TaskHub</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/auth.css">
 </head>
 
-<body>
-    <nav class="top-menu">
-        <span class="campus">CAMPUS</span>
-        <span class="taskhub">TASKHUB</span>
-    </nav>
+<body class="auth-body">
 
-    <main class="container">
-        <section class="left">
-            <h1 class="hustle">HUSTLE</h1>
-            <h1 class="hustle2">AND CHANGE YOUR FUTURE</h1>
+    <main class="auth-container">
+        
+        <div class="auth-header">
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+            </a>
+            <p class="auth-subtitle">Create an account and start earning on campus.</p>
+        </div>
 
-            <h2 class="loginnow"><a href="login.html">LOG IN NOW -></a></h2>
-        </section>
+        <div class="auth-card">
+            <form action="includes/php/signup_handler.php" method="POST">
+                
+                <div class="field-block">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-input" placeholder="Choose a nickname" required>
+                </div>
 
-        <section class="right">
+                <div class="field-block">
+                    <label>Student Email Address</label>
+                    <input type="email" name="email" class="form-input" placeholder="e.g. d032410118@student.utem.edu.my" required>
+                    <small style="color: #6c637e; font-size: 0.75rem; margin-top: 5px;">Your Student ID will be securely pulled from this email.</small>
+                </div>
 
-            <section class="welcome-container">
-                <span class="welcometo">Welcome to</span>
-                <span class="ctask">CTASK</span>
-            </section>
+                <div class="field-block">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-input" placeholder="Create a password" required>
+                </div>
 
-            <form action="#">
-                <section class="form-container">
-                    <label class="label">Username:</label>
-                    <input class="input" , type="text" , placeholder=" e.g: campustaskhub123">
-
-                    <label class="label">Password:</label>
-                    <input class="input" , type="password" , placeholder="e.g: taskhub@27">
-
-                    <label class="label">Confirm Password:</label>
-                    <input class="input" , type="password" , placeholder="e.g: taskhub@27">
-
-                    <label class="label">Email:</label>
-                    <input class="input" , type="email" , placeholder="e.g: d012345678@student.utem.edu.my">
-
-                    <button type="submit">SIGN UP</button>
-                </section>
+                <button type="submit" class="btn-primary-full" style="margin-top: 25px;">Create Account</button>
             </form>
-        </section>
-    </main>
-</body>
 
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html" class="register-link">Log in here</a></p>
+            </div>
+        </div>
+
+    </main>
+
+</body>
 </html>
