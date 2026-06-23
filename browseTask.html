@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus TaskHub - Browse Tasks</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/browseTask.css">
+    <script src="includes/js/auth.js"></script>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="browseTask.html" class="active">Browse Tasks</a>
+            <a href="posttasks.html">Post Task</a>
+            <a href="mytasks.html">My Tasks</a>
+            <a href="leaderboard.html">Leaderboard</a>
+        </nav>
+
+        <div class="header-icons">
+            <a href="chatpage.html" style="text-decoration: none; font-size: 20px;">💬</a>
+            <a href="myProfile.html">
+                <img src="images/PFP.jpg" alt="Profile" class="profile-pic" onerror="this.src='images/PFP.jpg'">
+            </a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <h1 class="page-title">Browse Tasks</h1>
+
+        <div class="task-controls">
+            <input type="text" id="search-task" placeholder="🔍 Search tasks by title or description..." class="search-input">
+            <select id="sort-tasks" class="sort-select">
+                <option value="newest">Sort By: Newest</option>
+                <option value="reward-high">Highest Reward</option>
+                <option value="reward-low">Lowest Reward</option>
+            </select>
+        </div>
+
+        <div class="browse-layout">
+            <aside class="filter-sidebar">
+                <h2>Filters</h2>
+
+                <div class="filter-section">
+                    <h3>Location</h3>
+                    <div class="tag-group" id="location-tags">
+                        <button class="side-tag active" data-value="All">All</button>
+                        <button class="side-tag" data-value="FTMK">FTMK</button>
+                        <button class="side-tag" data-value="FAIX">FAIX</button>
+                        <button class="side-tag" data-value="FTKM">FTKM</button>
+                        <button class="side-tag" data-value="FKE">FKE</button>
+                        <button class="side-tag" data-value="FTKEK">FTKEK</button>
+                        <button class="side-tag" data-value="FPTT">FPTT</button>
+                        <button class="side-tag" data-value="Satria">Satria</button>
+                        <button class="side-tag" data-value="Jebat">Jebat</button>
+                        <button class="side-tag" data-value="Lekir">Lekir</button>
+                        <button class="side-tag" data-value="Kasturi">Kasturi</button>
+                        <button class="side-tag" data-value="Kafe Satria">Kafe Satria</button>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Category</h3>
+                    <div class="tag-group" id="category-tags">
+                        <button class="side-tag active" data-value="All">All</button>
+                        <button class="side-tag" data-value="Food">Food</button>
+                        <button class="side-tag" data-value="Printing">Printing</button>
+                        <button class="side-tag" data-value="Library">Library</button>
+                        <button class="side-tag" data-value="Assignment">Assignment</button>
+                        <button class="side-tag" data-value="Supplies">Supplies</button>
+                        <button class="side-tag" data-value="Tech">Tech</button>
+                        <button class="side-tag" data-value="Sports">Sports</button>
+                        <button class="side-tag" data-value="Grocery">Grocery</button>
+                        <button class="side-tag" data-value="Car">Car</button>
+                        <button class="side-tag" data-value="Room">Room</button>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <label>Min reward (RM)</label>
+                    <input type="number" id="min-reward" placeholder="RM 0" class="reward-input">
+                </div>
+
+                <div class="filter-section">
+                    <label>Max reward (RM)</label>
+                    <input type="number" id="max-reward" placeholder="RM 50" class="reward-input">
+                </div>
+
+                <button id="apply-filters-btn" class="apply-filters-btn">Apply Filters</button>
+            </aside>
+
+            <div class="task-container" id="live-task-container">
+                <p style="text-align: center; color: #888; grid-column: 1 / -1;">Loading tasks...</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchTasks();
+
+            const setupMultiSelectTags = (groupId) => {
+                const group = document.getElementById(groupId);
+                const allBtn = group.querySelector('.side-tag[data-value="All"]');
+
+                group.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('side-tag')) {
+                        const clickedBtn = e.target;
+                        const value = clickedBtn.getAttribute('data-value');
+
+                        if (value === 'All') {
+                            group.querySelectorAll('.side-tag').forEach(t => t.classList.remove('active'));
+                            clickedBtn.classList.add('active');
+                        } else {
+                            clickedBtn.classList.toggle('active');
+                            if (allBtn) allBtn.classList.remove('active');
+
+                            const activeTags = group.querySelectorAll('.side-tag.active');
+                            if (activeTags.length === 0 && allBtn) {
+                                allBtn.classList.add('active');
+                            }
+                        }
+                    }
+                });
+            };
+
+            setupMultiSelectTags('location-tags');
+            setupMultiSelectTags('category-tags');
+
+            // Fetch when clicking apply
+            document.getElementById('apply-filters-btn').addEventListener('click', fetchTasks);
+            
+            // Fetch when sorting changes
+            document.getElementById('sort-tasks').addEventListener('change', fetchTasks);
+
+            // Fetch when typing in search (with a slight delay so it doesn't spam the database)
+            let searchTimeout;
+            document.getElementById('search-task').addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(fetchTasks, 400); // Waits 400ms after you stop typing
+            });
+        });
+
+        function fetchTasks() {
+            const container = document.getElementById('live-task-container');
+            container.innerHTML = '<p style="text-align: center; color: #888; grid-column: 1 / -1;">Loading tasks...</p>';
+
+            const getActiveValues = (groupId) => {
+                const activeTags = document.querySelectorAll(`#${groupId} .side-tag.active`);
+                const values = Array.from(activeTags).map(t => t.getAttribute('data-value'));
+                if (values.includes('All') || values.length === 0) return null;
+                return values.join(',');
+            };
+
+            const locations = getActiveValues('location-tags');
+            const categories = getActiveValues('category-tags');
+            const minReward = document.getElementById('min-reward').value;
+            const maxReward = document.getElementById('max-reward').value;
+            
+            // NEW: Get Search and Sort values
+            const searchQuery = document.getElementById('search-task').value.trim();
+            const sortOption = document.getElementById('sort-tasks').value;
+
+            let url = new URL('includes/php/get_tasks.php', window.location.href);
+            if (locations) url.searchParams.append('locations', locations);
+            if (categories) url.searchParams.append('categories', categories);
+            if (minReward) url.searchParams.append('min', minReward);
+            if (maxReward) url.searchParams.append('max', maxReward);
+            if (searchQuery) url.searchParams.append('search', searchQuery);
+            if (sortOption) url.searchParams.append('sort', sortOption);
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    container.innerHTML = '';
+
+                    if (data.status === 'success') {
+                        if (data.tasks.length === 0) {
+                            container.innerHTML = '<p style="text-align: center; color: #888; grid-column: 1 / -1;">No tasks found matching your filters.</p>';
+                            return;
+                        }
+
+                        data.tasks.forEach(task => {
+                            const posterName = task.Username || task.PosterName || "Unknown User";
+                            const rating = task.Rating || "4.8";
+                            const category = task.CategoryName || "General";
+                            const location = task.Location || "Campus";
+                            const reward = parseFloat(task.Reward_Amount).toFixed(0); 
+                            
+                            // Get Poster Pic if available
+                            const posterPic = task.PosterPic || 'images/PFP.jpg';
+
+                            const card = document.createElement('div');
+                            card.className = 'task-card';
+                            
+                            card.onclick = () => { window.location.href = `taskDetail.html?id=${task.TaskID}`; };
+
+                            card.innerHTML = `
+                                <div class="card-header">
+                                    <img src="${posterPic}" alt="User" class="card-avatar" onerror="this.src='images/pfp1.jpg'">
+                                    <div class="card-user-info">
+                                        <div class="card-username">${posterName}</div>
+                                        <div class="card-rating">${rating} ⭐</div>
+                                    </div>
+                                </div>
+                                <h3 class="card-title">${task.Title}</h3>
+                                <p class="card-desc">${task.Description || 'No description provided.'}</p>
+                                <div class="card-tags">
+                                    <span class="card-tag tag-open">Open</span>
+                                    <span class="card-tag tag-category">${category}</span>
+                                    <span class="card-tag tag-location">${location}</span>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="card-reward">Reward: <strong>RM${reward}</strong></div>
+                                </div>
+                            `;
+                            container.appendChild(card);
+                        });
+                    } else {
+                        container.innerHTML = `<p style="color: #ff4d4d; grid-column: 1 / -1;">Error: ${data.message}</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error("Fetch error:", error);
+                    container.innerHTML = '<p style="color: #ff4d4d; grid-column: 1 / -1;">Network error. Check console and make sure paths are correct.</p>';
+                });
+        }
+    </script>
+</body>
+</html>
