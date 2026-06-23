@@ -1,0 +1,177 @@
+/* =========================================
+   GLOBAL RESETS & TYPOGRAPHY
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #121212; 
+    color: white; 
+    /* Prevents horizontal scroll on smaller screens */
+    overflow-x: hidden; 
+}
+
+/* =========================================
+   NAVIGATION BAR (.top-menu)
+   ========================================= */
+.top-menu {
+    display: flex;
+    padding: 20px 40px;
+    background-color: rgba(0, 0, 0, 0.85); /* Slightly darker for a sleeker look */
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 10;
+}
+
+.campus {
+    color: #ffffff;
+    margin-right: 8px;
+    letter-spacing: 2px;
+}
+
+.taskhub {
+    color: rgb(0, 255, 136); /* Synced with your neon theme */
+    letter-spacing: 2px;
+}
+
+/* =========================================
+   MAIN CONTAINER
+   ========================================= */
+.container {
+    background-color: rgba(0, 0, 0, 0.5); /* Added slight dark overlay */
+    background-image: url('/CAMPUS_TASKHUB/images/background3.png');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply; /* Helps text pop against the background */
+    min-height: calc(100vh - 70px); 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Prevents the box from touching screen edges on mobile */
+}
+
+/* =========================================
+   LOGIN FORM BOX
+   ========================================= */
+.login-form {
+    background-color: rgba(0, 0, 0, 0.75); 
+    width: 100%;
+    max-width: 450px; /* Perfect width for forms */
+    padding: 50px 40px; /* Uses padding to space items instead of margins */
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(8px); /* Stronger glass effect */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+.login {
+    text-align: center;
+    font-weight: 300; /* Cleaner than 'lighter' */
+    font-size: 45px;
+    margin-bottom: 30px;
+    letter-spacing: 4px;
+    color: rgb(0, 255, 136); /* Title color to match theme */
+}
+
+/* =========================================
+   FORM INPUTS & LABELS
+   ========================================= */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.label {
+    text-align: left;
+    font-weight: 600;
+    padding: 15px 0px 8px 5px;
+    font-size: 15px;
+    color: #eeeeee;
+    letter-spacing: 1px;
+}
+
+.input {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px; /* Modern, slightly squared borders look better than full pills */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 16px;
+    padding: 15px 20px;
+    color: white;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Placeholder styling */
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
+}
+
+/* Focus state for inputs */
+.input:focus {
+    outline: none;
+    border-color: rgb(0, 255, 136);
+    background-color: rgba(0, 255, 136, 0.05); /* Slight neon glow inside */
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.2); /* Outer glow */
+}
+
+/* =========================================
+   BUTTON STYLING
+   ========================================= */
+.button {
+    padding: 16px;
+    margin: 40px 0 25px 0; 
+    border-radius: 12px; /* Matched to input borders */
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 2px;
+    background-color: rgb(0, 255, 136);
+    color: #000000; /* Dark text on bright background is crucial for readability */
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.button:hover, .button:focus {
+    background-color: rgb(0, 220, 115);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4); /* Neon hover glow */
+    outline: none;
+}
+
+.button:active {
+    transform: scale(0.97); 
+}
+
+/* =========================================
+   SIGNUP LINK
+   ========================================= */
+.signup {
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    color: #aaaaaa; /* Gray text for the question */
+}
+
+.signup a {
+    color: rgb(0, 255, 136);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.signup a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.8); /* Glow effect on hover */
+}
