@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Campus TaskHub</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body class="auth-body">
+
+    <main class="auth-container">
+
+        <div class="auth-header">
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+            </a>
+            <p class="auth-subtitle">Welcome back! Ready to get things done?</p>
+        </div>
+
+        <div class="auth-card">
+            <form action="includes/php/login_process.php" method="POST">
+
+                <div class="field-block">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-input" placeholder="Enter your username" required>
+                </div>
+
+                <div class="field-block">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-input" placeholder="Enter your password"
+                        required>
+                </div>
+
+                <div class="auth-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="forgot-password.html" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary-full">Log In</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="signup.html" class="register-link">Sign up here</a></p>
+            </div>
+        </div>
+
+        <div class="admin-access">
+            <a href="adminLogin.html">Admin Portal Access</a>
+        </div>
+
+    </main>
+
+</body>
+
+</html>
