@@ -7,186 +7,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Card Payment</title>
-
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/cardDetails.css">
-
+    <script src="includes/js/auth.js"></script>
 </head>
 
 <body>
 
     <!-- HEADER -->
 
-    <header class="header">
-
+    <header class="navbar">
         <div class="logo">
-            <span class="campus">CAMPUS </span>
-            <span class="taskhub">TASKHUB</span>
+            <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
         </div>
 
-        <nav class="nav-menu">
-
-           <a href="dashboard.html">
-        Dashboard
-    </a>
-
-    <a href="browseTask.html">
-         Browse<br> Task </a>
-
-    <a href="posttasks.html">
-        Post Task
-    </a>
-
-    <a href="mytasks.html">
-        My Tasks
-    </a>
-
-    <a href="leaderboard.html">
-        Leaderboard
-    </a>
-
-</nav>
-
-        <div class="header-icons">
-            
-            <a href="chatpage.html">
-            <span>💬</span>
-            </a>
-            
-            <a href="myProfile.html">
-            <img src="images/PFP.png" alt="Profile" class="profile-pic">
-            </a>
-        </div>
-
-    </header>
-
-    <!-- PAGE -->
-
-    <div class="container">
-
-        <div class="top-section">
-
-            <a href="posttasks.html" class="back-btn">
-                ← Back to Post
-            </a>
-
-            <h1 class="page-title">
-                Enter Card Details
-            </h1>
+        <nav class="nav-links">
+            </form>
 
         </div>
 
-        <hr class="divider">
+        <!-- JAVASCRIPT -->
 
-        <!-- FORM -->
+        <script>
 
-        <form id="payment-form"
-        action="payment.html" method="get">
+            // AUTO SPACE CARD NUMBER
 
-            <div class="card-box">
+            const cardInput =
+                document.querySelector('#card-number');
 
-                <!-- CARD NUMBER -->
+            cardInput.addEventListener('input', function (e) {
 
-                <div class="form-group">
+                let value =
+                    e.target.value.replace(/\s/g, '');
 
-                    <label>
-                        Card Number
-                    </label>
+                let formatted =
+                    value.match(/.{1,4}/g);
 
-                    <input
-                        type="text"
-                        id="card-number"
-                        placeholder="eg. XXXX XXXX XXXX XXXX"
-                        maxlength="19"
-                    >
+                if (formatted) {
 
-                    <div class="card-icons">
+                    e.target.value =
+                        formatted.join(' ');
 
-                        <img src="images/visa.png" >
+                }
 
-                        <img src="images/americanExpress.jpg" >
+            });
 
-                        <img src="images/mastercard.png" >
 
-                        <img src="images/discover.png" >
 
-                        <img src="images/paypal.png" >
+            // FORM VALIDATION AND PAYMENT PROCESSING
+            const form = document.querySelector('#payment-form');
 
-                        <img src="images/jcb.png" >
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Stop the form from doing a default HTML submit
 
-                    </div>
+                const cardNumber = document.querySelector('#card-number').value;
+                const month = document.querySelector('#month').value;
+                const year = document.querySelector('#year').value;
+                const cardName = document.querySelector('#card-name').value;
+                const cvv = document.querySelector('#cvv').value;
 
-                </div>
+                if (cardNumber.length < 19 || month === '' || year === '' || cardName === '' || cvv.length < 3) {
+                    alert('Please complete all card details.');
+                    return;
+                }
 
-                <div class="line"></div>
+                // 1. Get the TaskID we are paying for from the URL bar (e.g., ?id=5)
+                const urlParams = new URLSearchParams(window.location.search);
+                const taskId = urlParams.get('id');
 
-                <!-- EXPIRY DATE -->
+                if (!taskId) {
+                    alert("Error: Cannot find the task you are trying to pay for.");
+                    return;
+                }
 
-                <div class="form-group">
+                // Change button text to show it's processing
+                const payBtn = document.querySelector('.pay-btn');
+                payBtn.textContent = "Processing RM...";
+                payBtn.disabled = true;
 
-                    <label>
-                        Expiry Date
-                    </label>
+                // 2. Send the payment request to our Escrow Backend
+                fetch('includes/php/process_payment.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        task_id: taskId,
+                        method: 'Online Banking'
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            alert("Payment Successful! Funds are safely held in Escrow.");
+                            // Redirect the Poster to the live tracking page so they can watch the runner's progress
+                            window.location.href = `taskprogressposter.html?id=${taskId}`;
+                        } else {
+                            alert("Payment Failed: " + data.message);
+                            payBtn.textContent = "Pay";
+                            payBtn.disabled = false;
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error processing payment:", error);
+                        alert("A network error occurred. Please try again.");
+                        payBtn.textContent = "Pay";
+                        payBtn.disabled = false;
+                    });
+            });
 
-                    <p class="small-text">
-                        For Example: 10/30
-                    </p>
+        </script>
 
-                    <div class="expiry-row">
+    </body>
 
-                        <div>
-
-                            <p class="mini-label">
-                                Month
-                            </p>
-
-                            <input
-                                type="text"
-                                id="month"
-                                maxlength="2"
-                            >
-
-                        </div>
-
-                        <span class="slash">/</span>
-
-                        <div>
-
-                            <p class="mini-label">
-                                Year
-                            </p>
-
-                            <input
-                                type="text"
-                                id="year"
-                                maxlength="2"
-                            >
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="line"></div>
-
-                <!-- NAME -->
-
-                <div class="form-group">
-
-                    <label>
-                        Name on card
-                    </label>
-
-                    <input
-                        type="text"
-                        id="card-name"
-                        placeholder="eg. Cristiano Ronaldo"
-                    >
-
-                </div>
-
-                <div class="line"></div>
-
+    </html>
                 <!-- CVV -->
 
                 <div class="form-group">
@@ -201,16 +133,11 @@
 
                     <div class="cvv-row">
 
-                        <input
-                            type="password"
-                            id="cvv"
-                            placeholder="eg. XXX"
-                            maxlength="3"
-                        >
+                        <input type="password" id="cvv" placeholder="eg. XXX" maxlength="3">
 
                         <div class="cvv-icon">
 
-                             <img src="images/cvv.jpg" alt="CVV Example">
+                            <img src="images/cvv.jpg" alt="CVV Example">
 
                         </div>
 
@@ -237,7 +164,51 @@
 
         // AUTO SPACE CARD NUMBER
 
-        const cardInput =
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="campus">CAMPUS </span><span class="taskhub">TASKHUB</span>
+                    </div>
+                    <p class="footer-tagline">Empowering students to hustle, help out, and get things done on campus.</p>
+                </div>
+
+                <div class="footer-links-group">
+                    <div class="footer-column">
+                        <h4>Platform</h4>
+                        <a href="browseTask.html">Browse Tasks</a>
+                        <a href="posttasks.html">Post a Task</a>
+                        <a href="leaderboard.html">Leaderboard</a>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="#">FAQ / Help Center</a>
+                        <a href="#">Safety Guidelines</a>
+                        <a href="#">Contact Us</a>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Campus TaskHub. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#">📱 TikTok</a>
+                    <a href="#">📸 Instagram</a>
+                    <a href="#">✖️ X (Twitter)</a>
+                </div>
+            </div>
+        </footer>
+
+    </body>
+
+    </html>
             document.querySelector('#card-number');
 
         cardInput.addEventListener('input', function (e) {
@@ -262,52 +233,64 @@
 
 
 
-        // FORM VALIDATION
-
-        const form =
-            document.querySelector('#payment-form');
+        // FORM VALIDATION AND PAYMENT PROCESSING
+        const form = document.querySelector('#payment-form');
 
         form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Stop the form from doing a default HTML submit
 
-            const cardNumber =
-                document.querySelector('#card-number').value;
+            const cardNumber = document.querySelector('#card-number').value;
+            const month = document.querySelector('#month').value;
+            const year = document.querySelector('#year').value;
+            const cardName = document.querySelector('#card-name').value;
+            const cvv = document.querySelector('#cvv').value;
 
-            const month =
-                document.querySelector('#month').value;
-
-            const year =
-                document.querySelector('#year').value;
-
-            const cardName =
-                document.querySelector('#card-name').value;
-
-            const cvv =
-                document.querySelector('#cvv').value;
-
-            if (
-
-                cardNumber.length < 19 ||
-
-                month === '' ||
-
-                year === '' ||
-
-                cardName === '' ||
-
-                cvv.length < 3
-
-            ) {
-
-                e.preventDefault();
-
-                alert(
-                    'Please complete all card details.'
-                );
-
+            if (cardNumber.length < 19 || month === '' || year === '' || cardName === '' || cvv.length < 3) {
+                alert('Please complete all card details.');
+                return;
             }
 
-           
+            // 1. Get the TaskID we are paying for from the URL bar (e.g., ?id=5)
+            const urlParams = new URLSearchParams(window.location.search);
+            const taskId = urlParams.get('id');
 
+            if (!taskId) {
+                alert("Error: Cannot find the task you are trying to pay for.");
+                return;
+            }
+
+            // Change button text to show it's processing
+            const payBtn = document.querySelector('.pay-btn');
+            payBtn.textContent = "Processing RM...";
+            payBtn.disabled = true;
+
+            // 2. Send the payment request to our Escrow Backend
+            fetch('includes/php/process_payment.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    task_id: taskId,
+                    method: 'Online Banking'
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert("Payment Successful! Funds are safely held in Escrow.");
+                        // Redirect the Poster to the live tracking page so they can watch the runner's progress
+                        window.location.href = `taskprogressposter.html?id=${taskId}`;
+                    } else {
+                        alert("Payment Failed: " + data.message);
+                        payBtn.textContent = "Pay";
+                        payBtn.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error processing payment:", error);
+                    alert("A network error occurred. Please try again.");
+                    payBtn.textContent = "Pay";
+                    payBtn.disabled = false;
+                });
         });
 
     </script>
