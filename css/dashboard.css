@@ -1,0 +1,237 @@
+.main-container {
+    max-width: 2000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+/* STATS GRID (Top 4 Cards) */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background-color: #0d0910; /* Very dark purple/black */
+    border-radius: 12px;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stat-card h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.stat-card p {
+    color: #e2e2e2;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Make the Earned stat stand out */
+.stat-earned h2 {
+    color: var(--accent, #00ffa6);
+}
+
+/* MAIN DASHBOARD LAYOUT */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr; /* Left side wider than right */
+    gap: 20px;
+}
+
+.dash-panel {
+    background-color: #0d0910;
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid #1f1524;
+}
+
+.panel-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    color: #ffffff;
+}
+
+.panel-divider {
+    border: none;
+    border-top: 1px solid #1f1524;
+    margin: 25px 0;
+}
+
+/* LEFT PANEL - TASKS */
+.dash-task-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #1f1524;
+}
+
+.dash-task-item:last-of-type {
+    margin-bottom: 20px;
+}
+
+.task-info h4 {
+    margin: 0 0 8px 0;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.task-tags {
+    display: flex;
+    gap: 8px;
+}
+
+.tag {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.tag-open { background-color: #7ee2a8; }
+.tag-delivery { background-color: #a1ebd6; } /* Mint cyan */
+
+.task-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.task-user img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.task-meta {
+    text-align: right;
+}
+
+.reward {
+    color: #948b9c;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.reward strong {
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.time {
+    color: var(--accent, #00ffa6);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.btn-outline-small {
+    background: transparent;
+    border: 1px solid #42355c;
+    color: #948b9c;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.btn-outline-small:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+/* RIGHT PANEL - ACTIVITY */
+.progress-section {
+    margin-bottom: 25px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.progress-value {
+    color: #ffffff;
+}
+
+.progress-track {
+    height: 10px;
+    background-color: #1a1220;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.fill-green { background-color: var(--accent, #00ffa6); }
+.fill-cyan { background-color: #00e5ff; }
+
+/* RECENT ACTIVITY LIST */
+.recent-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #1f1524;
+}
+
+.recent-item:last-child {
+    border-bottom: none;
+}
+
+.recent-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #b0a7b8;
+    font-size: 0.9rem;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.dot-green { background-color: var(--accent, #00ffa6); }
+.dot-yellow { background-color: #ffca28; }
+
+.recent-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.badge-green { background-color: var(--accent, #00ffa6); }
+.badge-yellow { background-color: #ffca28; }
