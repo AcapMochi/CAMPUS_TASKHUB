@@ -18,9 +18,9 @@
 ## 👥 The Team
 
 This project is being collaboratively developed by:
-*   Mohammad Asyraf Raziq bin Mohd Zulkhairi
+*   Asyraf
 *   Afiq
-*   Nur Wafarina
+*   Qistina
 *   Damia
 *   Ahmad
 *   Aniq
