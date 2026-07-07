@@ -61,10 +61,10 @@ Follow these instructions to set up the project locally for development and test
 
 ## 🛠️ Built With
 
-*   **Frontend:** standard HTML/CSS/JS]
+*   **Frontend:** standard HTML / JS
 *   **Backend:** Node.js, Java, PHP
 *   **Database:** MySQL
-*   **Design/Styling:** Standard CSS
+*   **Design/Styling:** Figma converted to CSS Styling.
 
 ---
 
