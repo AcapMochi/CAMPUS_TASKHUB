@@ -27,44 +27,47 @@ This project is being collaboratively developed by:
 
 ---
 
-## 🚀 Getting Started
+## 🛠️ Built With
 
-Follow these instructions to set up the project locally for development and testing.
-
-### Prerequisites
-*   Node.js, PHP
-*   Xampp, MySQL Database
-*   Git
-
-### Installation
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/yourusername/Campus-TaskHub.git](https://github.com/yourusername/Campus-TaskHub.git)
-    ```
-2.  **Navigate to the project directory:**
-    ```bash
-    cd Campus-TaskHub
-    ```
-3.  **Install dependencies:**
-    ```bash
-    npm install  # or pip install -r requirements.txt
-    ```
-4.  **Set up your environment variables:**
-    *   Copy `.env.example` to `.env` and fill in your database credentials and API keys.
-5.  **Run the development server:**
-    ```bash
-    npm run dev  # or equivalent command for your framework
-    ```
+*   **Frontend:** HTML, CSS, JavaScript
+*   **Backend:** PHP
+*   **Database:** MySQL
+*   **Environment:** XAMPP (Apache Web Server)
+*   **Design/Styling:** Figma converted to custom CSS
 
 ---
 
-## 🛠️ Built With
+## 🚀 Getting Started
 
-*   **Frontend:** standard HTML / JS
-*   **Backend:** Node.js, Java, PHP
-*   **Database:** MySQL
-*   **Design/Styling:** Figma converted to CSS Styling.
+Follow these instructions to set up the project locally for development and testing using XAMPP.
+
+### Prerequisites
+*   **XAMPP** (Includes Apache and MySQL)
+*   **Git**
+
+### Installation
+
+1.  **Clone the repository into your XAMPP folder:**
+    Navigate to your XAMPP `htdocs` directory (usually `C:\xampp\htdocs` on Windows or `/Applications/XAMPP/htdocs` on Mac) and run:
+    ```bash
+    git clone [https://github.com/yourusername/Campus-TaskHub.git](https://github.com/yourusername/Campus-TaskHub.git)
+    ```
+
+2.  **Start your local server:**
+    Open the XAMPP Control Panel and start both the **Apache** and **MySQL** modules.
+
+3.  **Set up the Database:**
+    * Open your web browser and go to `http://localhost/phpmyadmin`
+    * Create a new database named `campus_taskhub` (or your preferred name).
+    * Import the database schema (e.g., `database.sql`) provided in the project folder into your new database.
+
+4.  **Configure Database Connection:**
+    * Open your project files and locate the database connection file (e.g., `db_connect.php` or `config.php`).
+    * Update it with your local MySQL credentials. (By default in XAMPP, the username is `root` and the password is left blank).
+
+5.  **Run the application:**
+    Open your web browser and navigate to:
+    `http://localhost/Campus-TaskHub`
 
 ---
 
