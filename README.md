@@ -50,7 +50,7 @@ Follow these instructions to set up the project locally for development and test
 1.  **Clone the repository into your XAMPP folder:**
     Navigate to your XAMPP `htdocs` directory (usually `C:\xampp\htdocs` on Windows or `/Applications/XAMPP/htdocs` on Mac) and run:
     ```bash
-    git clone [https://github.com/yourusername/Campus-TaskHub.git](https://github.com/yourusername/Campus-TaskHub.git)
+    git clone [https://github.com/yourusername/CAMPUS_TASKHUB.git](https://github.com/yourusername/CAMPUS_TASKHUB.git)
     ```
 
 2.  **Start your local server:**
@@ -67,7 +67,7 @@ Follow these instructions to set up the project locally for development and test
 
 5.  **Run the application:**
     Open your web browser and navigate to:
-    `http://localhost/Campus-TaskHub`
+    `http://localhost/CAMPUS_TASKHUB`
 
 ---
 
