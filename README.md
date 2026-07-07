@@ -77,9 +77,3 @@ Contributions, issues, and feature requests are welcome!
 3. Commit your Changes (`git commit -m 'Add some NewMarketplaceFeature'`)
 4. Push to the Branch (`git push origin feature/NewMarketplaceFeature`)
 5. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
