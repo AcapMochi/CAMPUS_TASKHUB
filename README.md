@@ -32,8 +32,8 @@ This project is being collaboratively developed by:
 Follow these instructions to set up the project locally for development and testing.
 
 ### Prerequisites
-*   [e.g., Node.js v18+ or Python 3.10+]
-*   [e.g., MySQL, PostgreSQL, or MongoDB]
+*   Node.js, PHP
+*   Xampp, MySQL Database
 *   Git
 
 ### Installation
@@ -61,12 +61,10 @@ Follow these instructions to set up the project locally for development and test
 
 ## 🛠️ Built With
 
-*(Update these placeholders with your actual Web Programming stack!)*
-
-*   **Frontend:** [e.g., React, Vue, or standard HTML/CSS/JS]
-*   **Backend:** [e.g., Node.js/Express, Python/Django, or Java/Spring]
-*   **Database:** [e.g., MySQL, Firebase]
-*   **Design/Styling:** [e.g., Tailwind CSS, Bootstrap]
+*   **Frontend:** standard HTML/CSS/JS]
+*   **Backend:** Node.js, Java, PHP
+*   **Database:** MySQL
+*   **Design/Styling:** Standard CSS
 
 ---
 
